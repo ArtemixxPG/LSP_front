@@ -1,0 +1,11 @@
+.home{
+  display: flex;
+
+
+  .homeContainer{
+    flex: 6;
+    background-image: url('./img/home.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
