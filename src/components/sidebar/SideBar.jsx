@@ -39,43 +39,61 @@ const SideBar = () => {
                     <p className="title">RESULT ALL</p>
 
                     <li>
+                        <Link to="/sitestate" style={{textDecoration:"none"}}>
                         <InventoryIcon className="icon"/>
                         <span>Приход товара</span>
+                        </Link>
                     </li>
 
                     <li>
+                        <Link to="/opsites" style={{textDecoration:"none"}}>
                         <AirlineStopsIcon className="icon"/>
                         <span>Движение объекта</span>
+                        </Link>
                     </li>
 
                     <li>
+                        <Link to="/othcost" style={{textDecoration:"none"}}>
                         <MoneyIcon className="icon"/>
                         <span>Прочие расходы</span>
+                        </Link>
                     </li>
 
                     <li>
+                        <Link to="/opsites" style={{textDecoration:"none"}}>
                         <MonetizationOnIcon className="icon"/>
                         <span>Операционая стоимость</span>
+                        </Link>
                     </li>
                     <li>
+                        <Link to="/sbp" style={{textDecoration:"none"}}>
                         <WarehouseIcon className="icon"/>
                         <span>Хранилища товаров</span>
+                        </Link>
                     </li>
                     <li>
+                        <Link to="/pdncost" style={{textDecoration:"none"}}>
                         <AttachMoneyIcon className="icon"/>
                         <span>Себестоимость продукции</span>
+                        </Link>
                     </li>
                     <li>
+                        <Link to="/pdnflows" style={{textDecoration:"none"}}>
                         <BuildIcon className="icon"/>
                         <span>Производственный поток</span>
+                        </Link>
                     </li>
                     <li>
+                        <Link to="/sfc" style={{textDecoration:"none"}}>
                         <RunningWithErrorsIcon className="icon"/>
                         <span>Общие ограничения производства</span>
+                        </Link>
                     </li>
                     <li>
+                        <Link to="/ssc" style={{textDecoration:"none"}}>
                         <AssignmentLateIcon className="icon"/>
                         <span>Общие ограничения хранения</span>
+                        </Link>
                     </li>
                     <li>
                         <Link to="/dfilm" style={{textDecoration:"none"}}>
@@ -84,12 +102,16 @@ const SideBar = () => {
                         </Link>
                     </li>
                     <li>
+                        <Link to="/vf" style={{textDecoration:"none"}}>
                         <DirectionsRailwayFilledIcon className="icon"/>
                         <span>Траспортный поток</span>
+                        </Link>
                     </li>
                     <li>
+                        <Link to="/infograph" style={{textDecoration:"none"}}>
                         <AutoGraphIcon className="icon"/>
                         <span>Инфографика</span>
+                        </Link>
                     </li>
                     <p className="title">SIM</p>
                     <li>
@@ -107,8 +129,10 @@ const SideBar = () => {
                     </li>
 
                     <li>
+                        <Link to="/tc" style={{textDecoration:"none"}}>
                         <CreditScoreIcon className="icon"/>
                         <span>Полная стоимость</span>
+                        </Link>
                     </li>
 
                     <p className="title">SERVICE</p>

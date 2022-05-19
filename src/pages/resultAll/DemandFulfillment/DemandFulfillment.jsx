@@ -11,7 +11,7 @@ const DemandFulfillment = () => {
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
 
-    useEffect(()=>{
+    useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
@@ -19,10 +19,9 @@ const DemandFulfillment = () => {
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
-                if(!cleanupFunction){ setData(result);
-
+                if(!cleanupFunction) {
+                    setData(result);
                 }
-
 
             } catch (e) {
                 console.error(e.message)
