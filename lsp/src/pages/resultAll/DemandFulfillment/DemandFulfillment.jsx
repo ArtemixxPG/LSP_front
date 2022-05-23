@@ -10,8 +10,9 @@ const DemandFulfillment = () => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
+    const [fileDir, setFileDir] = useState("");
 
-    useEffect(()=>{
+    useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
@@ -19,10 +20,9 @@ const DemandFulfillment = () => {
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
-                if(!cleanupFunction){ setData(result);
-
+                if(!cleanupFunction) {
+                    setData(result);
                 }
-
 
             } catch (e) {
                 console.error(e.message)
@@ -34,6 +34,21 @@ const DemandFulfillment = () => {
         // функция очистки useEffect
         return () => cleanupFunction = true;
     }, [])
+
+
+    const fetchDataCreateCSV = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/dfilm/create');
+            const result = await response.json();
+
+            setFileDir("Файл загружен: "+result.path);
+
+
+        } catch (e) {
+            console.error(e.message)
+        }
+    }
+
 
 
     return (
@@ -48,6 +63,11 @@ const DemandFulfillment = () => {
                          pageSize={5}
                          rowsPerPageOptions={5}
                 />
+                </div>
+                <div className="button">
+                    <button onClick={fetchDataCreateCSV
+                    }>Загрузить результат</button>
+                    <label>{fileDir}</label>
                 </div>
             </div>
         </div>

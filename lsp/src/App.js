@@ -24,6 +24,7 @@ import Upload from "./pages/upload/Upload";
 import "./style/dark.scss"
 import {useContext, useState} from "react";
 import {DarkModeContext} from "./context/darkModeContext";
+import CompareDemandFulfillment from "./compare/compare";
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
                     <Route path="shsh" element={<ShipmentShedule/>}/>
                     <Route path="tc" element={<TotalCost/>}/>
                     <Route path="upload" element={<Upload/>}/>
+                    <Route path="compare" element={<CompareDemandFulfillment/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>
