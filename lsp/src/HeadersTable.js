@@ -476,6 +476,7 @@ export const columnsProductionFlows = [
     { field: 'produced', headerName: 'PRODUCED', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.produced}</div>
         )}},
+
 ];
 
 
