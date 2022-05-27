@@ -1,12 +1,12 @@
 .widget13 {
   display: flex;
   justify-content: space-between;
-  flex: 1;
   padding: 10px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   border-radius: 10px;
-  height: 70px;
+  height: 60px;
+  width: 450px;
 
   .left, .right {
     display: flex;
@@ -16,7 +16,13 @@
   }
 
   .col_left, .col_right {
-    color: rgb(160, 160, 160)
+    color: rgb(160, 160, 160);
+    font-size: 18px;
+    font-weight: bold;
   }
 
+  .first_it, .second_it, .first_val, .second_val {
+    font-size: 18px;
+    font-weight: bold;
+  }
 }

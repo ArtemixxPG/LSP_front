@@ -1,11 +1,23 @@
-.inforaph{
+.inforaph {
   display: flex;
+  flex: 1;
 
+  .named_exp_btn, .obj_mmb_btn, .over_stats_btn {
+    display: flex;
+    width: 150px;
+    height: 50px;
+    position: center;
+    border-radius: 10px;
+    font-size: 10px;
 
-  .container{
+  }
+
+  .container {
     flex: 6;
 
-    .widgets{
+
+
+    .widgets {
       display: flex;
       padding: 20px;
       gap: 20px;
