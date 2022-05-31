@@ -1,26 +1,100 @@
 .inforaph {
+  position: relative;
   display: flex;
   flex: 1;
 
-  .named_exp_btn, .obj_mmb_btn, .over_stats_btn {
-    display: flex;
-    width: 150px;
-    height: 50px;
-    position: center;
-    border-radius: 10px;
-    font-size: 10px;
-
-  }
 
   .container {
+    position: relative;
     flex: 6;
 
 
+    .NEChart, .OMChart, .OSChart {
+      position: absolute;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
 
-    .widgets {
-      display: flex;
-      padding: 20px;
-      gap: 20px;
+    .NEChart {
+      left: 3%;
+      top: 35%;
+      margin-left: auto;
+    }
+
+    .OMChart {
+      left: 3%;
+      top: 60%;
+      margin-left: auto;
+    }
+
+    .OSChart {
+      left: 3%;
+      top: 85%;
+      margin-left: auto;
+    }
+
+    .named_exp_btn button {
+      position: absolute;
+      left: 45%;
+      top: 7%;
+      margin-left: auto;
+      margin-top: auto;
+      width: 150px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: #218bff;
+      border: none;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #f6f5f5;
+    }
+
+    .obj_mmb_btn button {
+      position: absolute;
+      left: 45%;
+      top: 14%;
+      margin-left: auto;
+      margin-top: auto;
+      width: 150px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: #218bff;
+      border: none;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #f6f5f5;
+    }
+
+    .over_stats_btn button {
+      position: absolute;
+      left: 45%;
+      top: 21%;
+      margin-left: auto;
+      margin-top: auto;
+      width: 150px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: #218bff;
+      border: none;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #f6f5f5;
     }
   }
+    .widgets {
+      display: flex;
+      padding: 10px;
+      gap: 20px;
+    }
+
 }
+
+
+
+
+
+
