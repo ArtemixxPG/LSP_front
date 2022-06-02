@@ -1,8 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./popup.scss"
-import Widget from "../widget/Widget";
-import Widget13 from "../widget/Widget13";
+
 
 /*const popup = () => {
 

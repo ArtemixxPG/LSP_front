@@ -20,7 +20,7 @@ const ShipmentShedule = () => {
 
 
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
-                    if(!cleanupFunction){ setData(result);
+                    if(!cleanupFunction) { setData(result);
 
                     }
 

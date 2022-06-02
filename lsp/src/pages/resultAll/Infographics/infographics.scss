@@ -1,41 +1,19 @@
 .inforaph {
-  position: relative;
+  //position: relative;
   display: flex;
   flex: 1;
 
-
+  .widgets {
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+  }
   .container {
-    position: relative;
+    //position: relative;
     flex: 6;
 
-
-    .NEChart, .OMChart, .OSChart {
-      position: absolute;
-      font-size: 20px;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .NEChart {
-      left: 3%;
-      top: 35%;
-      margin-left: auto;
-    }
-
-    .OMChart {
-      left: 3%;
-      top: 60%;
-      margin-left: auto;
-    }
-
-    .OSChart {
-      left: 3%;
-      top: 85%;
-      margin-left: auto;
-    }
-
     .named_exp_btn button {
-      position: absolute;
+      //position: relative;
       left: 45%;
       top: 7%;
       margin-left: auto;
@@ -52,7 +30,7 @@
     }
 
     .obj_mmb_btn button {
-      position: absolute;
+      //position: relative;
       left: 45%;
       top: 14%;
       margin-left: auto;
@@ -69,7 +47,7 @@
     }
 
     .over_stats_btn button {
-      position: absolute;
+      //position: relative;
       left: 45%;
       top: 21%;
       margin-left: auto;
@@ -84,12 +62,27 @@
       cursor: pointer;
       color: #f6f5f5;
     }
-  }
-    .widgets {
+
+    .NEcharts {
       display: flex;
-      padding: 10px;
-      gap: 20px;
+      padding: 20px 5px 20px;
+      gap:20px;
     }
+
+    .OMcharts {
+      display: flex;
+      padding: 20px 5px 20px;
+      gap:20px;
+    }
+
+    .OScharts {
+      display: flex;
+      padding: 20px 5px 20px;
+      gap:20px;
+    }
+  }
+
+
 
 }
 

@@ -5,15 +5,10 @@ import "./infographics.scss"
 import Widget from "../../../components/widget/Widget";
 import Widget13 from "../../../components/widget/Widget13";
 import Popup from "../../../components/popup/Popup";
+import NEChart from "../../../components/chart/nechart/NEChart";
+import OMChart from "../../../components/chart/omchart/OMChart";
+import OSChart from "../../../components/chart/oschart/OSChart";
 
-/*function ModalWin({shown, close}) {
-    return shown ? (
-        <div className="modal-backdrop" onClick={() => { close(); }}>
-            <div className="modal-content" onClick={e => { e.stopPropagation(); }}>
-            </div>
-        </div>
-    ) : null;
-}*/
 
 
 function Infographics() {
@@ -40,6 +35,8 @@ function Infographics() {
                     if(!cleanupFunction){
                         setDataExpression(result);
                     }
+
+
 
                 } catch (e) {
                     console.error(e.message)
@@ -188,17 +185,18 @@ function Infographics() {
                      </h3>
                  </Popup>
 
-                 <div className="NEChart">График зависимости (общая стоимость):
-
+                 <div className="NEcharts">
+                     <NEChart data = {dataExpression.dataSet} dataName = "name" title dataKeyFirst="it#1" dataKeySecond="it#2"/>
                  </div>
 
-                 <div className="OMChart">График зависимости (закупочная стоимость):
-
+                 <div className="OMcharts">
+                     <OMChart data = {dataExpression.dataSet} dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2"/>
                  </div>
 
-                 <div className="OSChart">График зависимости (общая статистика):
-
+                 <div className="OScharts">
+                     <OSChart data = {dataExpression.dataSet} dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2"/>
                  </div>
+
 
              </div>
          </div>
