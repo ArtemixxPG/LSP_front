@@ -24,7 +24,7 @@ import Upload from "./pages/upload/Upload";
 import "./style/dark.scss"
 import {useContext, useState} from "react";
 import {DarkModeContext} from "./context/darkModeContext";
-import CompareDemandFulfillment from "./compare/compare";
+import CompareDemandFulfillment from "./pages/compare/compare";
 
 function App() {
 

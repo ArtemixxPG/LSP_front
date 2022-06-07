@@ -8,6 +8,9 @@ import Popup from "../../../components/popup/Popup";
 import NEChart from "../../../components/chart/nechart/NEChart";
 import OMChart from "../../../components/chart/omchart/OMChart";
 import OSChart from "../../../components/chart/oschart/OSChart";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button"
+
 
 
 
@@ -60,19 +63,13 @@ function Infographics() {
               <SideBar/>
              <div className="container">
                  <NavBar/>
-
-                 <div className="named_exp_btn">
-                     <button onClick={() => setButtonPopupNE(!buttonPopupNE)}>Named Expressions</button>
+                 <div className="stack">
+                 <Stack  direction="row" spacing={2}>
+                     <Button onClick={() => setButtonPopupNE(!buttonPopupNE)}>Named Expressions</Button>
+                     <Button onClick={() => setButtonPopupOM(!buttonPopupOM)}>Objective Members</Button>
+                     <Button onClick={() => setButtonPopupOS(!buttonPopupOS)}>Overall Stats</Button>
+                 </Stack>
                  </div>
-
-                 <div className="obj_mmb_btn">
-                     <button onClick={() => setButtonPopupOM(!buttonPopupOM)}>Objective Members</button>
-                 </div>
-
-                 <div className="over_stats_btn">
-                     <button onClick={() => setButtonPopupOS(!buttonPopupOS)}>Overall Stats</button>
-                 </div>
-
                  <div className="NEcharts">
                      <NEChart data = {dataExpression.dataSet} dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2"/>
                  </div>

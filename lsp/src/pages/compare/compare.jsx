@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import SideBar from "../components/sidebar/SideBar";
-import Datable from "../components/datable/Datable";
-import {columnsDemandFulfillment} from "../HeadersTable";
-import NavBar from "../components/navbar/NavBar";
+import SideBar from "../../components/sidebar/SideBar";
+import Datable from "../../components/datable/Datable";
+import {columnsDemandFulfillment, columnsDemandFulfillmentWithColor} from "../../HeadersTable";
+import NavBar from "../../components/navbar/NavBar";
 
 import "./compare.scss"
 
@@ -98,7 +98,7 @@ const CompareDemandFulfillment = () => {
                         </label>
                     </form>
                     <Datable rows = {data}
-                             columns = {columnsDemandFulfillment}
+                             columns = {columnsDemandFulfillmentWithColor(data, data)}
                              new_id = {rowId}
                              pageSize={5}
                              rowsPerPageOptions={5}
@@ -118,7 +118,7 @@ const CompareDemandFulfillment = () => {
                         </label>
                     </form>
                     <Datable rows = {data}
-                             columns = {columnsDemandFulfillment}
+                             columns = {columnsDemandFulfillmentWithColor(data, data)}
                              new_id = {rowId}
                              pageSize={5}
                              rowsPerPageOptions={5}

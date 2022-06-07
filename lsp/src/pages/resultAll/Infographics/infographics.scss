@@ -12,6 +12,15 @@
     //position: relative;
     flex: 6;
 
+    .stack{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+
     .named_exp_btn button {
       //position: relative;
       left: 45%;

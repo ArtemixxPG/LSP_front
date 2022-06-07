@@ -175,10 +175,10 @@ export const columnsDemandFulfillment = [
 ];
 
 export const columnsDemandFulfillmentWithColor = (data1, data2)=> {
-    const columns = [
+    return [
 
 
-    {
+        {
             field: 'iterationCell', headerName: 'ITERATION', flex: 1, renderCell: (params) => {
                 return (
                     <div className="cell">{params.row.iteration}</div>
@@ -211,29 +211,41 @@ export const columnsDemandFulfillmentWithColor = (data1, data2)=> {
 
         {
             field: 'demandMin', headerName: 'DEMAND MIN', flex: 1, renderCell: (params) => {
-                if(params.row.demandMin<chooseColor("demandMin", params.row.demandMin, data1, data2)) {
+                if (params.row.demandMin === chooseColor("demandMin", params.row.demandMin, data1, data2)) {
                     return (
-                        <div className="colorCell over">{params.row.demandMin}</div>
+                        <div className="cell over">{params.row.demandMin}</div>
                     )
                 } else {
                     return (
-                        <div className="colorCell lower">{params.row.demandMin}</div>
+                        <div className="cell lower">{params.row.demandMin}</div>
                     )
                 }
             }
         },
         {
             field: 'demandMax', headerName: 'DEMAND MAX', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.demandMax}</div>
-                )
+                if (params.row.demandMax < chooseColor("demandMin", params.row.demandMax, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.demandMax}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.demandMax}</div>
+                    )
+                }
             }
         },
         {
             field: 'satisfied', headerName: "SATISFIED", flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.satisfied}</div>
-                )
+                if (params.row.demandMax < chooseColor("demandMin", params.row.demandMax, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.satisfied}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.satisfied}</div>
+                    )
+                }
             }
         },
         {
@@ -281,19 +293,16 @@ export const columnsDemandFulfillmentWithColor = (data1, data2)=> {
                 )
             }
         }
-    ]
-
-
-    return columns;
+    ];
 }
 
 
 const chooseColor = (key, currentValue, firstValue, secondValue) => {
 
-   let value = firstValue.find(value => value["key"] === currentValue);
+   let value = firstValue.find(value => value[key.toString()] === currentValue);
    let index = firstValue.indexOf(value);
 
-   return secondValue[index]["key"];
+   return secondValue[index][key.toString()];
 
 }
 
