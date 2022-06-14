@@ -64,11 +64,6 @@ const DemandFulfillment = () => {
                          rowsPerPageOptions={5}
                 />
                 </div>
-                <div className="button">
-                    <button onClick={fetchDataCreateCSV
-                    }>Загрузить результат</button>
-                    <label>{fileDir}</label>
-                </div>
             </div>
         </div>
     );

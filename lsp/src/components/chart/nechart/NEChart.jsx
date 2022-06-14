@@ -103,18 +103,18 @@ const NEChart = (props) => {
 
     return (
         <div className="ne_chart">
-             <div className="title">Гистограмма общей стоимости:</div>
+             <div className="title">{props.title}</div>
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart width={500} height={300} data={props.data}
                            margin={{ top: 12, right: 30, left: 20, bottom: 22 }}>
                         <CartesianGrid strokeDasharray="3 3"/>
                         <XAxis dataKey={props.dataName}/>
-                    <YAxis yAxisId="left" orientation="left" dataKey="it#1" stroke="#218bff"/>
-                    <YAxis yAxisId="right" orientation="right" dataKey="it#2" stroke="#483D8B"/>
+                    <YAxis yAxisId="left" orientation="left" dataKey="it#1" stroke={props.strokeFirst}/>
+                    <YAxis yAxisId="right" orientation="right" dataKey="it#2" stroke={props.strokeSecond}/>
                     <Tooltip />
                     <Legend />
-                    <Bar yAxisId="left" dataKey={props.dataKeyFirst} stroke="#218bff" fill="#218bff" />
-                    <Bar yAxisId="right" dataKey={props.dataKeySecond} stroke="#483D8B"  fill="#483D8B"/>
+                    <Bar yAxisId="left" dataKey={props.dataKeyFirst} stroke={props.strokeFirst} fill={props.fillFirst} />
+                    <Bar yAxisId="right" dataKey={props.dataKeySecond} stroke={props.strokeSecond}  fill={props.fillSecond}/>
                 </BarChart>
             </ResponsiveContainer>
         </div>

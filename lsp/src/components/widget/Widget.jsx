@@ -4,7 +4,29 @@ import "./widget.scss"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
-const Widget = ( {type} ) => {
+
+const Widget = (props) => {
+
+    return (
+        <div className="widget">
+            <div className="left">
+                <VisibilityIcon className="icon"/>
+                {props.iteration}
+            </div>
+            <div className="mid">
+                <span className="title">{props.title}</span>
+            </div>
+            <div className="right">
+                <TaskAltIcon className="icon"/>
+                <span className="value">{props.value}</span>
+            </div>
+
+        </div>
+    );
+};
+
+
+/*const Widget = ( {type} ) => {
 
     let data;
 
@@ -480,6 +502,6 @@ const Widget = ( {type} ) => {
             </div>
         </div>
     );
-};
+};*/
 
 export default Widget;

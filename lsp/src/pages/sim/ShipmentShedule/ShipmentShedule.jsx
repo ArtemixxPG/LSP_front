@@ -48,7 +48,6 @@ const ShipmentShedule = () => {
                 <div className="datatable">
                     <Datable rows={data.dataTable} columns={columnsShipmentShedule}/>
                 </div>
-
             </div>
         </div>
     );

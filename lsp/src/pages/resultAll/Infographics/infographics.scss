@@ -1,5 +1,4 @@
 .inforaph {
-  //position: relative;
   display: flex;
   flex: 1;
 
@@ -8,72 +7,20 @@
     padding: 10px;
     gap: 20px;
   }
+
   .container {
-    //position: relative;
     flex: 6;
 
-    .stack{
+    .stack {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-
-    }
-
-
-    .named_exp_btn button {
-      //position: relative;
-      left: 45%;
-      top: 7%;
-      margin-left: auto;
-      margin-top: auto;
-      width: 150px;
-      height: 50px;
-      border-radius: 10px;
-      background-color: #218bff;
-      border: none;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #f6f5f5;
-    }
-
-    .obj_mmb_btn button {
-      //position: relative;
-      left: 45%;
-      top: 14%;
-      margin-left: auto;
-      margin-top: auto;
-      width: 150px;
-      height: 50px;
-      border-radius: 10px;
-      background-color: #218bff;
-      border: none;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #f6f5f5;
-    }
-
-    .over_stats_btn button {
-      //position: relative;
-      left: 45%;
-      top: 21%;
-      margin-left: auto;
-      margin-top: auto;
-      width: 150px;
-      height: 50px;
-      border-radius: 10px;
-      background-color: #218bff;
-      border: none;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #f6f5f5;
     }
 
     .NEcharts {
       display: flex;
+      margin-top: 15px;
       padding: 20px 5px 20px;
       gap:20px;
     }
@@ -89,8 +36,11 @@
       padding: 20px 5px 20px;
       gap:20px;
     }
-  }
 
+    .datatableOS {
+      max-width: 1500px;
+    }
+  }
 
 
 }

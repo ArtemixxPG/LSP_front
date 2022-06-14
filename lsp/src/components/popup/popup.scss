@@ -14,11 +14,16 @@
   .popup-inner {
     position: relative;
     padding: 1px;
-    //width: 100%;
-    max-width: 1500px;
-    background-color: #f6f5f5;
+    width: 100%;
+    max-width: 1100px;
+    //max-width: 1500px;
+    background-color: #F0F8FF;
     overflow-y: auto;
-    border-radius: 10px;
+    border-radius: 12px;
+    border-style: solid;
+    border-color: #218bff;
+    border-width: 2.1px;
+
   }
 
 

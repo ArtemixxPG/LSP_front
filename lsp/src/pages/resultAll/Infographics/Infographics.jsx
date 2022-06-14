@@ -6,10 +6,10 @@ import Widget from "../../../components/widget/Widget";
 import Widget13 from "../../../components/widget/Widget13";
 import Popup from "../../../components/popup/Popup";
 import NEChart from "../../../components/chart/nechart/NEChart";
-import OMChart from "../../../components/chart/omchart/OMChart";
-import OSChart from "../../../components/chart/oschart/OSChart";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button"
+import Button from "@mui/material/Button";
+import Datable from "../../../components/datable/Datable";
+import {columnsNamedExpressions, columnsObjectiveMembers, columnsOverallStats} from "../../../HeadersTable";
 
 
 
@@ -20,11 +20,41 @@ function Infographics() {
      const [buttonPopupOM, setButtonPopupOM] = React.useState(false);
      const [buttonPopupOS, setButtonPopupOS] = React.useState(false);
 
+    /*const [dataNE, setDataNE] = useState([]);
+    const [rowIdNE, setRowIdNE] = useState();
+
+    const [dataOM, setDataOM] = useState([]);
+    const [rowIdOM, setRowIdOM] = useState();
+
+    const [dataOS, setDataOS] = useState([]);
+    const [rowIdOS, setRowIdOS] = useState();*/
+
     const [dataExpression, setDataExpression] = useState([{id: "",
         iteration: 0,
         expression_name: "",
-        value:0}]
-    )
+        value:0}])
+
+    const [dataObjective, setDataObjective] = useState([{id: "",
+        iteration: 0,
+        objective_member: "",
+        value:0}])
+
+    const [dataOverall, setDataOverall] = useState([{id: "",
+        iteration: 0,
+        ipc_overall: 0,
+        tc_overall: 0,
+        tariffs_overall: 0,
+        revenue_overall: 0,
+        sc_overall: 0,
+        opc_overall: 0,
+        ic_overall: 0,
+        cc_overall: 0,
+        penalties_overall: 0,
+        pc_overall: 0,
+        oc_overall: 0,
+        crc_overall: 0,
+        objective_overall: 0}])
+
 
     useEffect( () => {
             let cleanupFunction = false;
@@ -33,13 +63,10 @@ function Infographics() {
                     const response = await fetch('http://localhost:8080/ne?iteration=1');
                     const result = await response.json();
 
-
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
                     if(!cleanupFunction){
                         setDataExpression(result);
                     }
-
-
 
                 } catch (e) {
                     console.error(e.message)
@@ -54,7 +81,15 @@ function Infographics() {
     )
 
     const listWidgets = dataExpression.map(data =>{
-        return <Widget title={data.expression_name} value={data.value} iteration = {data.iteration}/>
+        return <Widget iteration = {data.iteration} title={data.expression_name} value={data.value}/>
+    })
+
+    const listWidgetsOM = dataObjective.map(data =>{
+        return <Widget iteration = {data.iteration} title={data.objective_member} value={data.value}/>
+    })
+
+    const listWidgetsOS = dataOverall.map(data =>{
+        return <Widget iteration = {data.iteration} title={data.expression_name} value={data.value}/>
     })
 
 
@@ -70,16 +105,24 @@ function Infographics() {
                      <Button onClick={() => setButtonPopupOS(!buttonPopupOS)}>Overall Stats</Button>
                  </Stack>
                  </div>
+
+
                  <div className="NEcharts">
-                     <NEChart data = {dataExpression.dataSet} dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2"/>
+                     <NEChart data = {dataExpression.dataSet} title = "Гистограмма общей стоимости:"
+                              dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
+                              fillFirst="#00008B" fillSecond="#00BFFF"/>
                  </div>
 
                  <div className="OMcharts">
-                     <OMChart data = {dataExpression.dataSet} dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2"/>
+                     <NEChart data = {dataExpression.dataSet} title = "Гистограмма закупочной стоимости:"
+                              dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
+                              fillFirst="#8B0000" fillSecond="#F08080"/>
                  </div>
 
                  <div className="OScharts">
-                     <OSChart data = {dataExpression.dataSet} dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2"/>
+                     <NEChart data = {dataExpression.dataSet} title = "Гистограмма общей статистики:"
+                              dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
+                              fillFirst="#800080" fillSecond="#9370DB"/>
                  </div>
              </div>
 
@@ -87,6 +130,9 @@ function Infographics() {
              <Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
                  <h3>
                      <div className="widgets">
+                         {listWidgets}
+                     </div>
+                     {/*<div className="widgets">
                          <Widget type = "total_co2_emission"/> <Widget type = "total_initial_cost"/>
                          <Widget type = "total_other_cost"/>
                      </div>
@@ -124,13 +170,22 @@ function Infographics() {
                      </div>
                      <div className="widgets">
                          <Widget type = "total_penaltiesd"/>
-                     </div>
+                     </div>*/}
+                     {/*<div className="datatableNE">
+                         <Datable rows = {dataNE}
+                                  columns = {columnsNamedExpressions}
+                                  new_id = {rowIdNE}
+                                  pageSize={5}
+                                  rowsPerPageOptions={5}
+                                  />
+                     </div>*/}
+
                  </h3>
              </Popup>
 
              <Popup shown={buttonPopupOM} close={() => {setButtonPopupOM(false);}}>
                  <h3>
-                     <div className="widgets">
+                     {/*<div className="widgets">
                          <Widget type = "inbound_processing_cost"/> <Widget type = "transportation_cost"/>
                          <Widget type = "tariffs12"/>
                      </div>
@@ -168,13 +223,24 @@ function Infographics() {
                      </div>
                      <div className="widgets">
                          <Widget type = "carrying_costd"/>
+                     </div>*/}
+                     {/*<div className="datatableOM">
+                         <Datable rows = {dataOM}
+                                  columns = {columnsObjectiveMembers}
+                                  new_id = {rowIdOM}
+                                  pageSize={5}
+                                  rowsPerPageOptions={5}
+                         />
+                     </div>*/}
+                     <div className="widgets">
+                         {listWidgetsOM}
                      </div>
                  </h3>
              </Popup>
 
              <Popup shown={buttonPopupOS} close={() => {setButtonPopupOS(false);}}>
                  <h3>
-                     <div className="widgets">
+                     {/*<div className="widgets">
                          <Widget13 type = "inbound_processing_cost13"/> <Widget13 type = "transportation_cost13"/>
                          <Widget13 type = "tariffs13"/>
                      </div>
@@ -192,7 +258,15 @@ function Infographics() {
                      </div>
                      <div className="widgets">
                          <Widget13 type = "objective"/>
-                     </div>
+                     </div>*/}
+                     {/*<div className="datatableOS">
+                         <Datable rows = {dataOS}
+                                  columns = {columnsOverallStats}
+                                  new_id = {rowIdOS}
+                                  pageSize={5}
+                                  rowsPerPageOptions={5}
+                         />
+                     </div>*/}
                  </h3>
              </Popup>
          </div>
