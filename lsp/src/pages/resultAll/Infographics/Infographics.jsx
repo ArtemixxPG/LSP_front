@@ -6,18 +6,19 @@ import Widget from "../../../components/widget/Widget";
 import Widget13 from "../../../components/widget/Widget13";
 import Popup from "../../../components/popup/Popup";
 import NEChart from "../../../components/chart/nechart/NEChart";
-
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button"
+import Button from "@mui/material/Button";
+import Datable from "../../../components/datable/Datable";
+import {columnsNamedExpressions, columnsObjectiveMembers, columnsOverallStats} from "../../../HeadersTable";
 
 
 
 
 function Infographics() {
 
-    const [buttonPopupNE, setButtonPopupNE] = React.useState(false);
-    const [buttonPopupOM, setButtonPopupOM] = React.useState(false);
-    const [buttonPopupOS, setButtonPopupOS] = React.useState(false);
+     const [buttonPopupNE, setButtonPopupNE] = React.useState(false);
+     const [buttonPopupOM, setButtonPopupOM] = React.useState(false);
+     const [buttonPopupOS, setButtonPopupOS] = React.useState(false);
 
     /*const [dataNE, setDataNE] = useState([]);
     const [rowIdNE, setRowIdNE] = useState();
@@ -80,58 +81,58 @@ function Infographics() {
     )
 
     const listWidgets = dataExpression.map(data =>{
-        return <Widget iteration = {data.iteration} title={data.expression_name} value={data.value}/>
+        return <Widget iteration = {data.iteration} mid = "Наименование операции" title={data.expression_name} value={data.value}/>
     })
 
     const listWidgetsOM = dataObjective.map(data =>{
-        return <Widget iteration = {data.iteration} title={data.objective_member} value={data.value}/>
+        return <Widget iteration = {data.iteration} title={data.objective_member} mid = "Объекты моделирования" value={data.value}/>
     })
 
     const listWidgetsOS = dataOverall.map(data =>{
-        return <Widget iteration = {data.iteration} title={data.expression_name} value={data.value}/>
+        return <Widget iteration = {data.iteration} title={data.expression_name} mid = "Общая статистика" value={data.value}/>
     })
 
 
-    return (
-        <div className="inforaph">
-            <SideBar/>
-            <div className="container">
-                <NavBar/>
-                <div className="stack">
-                    <Stack  direction="row" spacing={2}>
-                        <Button onClick={() => setButtonPopupNE(!buttonPopupNE)}>Named Expressions</Button>
-                        <Button onClick={() => setButtonPopupOM(!buttonPopupOM)}>Objective Members</Button>
-                        <Button onClick={() => setButtonPopupOS(!buttonPopupOS)}>Overall Stats</Button>
-                    </Stack>
-                </div>
+     return (
+         <div className="inforaph">
+              <SideBar/>
+             <div className="container">
+                 <NavBar/>
+                 <div className="stack">
+                 <Stack  direction="row" spacing={2}>
+                     <Button onClick={() => setButtonPopupNE(!buttonPopupNE)}>Наименовании операции</Button>
+                     <Button onClick={() => setButtonPopupOM(!buttonPopupOM)}>Объекты моделирования</Button>
+                     <Button onClick={() => setButtonPopupOS(!buttonPopupOS)}>Общая статистика</Button>
+                 </Stack>
+                 </div>
 
 
-                <div className="NEcharts">
-                    <NEChart data = {dataExpression.dataSet} title = "Гистограмма общей стоимости:"
-                             dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
-                             fillFirst="#00008B" fillSecond="#00BFFF"/>
-                </div>
+                 <div className="NEcharts">
+                     <NEChart data = {dataExpression.dataSet} title = "Гистограмма общей стоимости:"
+                              dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
+                              fillFirst="#00008B" fillSecond="#00BFFF"/>
+                 </div>
 
-                <div className="OMcharts">
-                    <NEChart data = {dataExpression.dataSet} title = "Гистограмма закупочной стоимости:"
-                             dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
-                             fillFirst="#8B0000" fillSecond="#F08080"/>
-                </div>
+                 <div className="OMcharts">
+                     <NEChart data = {dataExpression.dataSet} title = "Гистограмма закупочной стоимости:"
+                              dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
+                              fillFirst="#8B0000" fillSecond="#F08080"/>
+                 </div>
 
-                <div className="OScharts">
-                    <NEChart data = {dataExpression.dataSet} title = "Гистограмма общей статистики:"
-                             dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
-                             fillFirst="#800080" fillSecond="#9370DB"/>
-                </div>
-            </div>
+                 <div className="OScharts">
+                     <NEChart data = {dataExpression.dataSet} title = "Гистограмма общей статистики:"
+                              dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
+                              fillFirst="#800080" fillSecond="#9370DB"/>
+                 </div>
+             </div>
 
 
-            <Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
-                <h3>
-                    <div className="widgets">
-                        {listWidgets}
-                    </div>
-                    {/*<div className="widgets">
+             <Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
+                 <h3>
+                     <div className="widgets">
+                         {listWidgets}
+                     </div>
+                     {/*<div className="widgets">
                          <Widget type = "total_co2_emission"/> <Widget type = "total_initial_cost"/>
                          <Widget type = "total_other_cost"/>
                      </div>
@@ -170,7 +171,7 @@ function Infographics() {
                      <div className="widgets">
                          <Widget type = "total_penaltiesd"/>
                      </div>*/}
-                    {/*<div className="datatableNE">
+                     {/*<div className="datatableNE">
                          <Datable rows = {dataNE}
                                   columns = {columnsNamedExpressions}
                                   new_id = {rowIdNE}
@@ -179,12 +180,12 @@ function Infographics() {
                                   />
                      </div>*/}
 
-                </h3>
-            </Popup>
+                 </h3>
+             </Popup>
 
-            <Popup shown={buttonPopupOM} close={() => {setButtonPopupOM(false);}}>
-                <h3>
-                    {/*<div className="widgets">
+             <Popup shown={buttonPopupOM} close={() => {setButtonPopupOM(false);}}>
+                 <h3>
+                     {/*<div className="widgets">
                          <Widget type = "inbound_processing_cost"/> <Widget type = "transportation_cost"/>
                          <Widget type = "tariffs12"/>
                      </div>
@@ -223,7 +224,7 @@ function Infographics() {
                      <div className="widgets">
                          <Widget type = "carrying_costd"/>
                      </div>*/}
-                    {/*<div className="datatableOM">
+                     {/*<div className="datatableOM">
                          <Datable rows = {dataOM}
                                   columns = {columnsObjectiveMembers}
                                   new_id = {rowIdOM}
@@ -231,15 +232,15 @@ function Infographics() {
                                   rowsPerPageOptions={5}
                          />
                      </div>*/}
-                    <div className="widgets">
-                        {listWidgetsOM}
-                    </div>
-                </h3>
-            </Popup>
+                     <div className="widgets">
+                         {listWidgetsOM}
+                     </div>
+                 </h3>
+             </Popup>
 
-            <Popup shown={buttonPopupOS} close={() => {setButtonPopupOS(false);}}>
-                <h3>
-                    {/*<div className="widgets">
+             <Popup shown={buttonPopupOS} close={() => {setButtonPopupOS(false);}}>
+                 <h3>
+                     {/*<div className="widgets">
                          <Widget13 type = "inbound_processing_cost13"/> <Widget13 type = "transportation_cost13"/>
                          <Widget13 type = "tariffs13"/>
                      </div>
@@ -258,7 +259,7 @@ function Infographics() {
                      <div className="widgets">
                          <Widget13 type = "objective"/>
                      </div>*/}
-                    {/*<div className="datatableOS">
+                     {/*<div className="datatableOS">
                          <Datable rows = {dataOS}
                                   columns = {columnsOverallStats}
                                   new_id = {rowIdOS}
@@ -266,17 +267,15 @@ function Infographics() {
                                   rowsPerPageOptions={5}
                          />
                      </div>*/}
-                </h3>
-            </Popup>
-        </div>
+                 </h3>
+             </Popup>
+         </div>
 
-    );
+     );
 }
 
 
 export default Infographics;
-
-
 
 
 

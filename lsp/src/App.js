@@ -27,12 +27,15 @@ import {DarkModeContext} from "./context/darkModeContext";
 import CompareDemandFulfillment from "./pages/compare/compare";
 import Map from "./pages/map/MapPage";
 
+
+
 function App() {
 
     const {darkMode} = useContext(DarkModeContext)
 
+
   return (
-    <div className={darkMode ? "app dark":"dark"}>
+      <div className={darkMode ? "app dark":"dark"}>
         <BrowserRouter>
             <Routes>
                 <Route path="/">

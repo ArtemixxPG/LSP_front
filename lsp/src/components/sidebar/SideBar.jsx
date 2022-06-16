@@ -49,18 +49,14 @@ const SideBar = () => {
         <div id='side' className="sidebar">
             <div className="top">
                 <Link to="/" style={{textDecoration:"none"}}>
-                <span className="logo">ЛСП ТРАНСРЕСУРС</span>
+                    <span className="logo">ЛСП ТРАНСРЕСУРС</span>
                 </Link>
             </div>
             <hr/>
             <div className="center">
 
-                    <MenuList
-                    />
-            </div>
-            <div className="bottom">
-                <div className="colorOption" onClick={()=>dispatch({type:"LIGHT"})}></div>
-                <div className="colorOption" onClick={()=>dispatch({type:"DARK"})}></div>
+                <MenuList
+                />
             </div>
         </div>
     );

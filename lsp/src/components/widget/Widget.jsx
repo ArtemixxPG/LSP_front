@@ -13,7 +13,7 @@ const Widget = (props) => {
                 <VisibilityIcon className="icon"/>
                 {props.iteration}
             </div>
-            <div className="mid">
+            <div className="mid">{props.mid}
                 <span className="title">{props.title}</span>
             </div>
             <div className="right">
