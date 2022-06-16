@@ -1,0 +1,17 @@
+.mappage{
+  display: flex;
+  position: relative;
+
+ .ymap{
+   position: absolute;
+   z-index: 0;
+ }
+
+  .container{
+      flex: 6;
+  }
+  .side{
+    z-index: 100;
+    position: absolute;
+  }
+}

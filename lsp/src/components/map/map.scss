@@ -1,0 +1,13 @@
+.map{
+  display: flex;
+  flex: 1;
+
+  .mapload{
+    display: flex;
+    justify-content: center;
+    min-height: 95vh;
+    min-width: 86vw;
+    flex-direction: column;
+    align-items: center;
+  }
+}

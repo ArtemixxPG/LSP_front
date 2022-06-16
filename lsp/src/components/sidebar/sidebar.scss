@@ -3,6 +3,7 @@
   border-right: 0.5px solid #4682B4;
   min-height: 100vh;
   background-color: #f6f5f5;
+  z-index: 10000;
 
   .top{
     height: 50px;
@@ -23,6 +24,7 @@
 
   .center{
     padding-left: 10px;
+    padding-right: 10px;
 
     label,select{
       font-size: 13px;

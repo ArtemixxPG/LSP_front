@@ -19,9 +19,16 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import MapIcon from '@mui/icons-material/Map';
 
 import {Link} from "react-router-dom"
 import {DarkModeContext} from "../../context/darkModeContext";
+import MenuList from "./MenuList/MenuList";
+
+
+
+
+
 
 
 const SideBar = () => {
@@ -39,7 +46,7 @@ const SideBar = () => {
     }
 
     return (
-        <div className="sidebar">
+        <div id='side' className="sidebar">
             <div className="top">
                 <Link to="/" style={{textDecoration:"none"}}>
                 <span className="logo">ЛСП ТРАНСРЕСУРС</span>
@@ -47,134 +54,9 @@ const SideBar = () => {
             </div>
             <hr/>
             <div className="center">
-                <ul>
 
-                    <form onSubmit={handleSubmit}>
-                        <label className="search">
-                            Выберите эксперимент:
-                            <select value={typeExp} onChange={handleChange}>
-                                <option value="#1">#1</option>
-                                <option value="#2">#2</option>
-                                <option value="#3">#3</option>
-                                <option value="#4">#4</option>
-                            </select>
-                        </label>
-                    </form>
-
-                    <p className="title">RESULT ALL</p>
-
-                    <li>
-                        <Link to="/sitestate" style={{textDecoration:"none"}}>
-                        <InventoryIcon className="icon"/>
-                        <span>Приход товара</span>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link to="/opsites" style={{textDecoration:"none"}}>
-                        <AirlineStopsIcon className="icon"/>
-                        <span>Движение объекта</span>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link to="/othcost" style={{textDecoration:"none"}}>
-                        <MoneyIcon className="icon"/>
-                        <span>Прочие расходы</span>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link to="/opsites" style={{textDecoration:"none"}}>
-                        <MonetizationOnIcon className="icon"/>
-                        <span>Операционая стоимость</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/sbp" style={{textDecoration:"none"}}>
-                        <WarehouseIcon className="icon"/>
-                        <span>Хранилища товаров</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/pdncost" style={{textDecoration:"none"}}>
-                        <AttachMoneyIcon className="icon"/>
-                        <span>Себестоимость продукции</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/pdnflows" style={{textDecoration:"none"}}>
-                        <BuildIcon className="icon"/>
-                        <span>Производственный поток</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/sfc" style={{textDecoration:"none"}}>
-                        <RunningWithErrorsIcon className="icon"/>
-                        <span>Общие ограничения производства</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/ssc" style={{textDecoration:"none"}}>
-                        <AssignmentLateIcon className="icon"/>
-                        <span>Общие ограничения хранения</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/dfilm" style={{textDecoration:"none"}}>
-                        <FactCheckIcon className="icon"/>
-                        <span>Реализация спроса</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/vf" style={{textDecoration:"none"}}>
-                        <DirectionsRailwayFilledIcon className="icon"/>
-                        <span>Траспортный поток</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/infograph" style={{textDecoration:"none"}}>
-                        <AutoGraphIcon className="icon"/>
-                        <span>Инфографика</span>
-                        </Link>
-                    </li>
-                    <p className="title">SIM</p>
-                    <li>
-                        <Link to="/pfsim" style={{textDecoration:"none"}}>
-                        <ProductionQuantityLimitsIcon className="icon"/>
-                        <span>Товарный поток</span>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link to="/shsh" style={{textDecoration:"none"}}>
-                        <ListAltIcon className="icon"/>
-                        <span>Расписание отгрузки</span>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link to="/tc" style={{textDecoration:"none"}}>
-                        <CreditScoreIcon className="icon"/>
-                        <span>Полная стоимость</span>
-                        </Link>
-                    </li>
-
-                    <p className="title">SERVICE</p>
-                    <li>
-                        <Link to="/upload" style={{textDecoration:"none"}}>
-                        <UploadFileIcon className="icon"/>
-                        <span>Загрузить CSV...</span>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link to="/compare" style={{textDecoration:"none"}}>
-                            <InventoryIcon className="icon"/>
-                            <span>Сравнение</span>
-                        </Link>
-                    </li>
-                </ul>
+                    <MenuList
+                    />
             </div>
             <div className="bottom">
                 <div className="colorOption" onClick={()=>dispatch({type:"LIGHT"})}></div>

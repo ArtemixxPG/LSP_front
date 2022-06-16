@@ -25,6 +25,7 @@ import "./style/dark.scss"
 import {useContext, useState} from "react";
 import {DarkModeContext} from "./context/darkModeContext";
 import CompareDemandFulfillment from "./pages/compare/compare";
+import Map from "./pages/map/MapPage";
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
                     <Route path="tc" element={<TotalCost/>}/>
                     <Route path="upload" element={<Upload/>}/>
                     <Route path="compare" element={<CompareDemandFulfillment/>}/>
+                    <Route path="map" element={<Map/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

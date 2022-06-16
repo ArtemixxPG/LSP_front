@@ -12,7 +12,7 @@ import "./navbar.scss"
 
 const NavBar = () => {
     return (
-        <div className="navbar">
+        <div id='nav' className="navbar">
             <div className="wrapper">
                 <div className="search">
                     <input type="text" placeholder="Найти..."/>
