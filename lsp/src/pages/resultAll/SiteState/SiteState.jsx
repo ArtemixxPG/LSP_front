@@ -5,17 +5,22 @@ import Datable from "../../../components/datable/Datable";
 import {columnsSiteState} from "../../../HeadersTable";
 
 import './sitestate.scss'
+import MenuIcon from "@mui/icons-material/Menu";
+import Alert from "@mui/material/Alert";
 
 const SiteState = () => {
 
     const [data, setData] = useState([]);
-    const [rowId, setRowId] = useState();
+    const [rowId, setRowId] = useState(0);
+    const [icon, setIcon] = useState(false)
+
+
 
     useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/sitestate');
+                const response = await fetch('http://localhost:8080/ss');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -36,9 +41,15 @@ const SiteState = () => {
 
     return (
         <div className="main">
-            <SideBar/>
+            <div className="openMenu">
+                <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+            </div>
+            <SideBar
+                open = {icon}
+                close ={()=>setIcon(!icon)}
+
+            />
             <div className="container">
-                <NavBar/>
                 <div className="datatable">
                     <Datable rows = {data}
                              columns = {columnsSiteState}

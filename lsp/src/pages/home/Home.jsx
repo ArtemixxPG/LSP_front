@@ -4,13 +4,23 @@ import SideBar from "../../components/sidebar/SideBar";
 
 
 import "./home.scss"
+import {useState} from "react";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Home = () => {
+
+    const [icon, setIcon] = useState(false)
+
     return (
-        <div className="home">
-            <SideBar/>
+        <div style={{width:document.documentElement.clientWidth, height:document.documentElement.clientHeight-1}} className="home">
+            <div className="openMenu">
+                <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+            </div>
+            <SideBar
+                open = {icon}
+                close ={()=>setIcon(!icon)}
+            />
             <div className="homeContainer">
-                <NavBar/>
                 </div>
         </div>
     );

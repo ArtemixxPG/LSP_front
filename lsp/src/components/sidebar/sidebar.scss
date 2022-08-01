@@ -1,32 +1,45 @@
-.sidebar{
- flex: 1;
+.sidebar {
+  flex: 1;
   border-right: 0.5px solid #4682B4;
   min-height: 100vh;
   background-color: #f6f5f5;
-  z-index: 10000;
+  z-index: 1;
+  color: #4169E1;
 
-  .top{
+  .top {
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #218bff;
 
-    .logo{
+    .logo {
       font-size: 20px;
       font-weight: bold;
       color: snow;
     }
   }
-  hr{
+
+  hr {
     height: 0;
   }
 
-  .center{
+  .center {
     padding-left: 10px;
     padding-right: 10px;
 
-    label,select{
+    .autocomplete {
+      display: flex;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      color: #4169E1;
+
+      .selectExp {
+        margin-top: 0;
+      }
+    }
+
+    label, select {
       font-size: 13px;
       font-weight: 600;
       color: #888;
@@ -36,12 +49,13 @@
       background-color: transparent;
     }
 
-    ul{
+    ul {
       list-style: none;
       margin: 0;
       padding: 0;
     }
-    .title{
+
+    .title {
       font-size: 10px;
       font-weight: bold;
       color: #218bff;
@@ -49,22 +63,22 @@
       margin-bottom: 5px;
     }
 
-    li{
+    li {
       display: flex;
       align-items: center;
       padding: 5px;
       cursor: pointer;
 
-      &:hover{
+      &:hover {
         background-color: rgba(231, 234, 243, 0.84);
       }
 
-      .icon{
+      .icon {
         font-size: 18px;
         color: #218bff;
       }
 
-      span{
+      span {
         font-size: 13px;
         font-weight: 600;
         color: #888;
@@ -73,12 +87,12 @@
     }
   }
 
-  .bottom{
+  .bottom {
     display: flex;
     align-items: center;
     margin: 10px;
 
-    .colorOption{
+    .colorOption {
       width: 20px;
       height: 20px;
       border-radius: 5px;
@@ -86,10 +100,11 @@
       cursor: pointer;
       margin: 5px;
 
-      &:nth-child(1){
+      &:nth-child(1) {
         background-color: whitesmoke;
       }
-      &:nth-child(2){
+
+      &:nth-child(2) {
         background-color: #333333;
       }
     }

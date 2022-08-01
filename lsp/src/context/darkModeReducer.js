@@ -7,7 +7,7 @@ const DarkModeReducer = (state, action)=>{
             }
         }
 
-        i
+
 
         default:
             return state;

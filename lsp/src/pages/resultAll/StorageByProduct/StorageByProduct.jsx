@@ -4,12 +4,13 @@ import NavBar from "../../../components/navbar/NavBar";
 import Datable from "../../../components/datable/Datable";
 import {columnsStorageByProducts} from "../../../HeadersTable";
 import './storagebyproduct.scss'
+import MenuIcon from "@mui/icons-material/Menu";
 
 const StorageByProduct = () => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
-
+    const [icon, setIcon] = useState(false)
     useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
@@ -35,9 +36,13 @@ const StorageByProduct = () => {
 
     return (
         <div className="main">
-            <SideBar/>
-            <div className="container">
-                <NavBar/>
+            <div className="openMenu">
+                <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+            </div>
+            <SideBar
+                open = {icon}
+                close ={()=>setIcon(!icon)}
+            />
                 <div className="datatable">
                     <Datable rows = {data}
                              columns = {columnsStorageByProducts}
@@ -46,7 +51,6 @@ const StorageByProduct = () => {
                              rowsPerPageOptions={5}
                     />
                 </div>
-            </div>
         </div>
     );
 };

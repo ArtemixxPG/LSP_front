@@ -1,6 +1,14 @@
 import React, {useEffect, useState} from 'react';
+import SideBar from "../../../components/sidebar/SideBar";
+import MenuIcon from "@mui/icons-material/Menu";
+import "./productflow.scss"
 
 const ProductFlow = () => {
+
+    const [data, setData] = useState([]);
+    const [rowId, setRowId] = useState();
+    const [icon, setIcon] = useState(false)
+
 
     useEffect(() => {
         let cleanupFunction = false;
@@ -27,7 +35,13 @@ const ProductFlow = () => {
 
     return (
         <div>
-            
+            <div className="openMenu">
+                <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+            </div>
+            <SideBar
+                open = {icon}
+                close ={()=>setIcon(!icon)}
+            />
         </div>
     );
 };

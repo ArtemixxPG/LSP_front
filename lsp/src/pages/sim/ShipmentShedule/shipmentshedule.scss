@@ -2,8 +2,37 @@
   display: flex;
   width: 100%;
 
-  .container {
-    flex: 6;
+
+
+
+    .openMenu {
+      position: absolute;
+      z-index: 1;
+      top: 20px;
+      left: 20px;
+
+      .menuButton {
+        top: 20px;
+        right: 30px;
+        width: 30px;
+        height: 30px;
+        color: #222222;
+        cursor: pointer;
+      }
+    }
+
+
+
+
+    .datatable{
+      position: absolute;
+      top: 10%;
+      width: 100%;
+
+    }
+
+
+
 
     .charts{
       display: flex;
@@ -11,9 +40,7 @@
       gap:20px;
     }
 
-    .datatable{
-      display: flex;
-    }
-  }
+
+
 
 }

@@ -1,17 +1,34 @@
 .mappage{
-  display: flex;
-  position: relative;
 
- .ymap{
-   position: absolute;
-   z-index: 0;
- }
-
-  .container{
-      flex: 6;
-  }
-  .side{
-    z-index: 100;
+  .openMenu{
     position: absolute;
+    z-index: 1;
+    top: 20px;
+    left: 20px;
+    .menuButton{
+      top: 20px;
+      right: 30px;
+      width: 30px;
+      height: 30px;
+      color: #222222;
+      cursor: pointer;
+    }
+
+    .alert{
+      position: absolute;
+      right: 10px;
+      bottom: 200px;
+    }
   }
+
+  .root {
+  & .MuiAutocomplete-listbox {
+  & :hover {
+    color: brown
+  }
+  }
+  }
+
+
+
 }

@@ -1,6 +1,10 @@
 import React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import {ruRU} from '@mui/material/locale';
+import {
+    GridColumnMenu,
+        GridColumnMenuContainer,
+        GridFilterMenuItem,
+        SortGridMenuItems,
+        useGridApiRef, DataGrid, ruRU } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
@@ -35,6 +39,9 @@ const StyledGridOverlay = styled('div')(({ theme }) => ({
         fill: theme.palette.mode === 'light' ? '#f5f5f5' : '#fff',
     },
 }));
+
+
+
 
 function CustomNoRowsOverlay() {
     return (
@@ -98,6 +105,7 @@ const Datable = (props) => {
             }
                 pageSize={props.pageSize}
                 rowsPerPageOptions={[props.rowsPerPageOptions]}
+                localeText={ruRU.components.MuiDataGrid.defaultProps.localeText}
             />
             </ThemeProvider>
         </div>

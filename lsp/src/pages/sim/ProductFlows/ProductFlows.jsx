@@ -2,14 +2,17 @@ import React, {useEffect, useState} from 'react';
 import NavBar from "../../../components/navbar/NavBar";
 import SideBar from "../../../components/sidebar/SideBar";
 import Chart from "../../../components/chart/Chart";
-import {columnsProductFlow} from "../../../HeadersTable"
+import {columnsProductFlow, columnsSharedFlowConstraints} from "../../../HeadersTable"
 
 import "./productflows.scss"
 import Datable from "../../../components/datable/Datable";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const ProductFlows = () => {
 
     const [data, setData] = useState({ dataTable:[], dataSet: []})
+    const [rowId, setRowId] = useState();
+    const [icon, setIcon] = useState(false)
 
 
     useEffect(()=>{
@@ -39,9 +42,19 @@ const ProductFlows = () => {
 
     return (
         <div className="productflows">
-            <SideBar/>
-            <div className="container">
-                <NavBar/>
+            <div className="openMenu">
+                <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+            </div>
+            <SideBar
+                open = {icon}
+                close ={()=>setIcon(!icon)}
+            />
+            <Datable rows = {data}
+                     columns = {columnsSharedFlowConstraints}
+                     new_id = {rowId}
+                     pageSize={5}
+                     rowsPerPageOptions={5}
+            />
                 <div className="charts">
                 <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
                 </div>
@@ -49,7 +62,7 @@ const ProductFlows = () => {
                     <Datable rows={data.dataTable} columns={columnsProductFlow}/>
                 </div>
 
-            </div>
+
         </div>
     );
 };

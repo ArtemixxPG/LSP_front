@@ -10,6 +10,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Datable from "../../../components/datable/Datable";
 import {columnsNamedExpressions, columnsObjectiveMembers, columnsOverallStats} from "../../../HeadersTable";
+import MenuIcon from "@mui/icons-material/Menu";
 
 
 
@@ -20,14 +21,10 @@ function Infographics() {
      const [buttonPopupOM, setButtonPopupOM] = React.useState(false);
      const [buttonPopupOS, setButtonPopupOS] = React.useState(false);
 
-    /*const [dataNE, setDataNE] = useState([]);
-    const [rowIdNE, setRowIdNE] = useState();
 
-    const [dataOM, setDataOM] = useState([]);
-    const [rowIdOM, setRowIdOM] = useState();
 
-    const [dataOS, setDataOS] = useState([]);
-    const [rowIdOS, setRowIdOS] = useState();*/
+    const [icon, setIcon] = useState(false)
+
 
     const [dataExpression, setDataExpression] = useState([{id: "",
         iteration: 0,
@@ -95,9 +92,14 @@ function Infographics() {
 
      return (
          <div className="inforaph">
-              <SideBar/>
-             <div className="container">
-                 <NavBar/>
+             <div className="openMenu">
+                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+             </div>
+             <SideBar
+                 open = {icon}
+                 close ={()=>setIcon(!icon)}
+             />
+
                  <div className="stack">
                  <Stack  direction="row" spacing={2}>
                      <Button onClick={() => setButtonPopupNE(!buttonPopupNE)}>Наименовании операции</Button>
@@ -124,7 +126,7 @@ function Infographics() {
                               dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
                               fillFirst="#800080" fillSecond="#9370DB"/>
                  </div>
-             </div>
+
 
 
              <Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>

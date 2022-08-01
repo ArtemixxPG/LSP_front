@@ -10,7 +10,8 @@ const DemandFulfillment = () => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
-    const [fileDir, setFileDir] = useState("");
+    const [icon, setIcon] = useState(false)
+
 
     useEffect(() => {
         let cleanupFunction = false;
@@ -36,26 +37,16 @@ const DemandFulfillment = () => {
     }, [])
 
 
-    const fetchDataCreateCSV = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/dfilm/create');
-            const result = await response.json();
 
-            setFileDir("Файл загружен: "+result.path);
-
-
-        } catch (e) {
-            console.error(e.message)
-        }
-    }
 
 
 
     return (
         <div className="main">
-            <SideBar/>
-            <div className="container">
-                <NavBar/>
+            <SideBar
+                open = {icon}
+                close ={()=>setIcon(!icon)}
+            />
                 <div className="datatable">
                 <Datable rows = {data}
                 columns = {columnsDemandFulfillment}
@@ -63,7 +54,6 @@ const DemandFulfillment = () => {
                          pageSize={5}
                          rowsPerPageOptions={5}
                 />
-                </div>
             </div>
         </div>
     );

@@ -3,12 +3,15 @@ import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
 import Chart from "../../../components/chart/Chart";
 import Datable from "../../../components/datable/Datable";
-import {columnsShipmentShedule} from "../../../HeadersTable";
+import {columnsSharedFlowConstraints, columnsShipmentShedule} from "../../../HeadersTable";
 
 import "./shipmentshedule.scss"
+import MenuIcon from "@mui/icons-material/Menu";
 
 const ShipmentShedule = () => {
     const [data, setData] = useState({ dataTable:[], dataSet: []})
+    const [rowId, setRowId] = useState();
+    const [icon, setIcon] = useState(false)
 
 
     useEffect(()=>{
@@ -39,16 +42,26 @@ const ShipmentShedule = () => {
 
     return (
         <div className="shipmentshedule">
-            <SideBar/>
-            <div className="container">
-                <NavBar/>
+            <div className="openMenu">
+                <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+            </div>
+            <SideBar
+                open = {icon}
+                close ={()=>setIcon(!icon)}
+            />
+            <Datable rows = {data}
+                     columns = {columnsSharedFlowConstraints}
+                     new_id = {rowId}
+                     pageSize={5}
+                     rowsPerPageOptions={5}
+            />
                 <div className="charts">
                     <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="firstValue" dataKeySecond="secondValue"/>
                 </div>
                 <div className="datatable">
                     <Datable rows={data.dataTable} columns={columnsShipmentShedule}/>
                 </div>
-            </div>
+
         </div>
     );
 };

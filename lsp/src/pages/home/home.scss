@@ -2,6 +2,24 @@
   display: flex;
 
 
+
+    .openMenu {
+      position: absolute;
+      z-index: 1;
+      top: 20px;
+      left: 20px;
+
+      .menuButton {
+        top: 20px;
+        right: 30px;
+        width: 30px;
+        height: 30px;
+        color: #ffffff;
+        cursor: pointer;
+      }
+    }
+
+
   .homeContainer{
     flex: 6;
     background-image: url('./img/home.jpg');

@@ -4,11 +4,13 @@ import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
 import Datable from "../../../components/datable/Datable";
 import {columnsSharedStoragesConstraints} from "../../../HeadersTable";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const SharedStoragesConstraints = () => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
+    const [icon, setIcon] = useState(false)
 
     useEffect(() => {
         let cleanupFunction = false;
@@ -35,9 +37,13 @@ const SharedStoragesConstraints = () => {
 
     return (
         <div className="main">
-            <SideBar/>
-            <div className="container">
-                <NavBar/>
+            <div className="openMenu">
+                <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+            </div>
+            <SideBar
+                open = {icon}
+                close ={()=>setIcon(!icon)}
+            />
                 <div className="datatable">
                     <Datable rows = {data}
                              columns = {columnsSharedStoragesConstraints}
@@ -46,7 +52,6 @@ const SharedStoragesConstraints = () => {
                              rowsPerPageOptions={5}
                     />
                 </div>
-            </div>
         </div>
     );
 };
