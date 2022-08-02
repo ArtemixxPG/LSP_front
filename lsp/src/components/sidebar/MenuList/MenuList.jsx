@@ -38,17 +38,7 @@ export default function MenuList (props)  {
                 </ListSubheader>
             }
         >
-
-            <ListItemButton onClick={()=>setOpenCurrentRes(!openCurrentRes)}>
-                <ListItemIcon>
-                    <ScienceIcon/>
-                </ListItemIcon>
-                <ListItemText primary={props.nameExp}/>
-                {openTools ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={openCurrentRes} timeout="auto" unmountOnExit>
                 {props.menu}
-            </Collapse>
             <ListItemButton onClick={()=>setOpenTools(!openTools)}>
                 <ListItemIcon>
                     <ArchitectureIcon/>
