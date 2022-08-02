@@ -8,7 +8,7 @@ import "./productflows.scss"
 import Datable from "../../../components/datable/Datable";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const ProductFlows = () => {
+const ProductFlows = (props) => {
 
     const [data, setData] = useState({ dataTable:[], dataSet: []})
     const [rowId, setRowId] = useState();
@@ -46,22 +46,19 @@ const ProductFlows = () => {
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
-            <Datable rows = {data}
-                     columns = {columnsSharedFlowConstraints}
-                     new_id = {rowId}
-                     pageSize={5}
-                     rowsPerPageOptions={5}
-            />
+            <div className="content">
                 <div className="charts">
                 <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
                 </div>
                 <div className="datatable">
                     <Datable rows={data.dataTable} columns={columnsProductFlow}/>
                 </div>
-
+            </div>
 
         </div>
     );

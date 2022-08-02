@@ -10,7 +10,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import MenuIcon from '@mui/icons-material/Menu';
 import Alert from "@mui/material/Alert";
 
-const Map = () => {
+const Map = (props) => {
 
 
 
@@ -39,9 +39,10 @@ const Map = () => {
             <MenuIcon  className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
-                message = {callBackMsg}
+                close = {()=>setIcon(!icon)}
             />
             <YMap>
             </YMap>

@@ -7,7 +7,7 @@ import {columnsProductionCost} from "../../../HeadersTable";
 import MenuIcon from "@mui/icons-material/Menu";
 
 
-const ProductionCost = () => {
+const ProductionCost = (props) => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
@@ -42,8 +42,10 @@ const ProductionCost = () => {
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
 
 

@@ -31,7 +31,10 @@ import Map from "./pages/map/MapPage";
 
 function App() {
 
+
+    const [menu, setMenu] = useState()
     const {darkMode} = useContext(DarkModeContext)
+
 
 
   return (
@@ -39,25 +42,25 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/">
-                    <Route index element={<Home/>}/>
-                    <Route path="dfilm" element={<DemandFulfillment/>}/>
-                    <Route path="opsites" element={<OperatingSites/>}/>
-                    <Route path="othcost" element={<OtherCosts/>}/>
-                    <Route path="prdflow" element={<ProductFlow/>}/>
-                    <Route path="pdncost" element={<ProductionCost/>}/>
-                    <Route path="pdnflows" element={<ProductionFlows/>}/>
-                    <Route path="sfc" element={<SharedFlowConstraints/>}/>
-                    <Route path="ssc" element={<SharedStoragesConstraints/>}/>
-                    <Route path="sitestate" element={<SiteState/>}/>
-                    <Route path="sbp" element={<StorageByProduct/>}/>
-                    <Route path="vf" element={<VehicleFlows/>}/>
-                    <Route path="infograph" element={<Infographics/>}/>
-                    <Route path="pfsim" element={<ProductFlows/>}/>
-                    <Route path="shsh" element={<ShipmentShedule/>}/>
-                    <Route path="tc" element={<TotalCost/>}/>
-                    <Route path="upload" element={<Upload/>}/>
-                    <Route path="compare" element={<CompareDemandFulfillment/>}/>
-                    <Route path="map" element={<Map/>}/>
+                    <Route index element={<Home menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="dfilm" element={<DemandFulfillment menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="opsites" element={<OperatingSites menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="othcost" element={<OtherCosts menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="prdflow" element={<ProductFlow menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="pdncost" element={<ProductionCost menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="pdnflows" element={<ProductionFlows menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="sfc" element={<SharedFlowConstraints menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="ssc" element={<SharedStoragesConstraints menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="sitestate" element={<SiteState menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="sbp" element={<StorageByProduct/>} menu = {menu} setMenu = {setMenu}/>
+                    <Route path="vf" element={<VehicleFlows menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="infograph" element={<Infographics menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="pfsim" element={<ProductFlows menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="shsh" element={<ShipmentShedule menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="tc" element={<TotalCost menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="upload" element={<Upload menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="compare" element={<CompareDemandFulfillment menu = {menu} setMenu = {setMenu}/>}/>
+                    <Route path="map" element={<Map menu = {menu} setMenu = {setMenu}/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

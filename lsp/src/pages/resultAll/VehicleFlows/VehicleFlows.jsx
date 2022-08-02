@@ -7,7 +7,7 @@ import {columnsVehicleFlows} from "../../../HeadersTable";
 import MenuIcon from "@mui/icons-material/Menu";
 
 
-const VehicleFlows = () => {
+const VehicleFlows = (props) => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
@@ -42,8 +42,10 @@ const VehicleFlows = () => {
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
                     <Datable rows = {data}

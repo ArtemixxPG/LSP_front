@@ -3,7 +3,7 @@ import SideBar from "../../../components/sidebar/SideBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./productflow.scss"
 
-const ProductFlow = () => {
+const ProductFlow = (props) => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
@@ -39,8 +39,10 @@ const ProductFlow = () => {
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
         </div>
     );

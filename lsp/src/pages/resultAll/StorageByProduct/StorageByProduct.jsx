@@ -6,7 +6,7 @@ import {columnsStorageByProducts} from "../../../HeadersTable";
 import './storagebyproduct.scss'
 import MenuIcon from "@mui/icons-material/Menu";
 
-const StorageByProduct = () => {
+const StorageByProduct = (props) => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
@@ -40,8 +40,10 @@ const StorageByProduct = () => {
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
                     <Datable rows = {data}

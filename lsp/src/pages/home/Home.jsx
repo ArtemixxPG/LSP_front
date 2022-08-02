@@ -7,7 +7,7 @@ import "./home.scss"
 import {useState} from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const Home = () => {
+const Home = (props) => {
 
     const [icon, setIcon] = useState(false)
 
@@ -17,8 +17,10 @@ const Home = () => {
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
             <div className="homeContainer">
                 </div>

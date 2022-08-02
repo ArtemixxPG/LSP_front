@@ -26,9 +26,7 @@ const experiments = [
 const SideBar = (props) => {
 
     const [check, setCheck] = useState(false)
-    const [menu, setMenu] = useReducer(
-        <ListItemText primary="Для выбора эксперимента используйте пункт 'Эксперименты' "/>
-    )
+
     const [nameRes, setNameRes] = useState("Выбирете эксперимент")
 
     const checkExp = (type) => {
@@ -44,9 +42,9 @@ const SideBar = (props) => {
         if(typeof exp==='string')
         setNameRes(exp)
         if(exp.includes("Оптимизационный")){
-            setMenu(<OptimizationMenuList/>)
+            props.setMenu( <OptimizationMenuList/>)
         } else if(exp.includes("Симмуляционный")){
-            setMenu(<SimulationMenuList/>)
+            props.setMenu( <SimulationMenuList/>)
         }
 
     }
@@ -70,7 +68,7 @@ const SideBar = (props) => {
                     <EMenu setExperiment = {chooseMenu}/>
 
                     </div>
-                    <MenuList menu={menu} nameExp={nameRes}/>
+                    <MenuList menu={props.menu} nameExp={nameRes}/>
                 </div>
             </div>
         </Drawer>

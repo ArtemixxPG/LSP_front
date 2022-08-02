@@ -8,7 +8,7 @@ import {columnsSharedFlowConstraints, columnsShipmentShedule} from "../../../Hea
 import "./shipmentshedule.scss"
 import MenuIcon from "@mui/icons-material/Menu";
 
-const ShipmentShedule = () => {
+const ShipmentShedule = (props) => {
     const [data, setData] = useState({ dataTable:[], dataSet: []})
     const [rowId, setRowId] = useState();
     const [icon, setIcon] = useState(false)
@@ -46,22 +46,19 @@ const ShipmentShedule = () => {
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
-            <Datable rows = {data}
-                     columns = {columnsSharedFlowConstraints}
-                     new_id = {rowId}
-                     pageSize={5}
-                     rowsPerPageOptions={5}
-            />
+            <div className="content">
                 <div className="charts">
                     <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="firstValue" dataKeySecond="secondValue"/>
                 </div>
                 <div className="datatable">
                     <Datable rows={data.dataTable} columns={columnsShipmentShedule}/>
                 </div>
-
+            </div>
         </div>
     );
 };

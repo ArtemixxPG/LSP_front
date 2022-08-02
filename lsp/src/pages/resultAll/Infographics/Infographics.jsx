@@ -15,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 
 
-function Infographics() {
+function Infographics(props) {
 
      const [buttonPopupNE, setButtonPopupNE] = React.useState(false);
      const [buttonPopupOM, setButtonPopupOM] = React.useState(false);
@@ -96,8 +96,10 @@ function Infographics() {
                  <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
              </div>
              <SideBar
+                 menu = {props.menu}
+                 setMenu = {props.setMenu}
                  open = {icon}
-                 close ={()=>setIcon(!icon)}
+                 close = {()=>setIcon(!icon)}
              />
 
                  <div className="stack">

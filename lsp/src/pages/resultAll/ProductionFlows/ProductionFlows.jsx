@@ -6,7 +6,7 @@ import NavBar from "../../../components/navbar/NavBar";
 import Datable from "../../../components/datable/Datable";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const ProductionFlows = () => {
+const ProductionFlows = (props) => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
@@ -41,8 +41,10 @@ const ProductionFlows = () => {
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
                     <Datable rows = {data}

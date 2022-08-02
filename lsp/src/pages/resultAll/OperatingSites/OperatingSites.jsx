@@ -7,7 +7,7 @@ import Datable from "../../../components/datable/Datable";
 import {columnsOperatingSites} from "../../../HeadersTable";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const OperatingSites = () => {
+const OperatingSites = (props) => {
 
 
     const [data, setData] = useState([]);
@@ -45,8 +45,10 @@ const OperatingSites = () => {
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
 
 

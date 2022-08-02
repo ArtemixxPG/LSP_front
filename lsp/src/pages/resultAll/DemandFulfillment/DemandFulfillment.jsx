@@ -6,7 +6,7 @@ import NavBar from "../../../components/navbar/NavBar";
 
 import "./demandfulfillment.scss"
 
-const DemandFulfillment = () => {
+const DemandFulfillment = (props) => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
@@ -44,8 +44,10 @@ const DemandFulfillment = () => {
     return (
         <div className="main">
             <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
                 open = {icon}
-                close ={()=>setIcon(!icon)}
+                close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
                 <Datable rows = {data}
