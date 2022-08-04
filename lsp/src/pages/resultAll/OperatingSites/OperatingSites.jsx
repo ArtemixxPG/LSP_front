@@ -10,8 +10,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 const OperatingSites = (props) => {
 
 
-    const [data, setData] = useState([]);
-    const [rowId, setRowId] = useState();
+    //const [data, setData] = useState([]);
+    //const [rowId, setRowId] = useState();
+    const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
 
@@ -20,7 +21,7 @@ const OperatingSites = (props) => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/opsites');
+                const response = await fetch('http://localhost:8080/results/opsites/data');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -40,7 +41,7 @@ const OperatingSites = (props) => {
     }, [])
 
     return (
-        <div className="main">
+        <div className="operatingsites">
             <div className="openMenu">
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
@@ -50,16 +51,8 @@ const OperatingSites = (props) => {
                 open = {icon}
                 close = {()=>setIcon(!icon)}
             />
-
-
                 <div className="datatable">
-                    <Datable rows = {data}
-                             columns = {columnsOperatingSites}
-                             new_id = {rowId}
-                             pageSize={5}
-                             rowsPerPageOptions={5}
-                    />
-
+                    <Datable rows = {data.dataTable} columns = {columnsOperatingSites}/>
             </div>
         </div>
     );

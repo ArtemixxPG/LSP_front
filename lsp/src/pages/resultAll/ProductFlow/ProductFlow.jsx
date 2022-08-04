@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import SideBar from "../../../components/sidebar/SideBar";
+import Datable from "../../../components/datable/Datable";
+import {columnsProductFlows} from "../../../HeadersTable";
+import NavBar from "../../../components/navbar/NavBar";
 import MenuIcon from "@mui/icons-material/Menu";
-import "./productflow.scss"
+
+
+import './productflow.scss'
 
 const ProductFlow = (props) => {
 
-    const [data, setData] = useState([]);
-    const [rowId, setRowId] = useState();
+    const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
 
@@ -14,7 +18,7 @@ const ProductFlow = (props) => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/prdflow');
+                const response = await fetch('http://localhost:8080/results/prdflow/data');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -34,7 +38,7 @@ const ProductFlow = (props) => {
     }, [])
 
     return (
-        <div>
+        <div className="productflow">
             <div className="openMenu">
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
@@ -44,7 +48,10 @@ const ProductFlow = (props) => {
                 open = {icon}
                 close = {()=>setIcon(!icon)}
             />
-        </div>
+                <div className="datatable">
+                    <Datable rows = {data.dataTable} columns = {columnsProductFlows}/>
+                </div>
+            </div>
     );
 };
 

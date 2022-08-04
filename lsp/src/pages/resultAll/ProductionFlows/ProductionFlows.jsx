@@ -8,15 +8,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const ProductionFlows = (props) => {
 
-    const [data, setData] = useState([]);
-    const [rowId, setRowId] = useState();
+    //const [data, setData] = useState([]);
+    //const [rowId, setRowId] = useState();
+    const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
     useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/pdnflows');
+                const response = await fetch('http://localhost:8080/results/pdnflows/data');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -36,7 +37,7 @@ const ProductionFlows = (props) => {
     }, [])
 
     return (
-        <div className="main">
+        <div className="productionflows">
             <div className="openMenu">
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
@@ -47,12 +48,7 @@ const ProductionFlows = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {data}
-                             columns = {columnsProductionFlows}
-                             new_id = {rowId}
-                             pageSize={5}
-                             rowsPerPageOptions={5}
-                    />
+                    <Datable rows = {data.dataTable} columns = {columnsProductionFlows}/>
             </div>
         </div>
     );

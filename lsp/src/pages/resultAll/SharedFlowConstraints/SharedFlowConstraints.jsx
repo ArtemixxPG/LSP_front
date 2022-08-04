@@ -9,15 +9,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const SharedFlowConstraints = (props) => {
 
-    const [data, setData] = useState([]);
-    const [rowId, setRowId] = useState();
+    //const [data, setData] = useState([]);
+    //const [rowId, setRowId] = useState();
+    const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
     useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/sfc');
+                const response = await fetch('http://localhost:8080/results/sfc/data');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -37,7 +38,7 @@ const SharedFlowConstraints = (props) => {
     }, [])
 
     return (
-        <div className="main">
+        <div className="sharedflowconstraints">
             <div className="openMenu">
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
@@ -48,12 +49,7 @@ const SharedFlowConstraints = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {data}
-                             columns = {columnsSharedFlowConstraints}
-                             new_id = {rowId}
-                             pageSize={5}
-                             rowsPerPageOptions={5}
-                    />
+                    <Datable rows = {data.dataTable} columns = {columnsSharedFlowConstraints}/>
                 </div>
         </div>
     );

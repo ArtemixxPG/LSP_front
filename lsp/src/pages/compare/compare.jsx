@@ -3,10 +3,11 @@ import SideBar from "../../components/sidebar/SideBar";
 import Datable from "../../components/datable/Datable";
 import {columnsDemandFulfillment, columnsDemandFulfillmentWithColor} from "../../HeadersTable";
 import NavBar from "../../components/navbar/NavBar";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import "./compare.scss"
 
-const CompareDemandFulfillment = () => {
+const CompareDemandFulfillment = (props) => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
@@ -14,6 +15,8 @@ const CompareDemandFulfillment = () => {
     const [typeExp, setTypeExp] = useState("");
     const [chooseTable1, setChoseTable1] = useState("")
     const [chooseTable2, setChoseTable2] = useState("")
+    const [icon, setIcon] = useState(false)
+
 
     useEffect(() => {
         let cleanupFunction = false;
@@ -69,64 +72,70 @@ const CompareDemandFulfillment = () => {
 
     return (
         <div className="main">
-            <SideBar/>
-            <div className="container">
-                <NavBar/>
-                <div className="chooseExpirement">
-                    <form onSubmit={handleSubmit}>
-                        <label className="search">
-                            Выберите таблицу:
-                            <select value={typeExp} onChange={handleChange}>
-                                <option value="Таблица 1">#1</option>
-                                <option value="Таблица 2">#2</option>
-                                <option value="Таблица 3">#3</option>
-                                <option value="Таблица 4">#4</option>
-                            </select>
-                        </label>
-                    </form>
-                </div>
-                <div className="datatable">
-                    <form onSubmit={handleSubmitTable1}>
-                        <label className="search">
-                            Выберите номер эксперимента:
-                            <select value={chooseTable1} onChange={handleChangeTable1}>
-                                <option value="#1">#1</option>
-                                <option value="#2">#2</option>
-                                <option value="#3">#3</option>
-                                <option value="#4">#4</option>
-                            </select>
-                        </label>
-                    </form>
-                    <Datable rows = {data}
-                             columns = {columnsDemandFulfillmentWithColor(data, data)}
-                             new_id = {rowId}
-                             pageSize={5}
-                             rowsPerPageOptions={5}
-                    />
-                </div>
+            <div className="openMenu">
+                <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+            </div>
+            <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
+                open = {icon}
+                close = {()=>setIcon(!icon)}
+            />
+                <div className="content">
+                    <div className="chooseExpirement">
+                        <form onSubmit={handleSubmit}>
+                            <label className="search">
+                                Выберите таблицу:
+                                <select value={typeExp} onChange={handleChange}>
+                                    <option value="Таблица 1">#1</option>
+                                    <option value="Таблица 2">#2</option>
+                                    <option value="Таблица 3">#3</option>
+                                    <option value="Таблица 4">#4</option>
+                                </select>
+                            </label>
+                        </form>
+                    </div>
+                    <div className="datatable">
+                        <form onSubmit={handleSubmitTable1}>
+                            <label className="search">
+                                Выберите номер эксперимента:
+                                <select value={chooseTable1} onChange={handleChangeTable1}>
+                                    <option value="#1">#1</option>
+                                    <option value="#2">#2</option>
+                                    <option value="#3">#3</option>
+                                    <option value="#4">#4</option>
+                                </select>
+                            </label>
+                        </form>
+                        <Datable rows = {data}
+                                 columns = {columnsDemandFulfillmentWithColor(data, data)}
+                                 new_id = {rowId}
+                                 pageSize={5}
+                                 rowsPerPageOptions={5}
+                        />
+                    </div>
 
-                <div className="datatable">
-                    <form onSubmit={handleSubmitTable2}>
-                        <label className="search">
-                            Выберите номер эксперимента:
-                            <select value={chooseTable2} onChange={handleChangeTable2}>
-                                <option value="#1">#1</option>
-                                <option value="#2">#2</option>
-                                <option value="#3">#3</option>
-                                <option value="#4">#4</option>
-                            </select>
-                        </label>
-                    </form>
-                    <Datable rows = {data}
-                             columns = {columnsDemandFulfillmentWithColor(data, data)}
-                             new_id = {rowId}
-                             pageSize={5}
-                             rowsPerPageOptions={5}
-                    />
-
+                    <div className="datatable">
+                        <form onSubmit={handleSubmitTable2}>
+                            <label className="search">
+                                Выберите номер эксперимента:
+                                <select value={chooseTable2} onChange={handleChangeTable2}>
+                                    <option value="#1">#1</option>
+                                    <option value="#2">#2</option>
+                                    <option value="#3">#3</option>
+                                    <option value="#4">#4</option>
+                                </select>
+                            </label>
+                        </form>
+                        <Datable rows = {data}
+                                 columns = {columnsDemandFulfillmentWithColor(data, data)}
+                                 new_id = {rowId}
+                                 pageSize={5}
+                                 rowsPerPageOptions={5}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
     );
 };
 

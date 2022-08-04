@@ -3,24 +3,22 @@ import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
 import Datable from "../../../components/datable/Datable";
 import {columnsSiteState} from "../../../HeadersTable";
+import MenuIcon from "@mui/icons-material/Menu";
+
 
 import './sitestate.scss'
-import MenuIcon from "@mui/icons-material/Menu";
-import Alert from "@mui/material/Alert";
 
 const SiteState = (props) => {
 
-    const [data, setData] = useState([]);
-    const [rowId, setRowId] = useState(0);
+    const [rowId, setRowId] = useState();
+    const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
-
-
 
     useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/ss');
+                const response = await fetch('http://localhost:8080/results/sitestate/data');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -40,7 +38,7 @@ const SiteState = (props) => {
     }, [])
 
     return (
-        <div className="main">
+        <div className="sitestate">
             <div className="openMenu">
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
@@ -50,17 +48,10 @@ const SiteState = (props) => {
                 open = {icon}
                 close = {()=>setIcon(!icon)}
             />
-            <div className="container">
                 <div className="datatable">
-                    <Datable rows = {data}
-                             columns = {columnsSiteState}
-                             new_id = {rowId}
-                             pageSize={5}
-                             rowsPerPageOptions={5}
-                    />
+                    <Datable rows = {data.dataTable} columns = {columnsSiteState}/>
                 </div>
             </div>
-        </div>
     );
 };
 

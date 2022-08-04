@@ -4,11 +4,13 @@ import NavBar from "../../../components/navbar/NavBar";
 import Datable from "../../../components/datable/Datable";
 import {columnsOtherCosts} from "../../../HeadersTable";
 import MenuIcon from "@mui/icons-material/Menu";
+import "./othercosts.scss"
 
 const OtherCosts = (props) => {
 
-    const [data, setData] = useState([]);
-    const [rowId, setRowId] = useState();
+    //const [data, setData] = useState([]);
+    //const [rowId, setRowId] = useState();
+    const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
 
@@ -16,7 +18,7 @@ const OtherCosts = (props) => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/othcost');
+                const response = await fetch('http://localhost:8080/results/othcost/data');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -36,7 +38,7 @@ const OtherCosts = (props) => {
     }, [])
 
     return (
-        <div className="main">
+        <div className="othercosts">
             <div className="openMenu">
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
@@ -46,16 +48,9 @@ const OtherCosts = (props) => {
                 open = {icon}
                 close = {()=>setIcon(!icon)}
             />
-
                 <div className="datatable">
-                    <Datable rows = {data}
-                             columns = {columnsOtherCosts}
-                             new_id = {rowId}
-                             pageSize={5}
-                             rowsPerPageOptions={5}
-                    />
-
-            </div>
+                    <Datable rows = {data.dataTable} columns = {columnsOtherCosts}/>
+                </div>
         </div>
     );
 };

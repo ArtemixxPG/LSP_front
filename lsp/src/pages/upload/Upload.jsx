@@ -4,20 +4,22 @@ import axios from "axios";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import SideBar from "../../components/sidebar/SideBar";
 import NavBar from "../../components/navbar/NavBar";
-
+import MenuIcon from "@mui/icons-material/Menu";
 import "./upload.scss"
 import Chart from "../../components/chart/Chart";
 import Datable from "../../components/datable/Datable";
 import {createTheme} from "@mui/material";
 
 
-const Upload = () => {
+const Upload = (props) => {
     const [csv, setCSV] = useState();
     const [header, setHeader] = useState([]);
     const [dataFile, setDataFile] = useState([]);
     const [list, setList] = useState([]);
     const [rowId, setRowId] = useState();
-    const [uploadResource, setUploadResponse] = useState("")
+    const [uploadResource, setUploadResponse] = useState("");
+    const [icon, setIcon] = useState(false)
+
 
 
     const upload = async (event)=> {
@@ -42,7 +44,6 @@ const Upload = () => {
             })
             .catch((error) => {
                 setUploadResponse(`File uploaded successfully
-
         
         FILE - uploadFile`);
             });
@@ -119,38 +120,39 @@ const Upload = () => {
 
     return (
         <div className="upload">
-            <SideBar/>
-            <div className="container">
-                <NavBar/>
+            <div className="openMenu">
+                <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
+            </div>
+            <SideBar
+                menu = {props.menu}
+                setMenu = {props.setMenu}
+                open = {icon}
+                close = {()=>setIcon(!icon)}
+            />
+            <div className="content">
                 <div className="top">
                     <h1>Загрузка CSV-файла</h1>
                 </div>
                 <div className="bottom">
                     <div className="left">
                         <label htmlFor="file">
-                        <UploadFileIcon className="icon"/>
+                            <UploadFileIcon className="icon"/>
                         </label>
                         <input
                             type="file"
                             onChange={handleFileUpload}
                             id="file"
                             style={{display:"none"}}/>
-
                     </div>
                     <div className="right">
                         <form onSubmit={upload}>
-                            <Datable
-                                new_id = {rowId}
-                            rows = {list}
-                            columns ={header}
-                            />
                             <button>Отправить</button>
                         </form>
                     </div>
                 </div>
             </div>
-            
         </div>
+            
     );
 };
 

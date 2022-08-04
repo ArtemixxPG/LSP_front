@@ -8,14 +8,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const StorageByProduct = (props) => {
 
-    const [data, setData] = useState([]);
+    //const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
+    const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
+
     useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/sbp');
+                const response = await fetch('http://localhost:8080/results/sbp/data');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -35,7 +37,7 @@ const StorageByProduct = (props) => {
     }, [])
 
     return (
-        <div className="main">
+        <div className="storagebyproduct">
             <div className="openMenu">
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
@@ -46,12 +48,7 @@ const StorageByProduct = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {data}
-                             columns = {columnsStorageByProducts}
-                             new_id = {rowId}
-                             pageSize={5}
-                             rowsPerPageOptions={5}
-                    />
+                    <Datable rows = {data.dataTable} columns = {columnsStorageByProducts}/>
                 </div>
         </div>
     );

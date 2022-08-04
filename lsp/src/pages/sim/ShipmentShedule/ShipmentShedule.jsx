@@ -9,7 +9,7 @@ import "./shipmentshedule.scss"
 import MenuIcon from "@mui/icons-material/Menu";
 
 const ShipmentShedule = (props) => {
-    const [data, setData] = useState({ dataTable:[], dataSet: []})
+    const [data, setData] = useState({ dataTable:[], dataSet: []});
     const [rowId, setRowId] = useState();
     const [icon, setIcon] = useState(false)
 

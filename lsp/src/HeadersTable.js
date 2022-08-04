@@ -1,4 +1,7 @@
 export const columnsProductFlow = [
+    { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{return(
+            <div className="cell">{params.row.iteration}</div>
+        )}},
     { field: 'object', headerName: 'ОБЪЕКТ', flex:1, renderCell:(params)=>{return(
         <div className="cell">{params.row.object}</div>
         )}},
@@ -10,6 +13,9 @@ export const columnsProductFlow = [
         )} },
     { field: 'period', headerName: 'ПЕРИОД', flex:1,  renderCell:(params)=>{return(
             <div className="cell">{params.row.period}</div>
+        )} },
+    { field: 'statistics', headerName: 'СТАТИСТИКА', flex:1,  renderCell:(params)=>{return(
+            <div className="cell">{params.row.statistics}</div>
         )} },
     {
         field: 'amount',
@@ -114,7 +120,118 @@ export const columnsShipmentShedule = [
         }
     ];
 
+export const columnsTotalCost = [
+    {
+        field: 'account', headerName: 'СЧЕТ', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.account}</div>
+            )
+        }
+    },
+    {
+        field: 'bom', headerName: 'СОСТАВЛЯЮЩИЕ ПРОДУКТА', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.bom}</div>
+            )
+        }
+    },
+    {
+        field: 'destination', headerName: 'РАССТОЯНИЕ', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.destination}</div>
+            )
+        }
+    },
+    {
+        field: 'object', headerName: 'ОБЪЕКТ', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.object}</div>
+            )
+        }
+    },
 
+    {
+        field: 'period', headerName: 'ПЕРИОД', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.period}</div>
+            )
+        }
+    },
+    {
+        field: 'product', headerName: 'ТОВАР', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.product}</div>
+            )
+        }
+    },
+    {
+        field: 'sale_bath', headerName: "СЛЕДУЮЩЕЕ МЕСТОПОЛОЖЕНИЕ", flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.sale_bath}</div>
+            )
+        }
+    },
+    {
+        field: 'source', headerName: 'ИСТОЧНИК', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.source}</div>
+            )
+        }
+    },
+    {
+        field: 'staff_type', headerName: 'ТИП ПЕРСОНАЛА', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.staff_type}</div>
+            )
+        }
+    },
+    {
+        field: 'statistics', headerName: 'СТАТИСТИКА', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.statistics}</div>
+            )
+        }
+    },
+
+    {
+        field: 'type', headerName: 'МОДЕЛЬ', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.type}</div>
+            )
+        }
+    },
+
+    {
+        field: 'unit', headerName: 'ЕД.ИЗМЕРЕНИЯ', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.unit}</div>
+            )
+        }
+    },
+
+    {
+        field: 'vehicle_type', headerName: 'ТИП ТРАНСПОРТА', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.vehicle_type}</div>
+            )
+        }
+    },
+
+    {
+        field: 'zone', headerName: 'ПОТОК', flex: 1, renderCell: (params) => {
+            return (
+                <div className="cell">{params.row.zone}</div>
+            )
+        }
+    },
+
+    {
+        field: 'value',
+        headerName: 'ЗНАЧЕНИЕ',
+        type: 'number',
+        width: 90,
+    }
+];
 
 export const columnsDemandFulfillment = [
     { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{return(
@@ -303,126 +420,195 @@ const chooseColor = (key, currentValue, firstValue, secondValue) => {
    let index = firstValue.indexOf(value);
 
    return secondValue[index][key.toString()];
-
 }
 
 
-
 export const columnsProductFlows = [
-    { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{
 
+    { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{
         return(
             <div className="cell">{params.row.iteration}</div>
         )
         }},
+
     { field: 'period', headerName: 'ПЕРИОД', flex:1,  renderCell:(params)=>{return(
             <div className="cell">{params.row.period}</div>
         )} },
-    { field: 'from', headerName: 'ИЗ', flex:1,  renderCell:(params)=>{return(
+
+    { field: 'from', headerName: 'ОТКУДА', flex:1,  renderCell:(params)=>{return(
             <div className="cell">{params.row.from}</div>
         )} },
-    { field: 'to', headerName: 'ДО', flex:1,  renderCell:(params)=>{return(
+
+    { field: 'to', headerName: 'КУДА', flex:1,  renderCell:(params)=>{return(
             <div className="cell">{params.row.to}</div>
         )} },
 
     { field: 'arrival_period', headerName: 'ВРЕМЯ ПРИБЫТИЯ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.arrival_period}</div>
         )}},
+
     { field: 'product', headerName: 'ТОВАР', flex:1,  renderCell:(params)=>{return(
             <div className="cell">{params.row.product}</div>
         )} },
-    { field: 'flow', headerName: "РАСХОД", flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow}</div>
-        )} },
+    {
+        field: 'flow',
+        headerName: 'РАСХОД',
+        type: 'number',
+        width: 90,
+    },
+
     { field: 'unit', headerName: 'ЕД.ИЗМЕРЕНИЯ', flex:1,  renderCell:(params)=>{return(
             <div className="cell">{params.row.unit}</div>
         )} },
-    { field: 'flow_min', headerName: 'МИН.РАСХОД', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow_min}</div>
-        )}},
-    { field: 'flow_max', headerName: 'МАКС.РАСХОД', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow_max}</div>
-        )} },
 
-    { field: 'percentage', headerName: '%', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.percentage}</div>
-        )} },
+    {
+        field: 'flow_min',
+        headerName: 'МИН.РАСХОД',
+        type: 'number',
+        width: 90,
+    },
 
-    { field: 'flow_under', headerName: 'НЕДОРАСХОД', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow_under}</div>
-        )} },
+    {
+        field: 'flow_max',
+        headerName: 'МАКС.РАСХОД',
+        type: 'number',
+        width: 90,
+    },
 
-    { field: 'flow_over', headerName: 'СВЕРХ РАСХОД', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow_over}</div>
-        )} },
+    {
+        field: 'percantage',
+        headerName: '%',
+        type: 'number',
+        width: 80,
+    },
 
-    { field: 'distance', headerName: 'РАССТОЯНИЕ', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.distance}</div>
-        )} },
+    {
+        field: 'flow_under',
+        headerName: 'НЕДОРАСХОД',
+        type: 'number',
+        width: 90,
+    },
+
+    {
+        field: 'flow_over',
+        headerName: 'СВЕРХ РАСХОД',
+        type: 'number',
+        width: 90,
+    },
+
+    {
+        field: 'distance',
+        headerName: 'РАССТОЯНИЕ',
+        type: 'number',
+        width: 100,
+    },
 
     { field: 'vehicle_type', headerName: 'ТИП ТРАНСПОРТА', flex:1,  renderCell:(params)=>{return(
             <div className="cell">{params.row.vehicle_type}</div>
         )} },
 
-    { field: 'travel_time_day', headerName: 'ВРЕМЯ ПЕРЕВОЗКИ, ДЕНЬ', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.travel_time_day}</div>
+    {
+        field: 'travel_time_day',
+        headerName: 'ВРЕМЯ ПЕРЕВОЗКИ, ДЕНЬ',
+        type: 'number',
+        width: 100,
+    },
+
+    {
+        field: 'out_processing_cost',
+        headerName: 'СТОИМОСТЬ ВЫХОДЯЩЕЙ ОБРАБОТКИ, ЗА ДЕНЬ',
+        type: 'number',
+        width: 100,
+    },
+
+    {
+        field: 'out_processing_cost_t',
+        headerName: 'СТОИМОСТЬ ВЫХОДЯЩЕЙ ОБРАБОТКИ, ВСЕГО',
+        type: 'number',
+        width: 100,
+    },
+
+    {
+        field: 'transportation_cost',
+        headerName: 'СТОИМОСТЬ ПЕРЕВОЗКИ, ЗА ДЕНЬ',
+        type: 'number',
+        width: 100,
+    },
+
+    {
+        field: 'transportation_cost_t',
+        headerName: 'СТОИМОСТЬ ПЕРЕВОЗКИ, ВСЕГО',
+        type: 'number',
+        width: 100,
+    },
+
+    {
+        field: 'tariff_pi',
+        headerName: 'ТАРИФ, ЗА ЕД.',
+        type: 'number',
+        width: 90,
+    },
+
+    {
+        field: 'tariff_t',
+        headerName: 'ТАРИФ, ВСЕГО',
+        type: 'number',
+        width: 90,
+    },
+
+    {
+        field: 'in_processing_cost',
+        headerName: 'СТОИМОСТЬ ВХОДЯЩЕЙ ОБРАБОТКИ, ЗА ЕД.',
+        type: 'number',
+        width: 100,
+    },
+
+    {
+        field: 'in_processing_cost_t',
+        headerName: 'СТОИМОСТЬ ВХОДЯЩЕЙ ОБРАБОТКИ, ВСЕГО',
+        type: 'number',
+        width: 100,
+    },
+
+    {
+        field: 'flow_cost',
+        headerName: 'РАСХОДЫ, ЗА ЕД.',
+        type: 'number',
+        width: 90,
+    },
+
+    {
+        field: 'penalty',
+        headerName: 'ШТРАФ',
+        type: 'number',
+        width: 90,
+    },
+
+    {
+        field: 'flow_cost_t',
+        headerName: 'РАСХОДЫ, ВСЕГО',
+        type: 'number',
+        width: 90,
+    },
+
+    {
+        field: 'flow_cost_co2',
+        headerName: 'РАСХОД CO2, ЗА ЕД.',
+        type: 'number',
+        width: 90,
+    },
+
+    {
+        field: 'flow_cost_co2_t',
+        headerName: 'РАСХОД CO2, ВСЕГО',
+        type: 'number',
+        width: 90,
+    },
+
+    { field: 'statistics', headerName: 'СТАТИСТИКА', flex:1,  renderCell:(params)=>{return(
+            <div className="cell">{params.row.statistics}</div>
         )} },
 
-    { field: 'out_processing_cost', headerName: 'СТОИМОСТЬ ВЫХОДЯЩЕЙ ОБРАБОТКИ, ЗА ДЕНЬ', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.out_processing_cost}</div>
-        )} },
-
-    { field: 'out_processing_cost_t', headerName: 'СТОИМОСТЬ ВЫХОДЯЩЕЙ ОБРАБОТКИ, ВСЕГО', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.out_processing_cost_t}</div>
-        )} },
-
-    { field: 'transportation_cost', headerName: 'СТОИМОСТЬ ПЕРЕВОЗКИ, ЗА ДЕНЬ', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.transportation_cost}</div>
-        )} },
-
-    { field: 'transportation_cost_t', headerName: 'СТОИМОСТЬ ПЕРЕВОЗКИ, ВСЕГО', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.transportation_cost_t}</div>
-        )} },
-
-    { field: 'tariff', headerName: 'ТАРИФ, ЗА ЕД.', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.tariff}</div>
-        )} },
-
-    { field: 'tariff_t', headerName: 'ТАРИФ, ВСЕГО', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.tariff_t}</div>
-        )} },
-
-    { field: 'in_processing_cost', headerName: 'СТОИМОСТЬ ВХОДЯЩЕЙ ОБРАБОТКИ, ЗА ЕД.', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.in_processing_cost}</div>
-        )} },
-
-    { field: 'in_processing_cost_t', headerName: 'СТОИМОСТЬ ВХОДЯЩЕЙ ОБРАБОТКИ, ВСЕГО', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.in_processing_cost_t}</div>
-        )} },
-
-    { field: 'flow_cost', headerName: 'РАСХОДЫ, ЗА ЕД.', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow_cost}</div>
-        )} },
-
-    { field: 'penalty', headerName: 'ШТРАФ', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.penalty}</div>
-        )} },
-
-    { field: 'flow_cost_t', headerName: 'РАСХОДЫ, ВСЕГО', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow_cost_t}</div>
-        )} },
-
-    { field: 'flow_cost_co2', headerName: 'РАСХОД CO2, ЗА ЕД.', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow_cost_co2}</div>
-        )} },
-
-    { field: 'flow_cost_co2_t', headerName: 'РАСХОД CO2, ВСЕГО', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow_cost_co2_t}</div>
-        )} },
-
-    { field: 'total', headerName: 'ИТОГО', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.total}</div>
-        )} },
 ];
 
 
@@ -431,26 +617,26 @@ export const columnsSiteState = [
             <div className="cell">{params.row.iteration}</div>
         )}},
 
-    { field: 'period', headerName: 'ПЕРИОД', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.period}</div>
+    { field: 'timePeriod', headerName: 'ПЕРИОД', flex:1,  renderCell:(params)=>{return(
+            <div className="cell">{params.row.timePeriod}</div>
         )} },
 
     { field: 'site', headerName: 'СДЕЛКА', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.from}</div>
+            <div className="cell">{params.row.site}</div>
         )} },
 
     { field: 'initial_state', headerName: 'НАЧАЛЬНОЕ ПОЛОЖЕНИЕ', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.to}</div>
+            <div className="cell">{params.row.initial_state}</div>
         )} },
 
     { field: 'new_state', headerName: 'НОВОЕ ПОЛОЖЕНИЕ', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.arrival_period}</div>
+            <div className="cell">{params.row.new_state}</div>
         )}},
     { field: 'initial_cost', headerName: 'НАЧАЛЬНАЯ ЦЕНА', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.product}</div>
+            <div className="cell">{params.row.initial_cost}</div>
         )} },
     { field: 'closing_cost', headerName: "ЦЕНА НА ЗАКРЫТИИ", flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.flow}</div>
+            <div className="cell">{params.row.closing_cost}</div>
         )} },
 ];
 
@@ -762,8 +948,8 @@ export const columnsVehicleFlows = [
             <div className="cell">{params.row.iteration}</div>
         )}},
 
-    { field: 'period', headerName: 'ПЕРИОД', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.period}</div>
+    { field: 'timePeriod', headerName: 'ПЕРИОД', flex:1, renderCell:(params)=>{return(
+            <div className="cell">{params.row.timePeriod}</div>
         )}},
 
     { field: 'source', headerName: 'ИСТОЧНИК', flex:1, renderCell:(params)=>{return(
@@ -774,12 +960,12 @@ export const columnsVehicleFlows = [
             <div className="cell">{params.row.destination}</div>
         )}},
 
-    { field: 'vehicle_type', headerName: 'ТИП ТРАНСПОРТА', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.vehicle_type}</div>
+    { field: 'vehicleType', headerName: 'ТИП ТРАНСПОРТА', flex:1, renderCell:(params)=>{return(
+            <div className="cell">{params.row.vehicleType}</div>
         )}},
 
-    { field: 'vehicle_trips', headerName: 'ТРАНСПОРТНЫЕ ПЕРЕВОЗКИ', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.vehicle_trips}</div>
+    { field: 'vehicleTrips', headerName: 'ТРАНСПОРТНЫЕ ПЕРЕВОЗКИ', flex:1, renderCell:(params)=>{return(
+            <div className="cell">{params.row.vehicleTrips}</div>
         )}},
 
     { field: 'cost', headerName: 'СТОИМОСТЬ', flex:1, renderCell:(params)=>{return(
@@ -790,24 +976,24 @@ export const columnsVehicleFlows = [
             <div className="cell">{params.row.co2}</div>
         )}},
 
-    { field: 'total_products_flow', headerName: 'ОБЩИЙ ПОТОК ПРОДУКЦИИ', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.total_products_flow}</div>
+    { field: 'totalProductsFlow', headerName: 'ОБЩИЙ ПОТОК ПРОДУКЦИИ', flex:1, renderCell:(params)=>{return(
+            <div className="cell">{params.row.totalProductsFlow}</div>
         )}},
 
     { field: 'unit', headerName: 'ЕД.ИЗМЕРЕНИЯ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.unit}</div>
         )}},
 
-    { field: 'vehicle_capacity', headerName: 'ВМЕСТИМОСТЬ ТРАНСПОРТА', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.vehicle_capacity}</div>
+    { field: 'vehicleCapacity', headerName: 'ВМЕСТИМОСТЬ ТРАНСПОРТА', flex:1, renderCell:(params)=>{return(
+            <div className="cell">{params.row.vehicleCapacity}</div>
         )}},
 
-    { field: 'min_load', headerName: 'МИН.ЗАГРУЗКА', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.min_load}</div>
+    { field: 'minLoad', headerName: 'МИН.ЗАГРУЗКА', flex:1, renderCell:(params)=>{return(
+            <div className="cell">{params.row.minLoad}</div>
         )}},
 
-    { field: 'actual_load', headerName: 'ФАКТИЧЕСКАЯ ЗАГРУЗКА', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.actual_load}</div>
+    { field: 'actualLoad', headerName: 'ФАКТИЧЕСКАЯ ЗАГРУЗКА', flex:1, renderCell:(params)=>{return(
+            <div className="cell">{params.row.actualLoad}</div>
         )}},
 ];
 
@@ -841,62 +1027,63 @@ export const columnsObjectiveMembers = [
 ];
 
 export const columnsOverallStats = [
-    { field: 'iteration', headerName: 'ITERATION', flex:1, renderCell:(params)=>{return(
+    { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.iteration}</div>
         )}},
 
-    { field: 'inbound_processing_cost', headerName: 'INBOUND PROCESSING COST', flex:1, renderCell:(params)=>{return(
+    { field: 'inbound_processing_cost', headerName: 'СТОИМОСТЬ ВХОДЯЩЕЙ ОБРАБОТКИ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.inbound_processing_cost}</div>
         )}},
 
-    { field: 'transportation_cost', headerName: 'TRANSPORTATION COST', flex:1, renderCell:(params)=>{return(
+    { field: 'transportation_cost', headerName: 'СТОИМОСТЬ ПЕРЕВОЗКИ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.transportation_cost}</div>
         )}},
 
-    { field: 'tariffs', headerName: 'TARIFFS', flex:1, renderCell:(params)=>{return(
+    { field: 'tariffs', headerName: 'ТАРИФЫ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.tariffs}</div>
         )}},
 
-    { field: 'revenue', headerName: 'REVENUE', flex:1, renderCell:(params)=>{return(
+    { field: 'revenue', headerName: 'ДОХОД', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.revenue}</div>
         )}},
 
-    { field: 'supply_cost', headerName: 'SUPPLY COST', flex:1, renderCell:(params)=>{return(
+    { field: 'supply_cost', headerName: 'СТОИМОСТЬ ПОСТАВКИ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.supply_cost}</div>
         )}},
 
-    { field: 'outbound_processing_cost', headerName: 'OUTBOUND PROCESSING COST', flex:1, renderCell:(params)=>{return(
+    { field: 'outbound_processing_cost', headerName: 'СТОИМОСТЬ ВЫХОДЯЩЕЙ ОБРАБОТКИ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.outbound_processing_cost}</div>
         )}},
 
-    { field: 'initial_cost', headerName: 'INITIAL COST', flex:1, renderCell:(params)=>{return(
+    { field: 'initial_cost', headerName: 'НАЧАЛЬНАЯ СТОИМОСТЬ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.initial_cost}</div>
         )}},
 
-    { field: 'closing_cost', headerName: 'CLOSING COST', flex:1, renderCell:(params)=>{return(
+    { field: 'closing_cost', headerName: 'СТОИМОСТЬ НА ЗАКРЫТИИ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.closing_cost}</div>
         )}},
 
-    { field: 'penalties', headerName: 'PENALTIES', flex:1, renderCell:(params)=>{return(
+    { field: 'penalties', headerName: 'ШТРАФЫ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.penalties}</div>
         )}},
 
-    { field: 'production_cost', headerName: 'PRODUCTION COST', flex:1, renderCell:(params)=>{return(
+    { field: 'production_cost', headerName: 'СТОИМОСТЬ ПРОИЗВОДСТВА', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.production_cost}</div>
         )}},
 
-    { field: 'other_cost', headerName: 'OTHER COST', flex:1, renderCell:(params)=>{return(
+    { field: 'other_cost', headerName: 'ПРОЧИЕ РАСХОДЫ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.other_cost}</div>
         )}},
 
-    { field: 'carrying_cost', headerName: 'CARRYING COST', flex:1, renderCell:(params)=>{return(
+    { field: 'carrying_cost', headerName: 'ИЗДЕРЖКИ СОДЕРЖАНИЯ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.carrying_cost}</div>
         )}},
 
-    { field: 'objective', headerName: 'OBJECTIVE', flex:1, renderCell:(params)=>{return(
+    { field: 'objective', headerName: 'ЦЕЛЬ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.objective}</div>
         )}},
 ];
+
 // export const dataCSV = (data) => {
 //     const dataStringLines = data.split(/\r\n|\n/);
 //     const headers = dataStringLines[0].split(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/);

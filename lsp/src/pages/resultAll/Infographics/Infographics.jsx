@@ -6,63 +6,37 @@ import Widget from "../../../components/widget/Widget";
 import Widget13 from "../../../components/widget/Widget13";
 import Popup from "../../../components/popup/Popup";
 import NEChart from "../../../components/chart/nechart/NEChart";
+import OMChart from "../../../components/chart/omchart/OMChart";
+import OSChart from "../../../components/chart/oschart/OSChart";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Datable from "../../../components/datable/Datable";
-import {columnsNamedExpressions, columnsObjectiveMembers, columnsOverallStats} from "../../../HeadersTable";
 import MenuIcon from "@mui/icons-material/Menu";
+import {columnsNamedExpressions, columnsObjectiveMembers, columnsOverallStats} from "../../../HeadersTable";
 
 
 
 
-function Infographics(props) {
+const Infographics = (props) => {
 
      const [buttonPopupNE, setButtonPopupNE] = React.useState(false);
      const [buttonPopupOM, setButtonPopupOM] = React.useState(false);
      const [buttonPopupOS, setButtonPopupOS] = React.useState(false);
+     const [data, setData] = useState({ dataTable:[], dataTable1:[], dataTable2:[], dataSetNE:[], dataSetOM:[], dataSetOvS:[]});
+     const [icon, setIcon] = useState(false)
 
-
-
-    const [icon, setIcon] = useState(false)
-
-
-    const [dataExpression, setDataExpression] = useState([{id: "",
-        iteration: 0,
-        expression_name: "",
-        value:0}])
-
-    const [dataObjective, setDataObjective] = useState([{id: "",
-        iteration: 0,
-        objective_member: "",
-        value:0}])
-
-    const [dataOverall, setDataOverall] = useState([{id: "",
-        iteration: 0,
-        ipc_overall: 0,
-        tc_overall: 0,
-        tariffs_overall: 0,
-        revenue_overall: 0,
-        sc_overall: 0,
-        opc_overall: 0,
-        ic_overall: 0,
-        cc_overall: 0,
-        penalties_overall: 0,
-        pc_overall: 0,
-        oc_overall: 0,
-        crc_overall: 0,
-        objective_overall: 0}])
 
 
     useEffect( () => {
             let cleanupFunction = false;
             const fetchData = async () => {
                 try {
-                    const response = await fetch('http://localhost:8080/ne?iteration=1');
+                    const response = await fetch('http://localhost:8080/results/ne/data');
                     const result = await response.json();
 
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
                     if(!cleanupFunction){
-                        setDataExpression(result);
+                        setData(result);
                     }
 
                 } catch (e) {
@@ -77,7 +51,7 @@ function Infographics(props) {
         }, []
     )
 
-    const listWidgets = dataExpression.map(data =>{
+    /*const listWidgets = dataExpression.map(data =>{
         return <Widget iteration = {data.iteration} mid = "Наименование операции" title={data.expression_name} value={data.value}/>
     })
 
@@ -87,7 +61,7 @@ function Infographics(props) {
 
     const listWidgetsOS = dataOverall.map(data =>{
         return <Widget iteration = {data.iteration} title={data.expression_name} mid = "Общая статистика" value={data.value}/>
-    })
+    })*/
 
 
      return (
@@ -95,13 +69,13 @@ function Infographics(props) {
              <div className="openMenu">
                  <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
              </div>
-             <SideBar
-                 menu = {props.menu}
-                 setMenu = {props.setMenu}
-                 open = {icon}
-                 close = {()=>setIcon(!icon)}
-             />
-
+              <SideBar
+                  menu = {props.menu}
+                  setMenu = {props.setMenu}
+                  open = {icon}
+                  close = {()=>setIcon(!icon)}
+              />
+                <div className="content">
                  <div className="stack">
                  <Stack  direction="row" spacing={2}>
                      <Button onClick={() => setButtonPopupNE(!buttonPopupNE)}>Наименовании операции</Button>
@@ -112,167 +86,48 @@ function Infographics(props) {
 
 
                  <div className="NEcharts">
-                     <NEChart data = {dataExpression.dataSet} title = "Гистограмма общей стоимости:"
-                              dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
+                     <NEChart data = {data.dataSetNE} title = "Гистограмма общей стоимости:"
+                              dataName = "name" dataKeyFirst="it1" dataKeySecond="it2" strokeFirst="#00008B" strokeSecond="#218bff"
                               fillFirst="#00008B" fillSecond="#00BFFF"/>
                  </div>
 
                  <div className="OMcharts">
-                     <NEChart data = {dataExpression.dataSet} title = "Гистограмма закупочной стоимости:"
-                              dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
-                              fillFirst="#8B0000" fillSecond="#F08080"/>
+                     <OMChart data = {data.dataSetOM} title = "Гистограмма закупочной стоимости:"
+                              dataName = "name" dataKeyFirst="it1"  strokeFirst="#8B0000" //strokeSecond="#F08080"
+                              fillFirst="#8B0000" /*fillSecond="#F08080"*//>
                  </div>
 
                  <div className="OScharts">
-                     <NEChart data = {dataExpression.dataSet} title = "Гистограмма общей статистики:"
-                              dataName = "name" dataKeyFirst="it#1" dataKeySecond="it#2" strokeFirst="#218bff" strokeSecond="#483D8B"
-                              fillFirst="#800080" fillSecond="#9370DB"/>
-                 </div>
+                     <OSChart data = {data.dataSetOvS} title = "Гистограмма общей статистики:"
 
+                     />
+                 </div>
 
 
              <Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
                  <h3>
-                     <div className="widgets">
-                         {listWidgets}
+                     <div className="NEdatatable">
+                         <Datable rows={data.dataTable} columns={columnsNamedExpressions}/>
                      </div>
-                     {/*<div className="widgets">
-                         <Widget type = "total_co2_emission"/> <Widget type = "total_initial_cost"/>
-                         <Widget type = "total_other_cost"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "total_co2_emission"/> <Widget type = "total_initial_cost"/>
-                         <Widget type = "total_other_cost"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "total_supply_cost"/> <Widget type = "total_carrying_cost"/>
-                         <Widget type = "total_tariffs"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "total_customer_tariffs"/> <Widget type = "total_inbound_cost"/>
-                         <Widget type = "total_outbound_cost"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "total_transportation_cost"/> <Widget type = "total_penalties"/>
-                         <Widget type = "total_revenued"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "total_production_costd"/> <Widget type = "total_closing_costd"/>
-                         <Widget type = "total_co2_emissiond"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "total_initial_costd"/> <Widget type = "total_other_costd"/>
-                         <Widget type = "total_supply_costd"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "total_carrying_costd"/> <Widget type = "total_tariffsd"/>
-                         <Widget type = "total_customer_tariffsd"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "total_inbound_costd"/> <Widget type = "total_outbound_costd"/>
-                         <Widget type = "total_transportation_costd"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "total_penaltiesd"/>
-                     </div>*/}
-                     {/*<div className="datatableNE">
-                         <Datable rows = {dataNE}
-                                  columns = {columnsNamedExpressions}
-                                  new_id = {rowIdNE}
-                                  pageSize={5}
-                                  rowsPerPageOptions={5}
-                                  />
-                     </div>*/}
-
                  </h3>
              </Popup>
 
              <Popup shown={buttonPopupOM} close={() => {setButtonPopupOM(false);}}>
                  <h3>
-                     {/*<div className="widgets">
-                         <Widget type = "inbound_processing_cost"/> <Widget type = "transportation_cost"/>
-                         <Widget type = "tariffs12"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "revenue12"/> <Widget type = "supply_cost"/>
-                         <Widget type = "outbound_processing_cost"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "initial_cost"/> <Widget type = "closing_cost"/>
-                         <Widget type = "co2_emission"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "penalties12"/> <Widget type = "production_cost"/>
-                         <Widget type = "other_cost"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "customer_tariffs"/> <Widget type = "carrying_cost"/>
-                         <Widget type = "inbound_processing_costd"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "transportation_costd"/> <Widget type = "tariffs12d"/>
-                         <Widget type = "revenue12d"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "supply_costd"/> <Widget type = "outbound_processing_costd"/>
-                         <Widget type = "initial_costd"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "closing_costd"/> <Widget type = "co2_emissiond"/>
-                         <Widget type = "penalties12d"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "production_costd"/> <Widget type = "other_costd"/>
-                         <Widget type = "customer_tariffsd"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget type = "carrying_costd"/>
-                     </div>*/}
-                     {/*<div className="datatableOM">
-                         <Datable rows = {dataOM}
-                                  columns = {columnsObjectiveMembers}
-                                  new_id = {rowIdOM}
-                                  pageSize={5}
-                                  rowsPerPageOptions={5}
-                         />
-                     </div>*/}
-                     <div className="widgets">
-                         {listWidgetsOM}
+                     <div className="OMdatatable">
+                         <Datable rows={data.dataTable1} columns={columnsObjectiveMembers}/>
                      </div>
                  </h3>
              </Popup>
 
              <Popup shown={buttonPopupOS} close={() => {setButtonPopupOS(false);}}>
                  <h3>
-                     {/*<div className="widgets">
-                         <Widget13 type = "inbound_processing_cost13"/> <Widget13 type = "transportation_cost13"/>
-                         <Widget13 type = "tariffs13"/>
+                     <div className="OSdatatable">
+                         <Datable rows={data.dataTable2} columns={columnsOverallStats}/>
                      </div>
-                     <div className="widgets">
-                         <Widget13 type = "revenue13"/> <Widget13 type = "supply_cost13"/>
-                         <Widget13 type = "outbound_processing_cost13"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget13 type = "initial_cost13"/> <Widget13 type = "closing_cost13"/>
-                         <Widget13 type = "penalties13"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget13 type = "production_cost13"/> <Widget13 type = "other_cost13"/>
-                         <Widget13 type = "carrying_cost13"/>
-                     </div>
-                     <div className="widgets">
-                         <Widget13 type = "objective"/>
-                     </div>*/}
-                     {/*<div className="datatableOS">
-                         <Datable rows = {dataOS}
-                                  columns = {columnsOverallStats}
-                                  new_id = {rowIdOS}
-                                  pageSize={5}
-                                  rowsPerPageOptions={5}
-                         />
-                     </div>*/}
                  </h3>
              </Popup>
+                </div>
          </div>
 
      );
