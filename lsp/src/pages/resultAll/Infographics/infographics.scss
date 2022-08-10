@@ -4,6 +4,7 @@
   width: 100%;
   height: 100%;
   overflow-x: auto;
+  overflow-y: auto;
 
   .openMenu {
     display: flex;
@@ -44,25 +45,16 @@
       gap: 20px;
     }
 
-    .OMcharts {
-      /*display: flex;
-      flex: 1;
-      margin-top: 650px;*/
-      padding: 20px 5px 20px;
-      gap: 20px;
-    }
-
     .OScharts {
-      /*display: flex;
-      margin-top: 1000px;*/
       padding: 20px 5px 20px;
       gap: 20px;
     }
+    .OMcharts {
+       padding: 20px 5px 20px;
+       gap: 20px;
+     }
   }
 
-    /*.datatableOS {
-      max-width: 1500px;
-    }*/
 
 }
 

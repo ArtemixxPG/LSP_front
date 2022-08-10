@@ -93,14 +93,21 @@ const Infographics = (props) => {
 
                  <div className="OMcharts">
                      <OMChart data = {data.dataSetOM} title = "Гистограмма закупочной стоимости:"
-                              dataName = "name" dataKeyFirst="it1"  strokeFirst="#8B0000" //strokeSecond="#F08080"
-                              fillFirst="#8B0000" /*fillSecond="#F08080"*//>
+                              dataName = "name" dataKeyFirst="it1" strokeFirst="#9ACD32" fillFirst="#9ACD32"/>
                  </div>
 
                  <div className="OScharts">
                      <OSChart data = {data.dataSetOvS} title = "Гистограмма общей статистики:"
+                              dataName = "name" dataKeyFirst="carrying_cost" dataKeySecond="closing_cost"
+                              dataKeyThird="inbound_processing_cost" dataKeyFourth="outbound_processing_cost"
+                              dataKeyFourth="outbound_processing_cost" dataKeyFifth="transportation_cost"
+                              dataKeySixth="initial_cost" dataKeySeventh="other_cost" dataKeyEighth="objective"
+                              dataKeyNineth="penalties" dataKeyTenth="production_cost" dataKeyEleventh="revenue"
+                              dataKeyTvelveth="supply_cost" dataKeyThirteenth="tariffs"  strokeFirst="#00008B"
 
-                     />
+                              fillFirst="#FA8072" fillSecond="#FF7F50" fillThird="#FFD700" fillFourth="#F0E68C" fillFifth="#8A2BE2"
+                              fillSixth="#4169E1" fillSeventh="#228B22" fillEighth="#8B4513" fillNineth="#F4A460" fillTenth="#00FA9A"
+                              fillEleventh="#66CDAA" fillTvelveth="#9ACD32" fillThirteenth="#7B68EE"/>
                  </div>
 
 
