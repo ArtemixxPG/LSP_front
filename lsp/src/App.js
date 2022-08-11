@@ -22,17 +22,18 @@ import ShipmentShedule from "./pages/sim/ShipmentShedule/ShipmentShedule";
 import TotalCost from "./pages/sim/TotalCost/TotalCost";
 import Upload from "./pages/upload/Upload";
 import "./style/dark.scss"
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import {DarkModeContext} from "./context/darkModeContext";
 import CompareDemandFulfillment from "./pages/compare/compare";
 import Map from "./pages/map/MapPage";
+import OptimizationMenuList from "./components/sidebar/MenuList/OptimizationMenuList/OptimizationMenuList";
 
 
 
 function App() {
 
 
-    const [menu, setMenu] = useState()
+    const [menu, setMenu] = useState(<OptimizationMenuList/>)
     const {darkMode} = useContext(DarkModeContext)
 
 

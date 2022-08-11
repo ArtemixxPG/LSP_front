@@ -1,11 +1,32 @@
 import * as React from "react";
-import { styled, alpha } from '@mui/material/styles';
+import {styled, alpha} from '@mui/material/styles';
 import Button from "@mui/material/Button";
+import IconButton from '@mui/material/IconButton';
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ScienceIcon from '@mui/icons-material/Science';
+import Stack from '@mui/material/Stack';
+import Tooltip, {tooltipClasses} from "@mui/material/Tooltip";
+import Divider from "@mui/material/Divider";
+import Drawer, {drawerClasses} from "@mui/material/Drawer";
+import ArchitectureIcon from "@mui/icons-material/Architecture";
+import Box from '@mui/material/Box';
 
 import "./EMenu.scss"
+import InventoryIcon from "@mui/icons-material/Inventory";
+import MapIcon from "@mui/icons-material/Map";
+import LanguageOutlinedIcon from "@mui/icons-material/Language";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkMode";
+import FullscreenExitOutlinedIcon from "@mui/icons-material/Fullscreen";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import SpeedDial, { SpeedDialProps } from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import {useContext} from "react";
+import {DarkModeContext} from "../../context/darkModeContext";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import {Link} from "react-router-dom";
 
 
 
@@ -14,20 +35,68 @@ const menuNames = ["Оптимизационный эксперимент", "С�
 export default function EMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
+    const [hidden, setHidden] = React.useState(false);
+    const { dispatch } = useContext(DarkModeContext);
+
+
+    const handleClickExp = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = (item) => {
         setAnchorEl(null);
-        if(typeof item === "string") {
+        if (typeof item === "string") {
             props.setExperiment(item)
         }
     };
 
+    const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
+        position:"absolute",
+        '&.MuiSpeedDial-directionRight': {
+            top: "50px",
+            left: "245px",
+            '.MuiSpeedDial-fab':{
+                width: "35px",
+                height: "35px",
+            },
+            '.MuiSpeedDial-actions':{
+                position:"absolute"
+            },
+        },
 
-    const menuItems = menuNames.map((item) =>
-        <MenuItem key={item} onClick={()=>handleClose(item)}>{item}</MenuItem>
+    }));
+
+
+
+    const menuItems = menuNames.map((item, key) =>
+        (key !== menuNames.length - 1) ?
+            <div key={item}>
+            <MenuItem  onClick={() => handleClose(item)}>{item}</MenuItem>
+            <Divider/>
+            </div>
+             :
+                <MenuItem key={item} onClick={() => handleClose(item)}>{item}</MenuItem>
+
     )
+
+
+
+
+
+    const CustomTooltip = styled(({className, ...props}) => (
+        <Tooltip {...props} classes={{popper: className}}/>
+    ))(({theme}) => ({
+        [`& .${tooltipClasses.arrow}`]: {
+            color: theme.palette.common.white
+        },
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: theme.palette.common.white,
+            color: '#218bff',
+            boxShadow: theme.shadows[1],
+            fontSize: 11,
+            opacity: 0
+        },
+    }));
 
     const StyledMenu = styled((props) => (
         <Menu
@@ -47,7 +116,7 @@ export default function EMenu(props) {
             }}
             {...props}
         />
-    ))(({ theme }) => ({
+    ))(({theme}) => ({
         '& .MuiPaper-root': {
             borderRadius: 6,
             marginTop: theme.spacing(1),
@@ -79,16 +148,92 @@ export default function EMenu(props) {
 
     return (
         <div>
-            <Button
-                id="demo-positioned-button"
-                aria-controls={open ? "demo-positioned-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-                variant="outlined"
-            >
-                <ScienceIcon className="icon"/>
-            </Button>
+
+            <Stack direction="row" spacing={1}>
+            <CustomTooltip title="Поле выбора эксперимента" arrow disableInteractive>
+                <IconButton
+                    id="exp-button"
+                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClickExp}
+                >
+                    <ScienceIcon className="icon"/>
+                </IconButton>
+            </CustomTooltip>
+                <CustomTooltip title="Тёмный режим" arrow disableInteractive>
+                <IconButton
+                    id="tools-button"
+                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={() => dispatch({type: "TOGGLE"})}
+                    variant="outlined"
+                >
+                <DarkModeOutlinedIcon className="icon"/>
+                </IconButton>
+                </CustomTooltip>
+                <CustomTooltip title="Карта" arrow disableInteractive>
+                <IconButton
+                    id="tools-button"
+                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={() => dispatch({type: "TOGGLE"})}
+                    variant="outlined"
+                >
+                    <Link to="/map" style={{textDecoration: "none",
+                        width:"24px",
+                        height:"24px"}}>
+                    <MapIcon className="icon"/>
+                    </Link>
+                </IconButton>
+                </CustomTooltip>
+                <CustomTooltip title="Сравнение значеений эспериментов" arrow disableInteractive>
+                <IconButton
+                    id="tools-button"
+                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    variant="outlined"
+                >
+                    <Link to="/compare" style={{textDecoration: "none",
+                    width:"24px",
+                    height:"24px"}}>
+                     <InventoryIcon className="icon"/>
+                    </Link>
+                </IconButton>
+                </CustomTooltip>
+                <CustomTooltip title="Загрузка CSV-файла" arrow disableInteractive>
+                <IconButton
+                    id="tools-button"
+                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={() => dispatch({type: "TOGGLE"})}
+                    variant="outlined"
+                >
+                    <Link to="/upload" style={{textDecoration: "none",
+                        width:"24px",
+                        height:"24px"}}>
+                    <UploadFileIcon className="icon"/>
+                    </Link>
+                </IconButton>
+                </CustomTooltip>
+                <CustomTooltip title="Уведомления" arrow disableInteractive>
+                    <IconButton
+                        id="tools-button"
+                        aria-controls={open ? "demo-positioned-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                        onClick={() => dispatch({type: "TOGGLE"})}
+                        variant="outlined"
+                    >
+                        <NotificationsNoneIcon className="icon"/>
+                    </IconButton>
+                </CustomTooltip>
+            </Stack>
+
             <StyledMenu
                 id="demo-customized-menu"
                 MenuListProps={{
@@ -99,7 +244,9 @@ export default function EMenu(props) {
                 onClose={handleClose}
             >
                 {menuItems}
+
             </StyledMenu>
+
         </div>
     );
 }

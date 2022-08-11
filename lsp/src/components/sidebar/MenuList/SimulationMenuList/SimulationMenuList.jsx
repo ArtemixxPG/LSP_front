@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import Divider from "@mui/material/Divider";
 
 export default function SimulationMenuList() {
 
@@ -18,6 +19,7 @@ export default function SimulationMenuList() {
                         </Link>
                     </li>
                 </ListItemButton>
+                <Divider/>
                 <ListItemButton>
                     <li>
                         <Link to="/shsh" style={{textDecoration: "none"}}>
@@ -26,6 +28,7 @@ export default function SimulationMenuList() {
                         </Link>
                     </li>
                 </ListItemButton>
+                <Divider/>
                 <ListItemButton>
                     <li>
                         <Link to="/tc" style={{textDecoration: "none"}}>

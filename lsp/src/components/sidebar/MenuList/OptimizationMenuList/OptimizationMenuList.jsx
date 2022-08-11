@@ -14,6 +14,7 @@ import FactCheckIcon from "@mui/icons-material/FactCheck";
 import DirectionsRailwayFilledIcon from "@mui/icons-material/DirectionsRailwayFilled";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import * as React from "react";
+import Divider from "@mui/material/Divider";
 
 export default function OptimizationMenuList (){
     return(
@@ -26,6 +27,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/opsites" style={{textDecoration:"none"}}>
@@ -34,6 +36,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/othcost" style={{textDecoration:"none"}}>
@@ -42,6 +45,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/opsites" style={{textDecoration:"none"}}>
@@ -50,6 +54,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/sbp" style={{textDecoration:"none"}}>
@@ -58,6 +63,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/pdncost" style={{textDecoration:"none"}}>
@@ -66,6 +72,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/pdnflows" style={{textDecoration:"none"}}>
@@ -74,6 +81,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/sfc" style={{textDecoration:"none"}}>
@@ -82,6 +90,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/ssc" style={{textDecoration:"none"}}>
@@ -90,6 +99,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/dfilm" style={{textDecoration:"none"}}>
@@ -98,6 +108,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/vf" style={{textDecoration:"none"}}>
@@ -106,6 +117,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            <Divider/>
             <ListItemButton>
                 <li>
                     <Link to="/infograph" style={{textDecoration:"none"}}>

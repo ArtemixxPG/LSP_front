@@ -3,17 +3,13 @@ import React, {useContext, useEffect, useReducer, useState} from 'react';
 import "./sidebar.scss"
 import {Link} from "react-router-dom"
 import MenuList from "./MenuList/MenuList";
-import Drawer from "@mui/material/Drawer";
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import CheckIcon from '@mui/icons-material/Check';
+import Drawer, {drawerClasses} from "@mui/material/Drawer";
 import OptimizationMenuList from "./MenuList/OptimizationMenuList/OptimizationMenuList";
 import SimulationMenuList from "./MenuList/SimulationMenuList/SimulationMenuList";
-import ListItemText from "@mui/material/ListItemText";
-import Alert from '@mui/material/Alert';
-import { styled } from '@mui/material/styles';
 import EMenu from "../ExperimentMenu/EMenu";
+import Tooltip from '@mui/material/Tooltip';
+import {styled} from "@mui/material/styles";
+
 
 const experiments = [
     {label:"Оптимизационный"},
@@ -33,9 +29,15 @@ const SideBar = (props) => {
 
     }
 
+    const StyledDrawer = styled(({className, ...props}) => (
+        <Drawer {...props} classes={{popper: className}}/>
+    ))(({theme}) => ({
+        [`& .${drawerClasses.paper}`]: {
+            color: theme.palette.common.white,
+            minWidth: "310px"
+        },
 
-
-
+    }))
 
 
     const chooseMenu = (exp) =>{
@@ -51,7 +53,7 @@ const SideBar = (props) => {
 
 
     return (
-        <Drawer
+        <StyledDrawer
             anchor={'left'}
             open={props.open}
             onClose={props.close}
@@ -65,13 +67,14 @@ const SideBar = (props) => {
                 <hr/>
                 <div className="center">
                     <div className="autocomplete">
-                    <EMenu setExperiment = {chooseMenu}/>
+
+                        <EMenu setExperiment = {chooseMenu}/>
 
                     </div>
                     <MenuList menu={props.menu} nameExp={nameRes}/>
                 </div>
             </div>
-        </Drawer>
+        </StyledDrawer>
     );
 };
 

@@ -44,7 +44,6 @@ const CompareDemandFulfillment = (props) => {
 
 
    const handleSubmit=(e) =>{
-        console.log('Ваш любимый вкус: ' + typeExp);
         e.preventDefault();
     }
 
@@ -53,7 +52,7 @@ const CompareDemandFulfillment = (props) => {
     }
 
     const handleSubmitTable1=(e) =>{
-        console.log('Ваш любимый вкус: ' + chooseTable1);
+
         e.preventDefault();
     }
 
@@ -62,7 +61,6 @@ const CompareDemandFulfillment = (props) => {
     }
 
     const handleSubmitTable2=(e) =>{
-        console.log('Ваш любимый вкус: ' + chooseTable2);
         e.preventDefault();
     }
 

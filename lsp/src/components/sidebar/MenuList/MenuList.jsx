@@ -21,12 +21,6 @@ import {useEffect, useState, ReactNode} from "react";
 
 export default function MenuList (props)  {
 
-    const [openCurrentRes, setOpenCurrentRes] = React.useState(false);
-    const [openTools, setOpenTools] = React.useState(false);
-    const [openRes, setOpenRes] = React.useState(false);
-
-
-
     return (
         <Box sx={{ width: '100%', maxWidth: 290, bgcolor: 'background.paper' }}>
         <List
@@ -39,16 +33,6 @@ export default function MenuList (props)  {
             }
         >
                 {props.menu}
-            <ListItemButton onClick={()=>setOpenTools(!openTools)}>
-                <ListItemIcon>
-                    <ArchitectureIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Инструменты" />
-                {openTools ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={openTools} timeout="auto" unmountOnExit>
-               <ToolsMenuList/>
-            </Collapse>
         </List>
         </Box>
     );
