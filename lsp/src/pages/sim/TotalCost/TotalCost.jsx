@@ -17,7 +17,7 @@ const TotalCost = (props) => {
             let cleanupFunction = false;
             const fetchData = async () => {
                 try {
-                    const response = await fetch('http://localhost:8080/sim/pf/data');
+                    const response = await fetch('http://localhost:8080/sim/tc/data');
                     const result = await response.json();
 
                     // непосредственное обновление состояния при условии, что компонент не размонтирован

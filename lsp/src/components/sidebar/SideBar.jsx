@@ -13,11 +13,6 @@ import MultilineChartIcon from '@mui/icons-material/MultilineChart';
 import SendTimeExtensionIcon from '@mui/icons-material/SendTimeExtension';
 
 
-const experiments = [
-    {label:"Оптимизационный"},
-    {label:"Симмуляционный"}
-]
-
 
 
 

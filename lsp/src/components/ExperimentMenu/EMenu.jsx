@@ -53,21 +53,7 @@ export default function EMenu(props) {
         }
     };
 
-    const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
-        position:"absolute",
-        '&.MuiSpeedDial-directionRight': {
-            top: "50px",
-            left: "245px",
-            '.MuiSpeedDial-fab':{
-                width: "35px",
-                height: "35px",
-            },
-            '.MuiSpeedDial-actions':{
-                position:"absolute"
-            },
-        },
 
-    }));
 
     const CustomTooltip = styled(({className, ...props}) => (
         <Tooltip {...props} classes={{popper: className}}/>
@@ -105,8 +91,7 @@ export default function EMenu(props) {
     ))(({theme}) => ({
         '& .MuiPaper-root': {
             borderRadius: 6,
-            marginTop: theme.spacing(1),
-            minWidth: 180,
+            maxWidth: "60px",
             color:
                 theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
             boxShadow:
@@ -116,10 +101,14 @@ export default function EMenu(props) {
             },
             '& .MuiMenuItem-root': {
                 color: "#218bff",
+                '& .MuiIconButton-root': {
+                   padding:0
+                },
                 '& .MuiSvgIcon-root': {
-                    fontSize: 18,
+                    fontSize: 24,
                     color: "#218bff",
-                    marginRight: theme.spacing(1.5),
+                    marginLeft: "auto",
+                    marginRight: "auto"
                 },
                 '&:active': {
                     backgroundColor: alpha(
@@ -134,7 +123,7 @@ export default function EMenu(props) {
     const menuItems = menuNames.map((item, key) =>
         (key !== menuNames.length - 1) ?
             <div key={item}>
-                <MenuItem  onClick={() => handleClose(item)}>{item}
+                <MenuItem  onClick={() => handleClose(item)}>
                     <CustomTooltip title="Оптимизационный эксперимент" arrow disableInteractive>
                         <IconButton
                             id="exp-button"
@@ -150,7 +139,7 @@ export default function EMenu(props) {
                 <Divider/>
             </div>
             :
-            <MenuItem key={item} onClick={() => handleClose(item)}>{item}
+            <MenuItem key={item} onClick={() => handleClose(item)}>
                 <CustomTooltip title="Симуляционный эксперимент" arrow disableInteractive>
                     <IconButton
                         id="exp-button"
@@ -170,7 +159,7 @@ export default function EMenu(props) {
         <div>
 
             <Stack direction="row" spacing={1}>
-            <CustomTooltip title="Поле выбора эксперимента" arrow disableInteractive>
+
                 <IconButton
                     id="exp-button"
                     aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -178,9 +167,11 @@ export default function EMenu(props) {
                     aria-expanded={open ? "true" : undefined}
                     onClick={handleClickExp}
                 >
+                    <CustomTooltip title="Поле выбора эксперимента" arrow disableInteractive>
                     <ScienceIcon className="icon"/>
+                    </CustomTooltip>
                 </IconButton>
-            </CustomTooltip>
+
                 <CustomTooltip title="Тёмный режим" arrow disableInteractive>
                 <IconButton
                     id="tools-button"
