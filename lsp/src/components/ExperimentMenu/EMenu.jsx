@@ -27,10 +27,13 @@ import {useContext} from "react";
 import {DarkModeContext} from "../../context/darkModeContext";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import {Link} from "react-router-dom";
+import MultilineChartIcon from '@mui/icons-material/MultilineChart';
+import SendTimeExtensionIcon from '@mui/icons-material/SendTimeExtension';
 
 
 
-const menuNames = ["Оптимизационный эксперимент", "Симмуляционный эксперимент"]
+
+const menuNames = ["Оптимизация", "Симуляция"]
 
 export default function EMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -65,23 +68,6 @@ export default function EMenu(props) {
         },
 
     }));
-
-
-
-    const menuItems = menuNames.map((item, key) =>
-        (key !== menuNames.length - 1) ?
-            <div key={item}>
-            <MenuItem  onClick={() => handleClose(item)}>{item}</MenuItem>
-            <Divider/>
-            </div>
-             :
-                <MenuItem key={item} onClick={() => handleClose(item)}>{item}</MenuItem>
-
-    )
-
-
-
-
 
     const CustomTooltip = styled(({className, ...props}) => (
         <Tooltip {...props} classes={{popper: className}}/>
@@ -145,6 +131,40 @@ export default function EMenu(props) {
         },
     }));
 
+    const menuItems = menuNames.map((item, key) =>
+        (key !== menuNames.length - 1) ?
+            <div key={item}>
+                <MenuItem  onClick={() => handleClose(item)}>{item}
+                    <CustomTooltip title="Оптимизационный эксперимент" arrow disableInteractive>
+                        <IconButton
+                            id="exp-button"
+                            aria-controls={open ? "demo-positioned-menu" : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={open ? "true" : undefined}
+                            onClick={handleClickExp}
+                        >
+                            <SendTimeExtensionIcon className="icon"/>
+                        </IconButton>
+                    </CustomTooltip>
+                </MenuItem>
+                <Divider/>
+            </div>
+            :
+            <MenuItem key={item} onClick={() => handleClose(item)}>{item}
+                <CustomTooltip title="Симуляционный эксперимент" arrow disableInteractive>
+                    <IconButton
+                        id="exp-button"
+                        aria-controls={open ? "demo-positioned-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                        onClick={handleClickExp}
+                    >
+                        <MultilineChartIcon className="icon"/>
+                    </IconButton>
+                </CustomTooltip>
+            </MenuItem>
+
+    )
 
     return (
         <div>

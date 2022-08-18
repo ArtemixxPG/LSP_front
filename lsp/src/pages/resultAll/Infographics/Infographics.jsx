@@ -17,6 +17,8 @@ import {columnsNamedExpressions, columnsObjectiveMembers, columnsOverallStats} f
 
 
 
+
+
 const Infographics = (props) => {
 
      const [buttonPopupNE, setButtonPopupNE] = React.useState(false);
@@ -26,8 +28,8 @@ const Infographics = (props) => {
      const [icon, setIcon] = useState(false)
 
 
-
     useEffect( () => {
+
             let cleanupFunction = false;
             const fetchData = async () => {
                 try {
@@ -36,6 +38,7 @@ const Infographics = (props) => {
 
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
                     if(!cleanupFunction){
+                        clean(result);
                         setData(result);
                     }
 
@@ -49,7 +52,36 @@ const Infographics = (props) => {
             // функция очистки useEffect
             return () => cleanupFunction = true;
         }, []
+
+
+
     )
+
+    function clean(obj) {
+        for(var propName in obj) {
+            for(var propInd in obj[propName]) {
+                for(var propKey in obj[propName][propInd]) {
+                    if (obj[propName][propInd][propKey] == null) {
+                        delete obj[propName][propInd][propKey];
+                    }
+                    /*if (obj[propName][propInd][propKey].name["carrying_cost"]) {
+                        obj[propName][propInd][propKey].name["value"];
+                    }*/
+                }
+            }
+        }
+        return obj;
+    }
+
+
+    /*const removeEmptyOrNull = (obj) => {
+        Object.keys(obj).forEach(k =>
+            (obj[k] && typeof obj[k] === 'object') && removeEmptyOrNull(obj[k]) ||
+            (!obj[k] && obj[k] !== undefined) && delete obj[k]
+        );
+        return obj;
+    };*/
+
 
     /*const listWidgets = dataExpression.map(data =>{
         return <Widget iteration = {data.iteration} mid = "Наименование операции" title={data.expression_name} value={data.value}/>
@@ -62,7 +94,6 @@ const Infographics = (props) => {
     const listWidgetsOS = dataOverall.map(data =>{
         return <Widget iteration = {data.iteration} title={data.expression_name} mid = "Общая статистика" value={data.value}/>
     })*/
-
 
      return (
          <div className="inforaph">
@@ -98,16 +129,15 @@ const Infographics = (props) => {
 
                  <div className="OScharts">
                      <OSChart data = {data.dataSetOvS} title = "Гистограмма общей статистики:"
-                              dataName = "name" dataKeyFirst="carrying_cost" dataKeySecond="closing_cost"
+                              dataName = "name" dataKey="value" dataFill="#FA8072" dataStroke = "#FA8072"/*dataKeySecond="closing_cost"
                               dataKeyThird="inbound_processing_cost" dataKeyFourth="outbound_processing_cost"
                               dataKeyFourth="outbound_processing_cost" dataKeyFifth="transportation_cost"
                               dataKeySixth="initial_cost" dataKeySeventh="other_cost" dataKeyEighth="objective"
                               dataKeyNineth="penalties" dataKeyTenth="production_cost" dataKeyEleventh="revenue"
                               dataKeyTvelveth="supply_cost" dataKeyThirteenth="tariffs"  strokeFirst="#00008B"
-
-                              fillFirst="#FA8072" fillSecond="#FF7F50" fillThird="#FFD700" fillFourth="#F0E68C" fillFifth="#8A2BE2"
+                               fillSecond="#FF7F50" fillThird="#FFD700" fillFourth="#F0E68C" fillFifth="#8A2BE2"
                               fillSixth="#4169E1" fillSeventh="#228B22" fillEighth="#8B4513" fillNineth="#F4A460" fillTenth="#00FA9A"
-                              fillEleventh="#66CDAA" fillTvelveth="#9ACD32" fillThirteenth="#7B68EE"/>
+                              fillEleventh="#66CDAA" fillTvelveth="#9ACD32" fillThirteenth="#7B68EE"*//>
                  </div>
 
 

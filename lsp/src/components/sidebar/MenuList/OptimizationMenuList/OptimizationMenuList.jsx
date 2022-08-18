@@ -15,6 +15,7 @@ import DirectionsRailwayFilledIcon from "@mui/icons-material/DirectionsRailwayFi
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import * as React from "react";
 import Divider from "@mui/material/Divider";
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 export default function OptimizationMenuList (){
     return(
@@ -121,7 +122,7 @@ export default function OptimizationMenuList (){
             <ListItemButton>
                 <li>
                     <Link to="/infograph" style={{textDecoration:"none"}}>
-                        <AutoGraphIcon className="icon"/>
+                        <BarChartIcon className="icon"/>
                         <span>Инфографика</span>
                     </Link>
                 </li>

@@ -23,12 +23,12 @@ const OSChart = (props) => {
                           margin={{ top: 12, right: 0, left: 110, bottom: 22 }}>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <XAxis dataKey={props.dataName} interval={0} hide={true}/>
-                    <YAxis />
+                    <YAxis stroke = {props.dataStroke}/>
                     <Tooltip/>
                     <Legend/>
                     <ReferenceLine y={0} stroke="#000" />
-                    <Bar dataKey={props.dataKeyFirst} fill={props.fillFirst}/>
-                    <Bar dataKey={props.dataKeySecond} fill={props.fillSecond}/>
+                    <Bar dataKey={props.dataKey} fill={props.dataFill} />
+                    {/*<Bar dataKey={props.dataKeySecond} fill={props.fillSecond}/>
                     <Bar dataKey={props.dataKeyThird} fill={props.fillThird}/>
                     <Bar dataKey={props.dataKeyFourth} fill={props.fillFourth}/>
                     <Bar dataKey={props.dataKeyFifth} fill={props.fillFifth}/>
@@ -39,7 +39,7 @@ const OSChart = (props) => {
                     <Bar dataKey={props.dataKeyTenth} fill={props.fillTenth}/>
                     <Bar dataKey={props.dataKeyEleventh} fill={props.fillEleventh}/>
                     <Bar dataKey={props.dataKeyTvelveth} fill={props.fillTvelveth}/>
-                    <Bar dataKey={props.dataKeyThirteenth} fill={props.fillThirteenth}/>
+                    <Bar dataKey={props.dataKeyThirteenth} fill={props.fillThirteenth}/>*/}
                 </BarChart>
             </ResponsiveContainer>
         </div>

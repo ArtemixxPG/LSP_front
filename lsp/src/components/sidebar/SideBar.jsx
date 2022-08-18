@@ -9,6 +9,8 @@ import SimulationMenuList from "./MenuList/SimulationMenuList/SimulationMenuList
 import EMenu from "../ExperimentMenu/EMenu";
 import Tooltip from '@mui/material/Tooltip';
 import {styled} from "@mui/material/styles";
+import MultilineChartIcon from '@mui/icons-material/MultilineChart';
+import SendTimeExtensionIcon from '@mui/icons-material/SendTimeExtension';
 
 
 const experiments = [
@@ -43,9 +45,9 @@ const SideBar = (props) => {
     const chooseMenu = (exp) =>{
         if(typeof exp==='string')
         setNameRes(exp)
-        if(exp.includes("Оптимизационный")){
+        if(exp.includes("Оптимизация")){
             props.setMenu( <OptimizationMenuList/>)
-        } else if(exp.includes("Симмуляционный")){
+        } else if(exp.includes("Симуляция")){
             props.setMenu( <SimulationMenuList/>)
         }
 
@@ -67,9 +69,7 @@ const SideBar = (props) => {
                 <hr/>
                 <div className="center">
                     <div className="autocomplete">
-
                         <EMenu setExperiment = {chooseMenu}/>
-
                     </div>
                     <MenuList menu={props.menu} nameExp={nameRes}/>
                 </div>
