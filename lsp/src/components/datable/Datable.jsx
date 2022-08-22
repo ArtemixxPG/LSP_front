@@ -1,10 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState, useReducer} from 'react';
 import {
-    GridColumnMenu,
-        GridColumnMenuContainer,
-        GridFilterMenuItem,
-        SortGridMenuItems,
-        useGridApiRef, DataGrid, ruRU } from '@mui/x-data-grid';
+    DataGrid, ruRU} from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
@@ -91,22 +87,74 @@ function CustomNoRowsOverlay() {
 }
 
 const Datable = (props) => {
+
+    const initialDataSet = {
+        count: 0,
+        data: []
+    }
+
+    const [count, setCount] = useState(0)
+    const [page, setPage] = React.useState(0);
+    const [rows, setRows] = React.useState([]);
+    const [loading, setLoading] = React.useState(false);
+    const [selectionModel, setSelectionModel] = React.useState([]);
+
+
+    useEffect(()=>{
+        let active = true;
+            let cleanupFunction = false;
+            const fetchData = async () => {
+                setLoading(true);
+                try {
+                    const response = await fetch(props.url(page));
+                    const result = await response.json();
+
+                    // непосредственное обновление состояния при условии, что компонент не размонтирован
+                    if(!cleanupFunction){
+
+                        setCount(result["count"])
+                        setRows(result["pageTotalCosts"]);
+                        setLoading(false);
+
+                    }
+                } catch (e) {
+                    console.error(e.message)
+                }
+            };
+
+
+
+
+
+
+            fetchData().then();
+            // функция очистки useEffect
+            return () => cleanupFunction = true;
+        }, [page]
+    )
+
     return (
         <div className="datable">
             <ThemeProvider theme={theme}>
-            <DataGrid
-                className="data"
-                components={{
-                    NoRowsOverlay: CustomNoRowsOverlay,
-                }}
-                rows={props.rows}
-                columns={props.columns}
-                getRowId ={(row) => Math.random()
-            }
-                pageSize={props.pageSize}
-                rowsPerPageOptions={[props.rowsPerPageOptions]}
-                localeText={ruRU.components.MuiDataGrid.defaultProps.localeText}
-            />
+                <DataGrid
+                    rows={rows}
+                    columns={props.columns}
+                    pagination
+                    checkboxSelection
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    rowCount={count}
+                    paginationMode="server"
+                    onPageChange={(newPage) => {
+                        setPage(newPage);
+                    }}
+                    onSelectionModelChange={(newSelectionModel) => {
+                        setSelectionModel(newSelectionModel);
+                    }}
+                    selectionModel={selectionModel}
+                    loading={loading}
+                    keepNonExistentRowsSelected
+                />
             </ThemeProvider>
         </div>
     );

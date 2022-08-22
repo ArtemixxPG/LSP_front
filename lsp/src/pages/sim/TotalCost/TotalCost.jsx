@@ -13,6 +13,10 @@ const TotalCost = (props) => {
     const [icon, setIcon] = useState(false)
 
 
+    const url = (page) => {
+        return 'http://localhost:8080/sim/datasets/totalcost?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
+
     useEffect(()=>{
             let cleanupFunction = false;
             const fetchData = async () => {
@@ -55,7 +59,7 @@ const TotalCost = (props) => {
                     <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
                 </div>
                 <div className="datatable">
-                    <Datable rows={data.dataTable} columns={columnsProductFlow}/>
+                    <Datable url = {url} columns={columnsProductFlow}/>
                 </div>
             </div>
         </div>

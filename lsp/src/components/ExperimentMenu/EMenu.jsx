@@ -1,6 +1,5 @@
 import * as React from "react";
 import {styled, alpha} from '@mui/material/styles';
-import Button from "@mui/material/Button";
 import IconButton from '@mui/material/IconButton';
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,21 +7,10 @@ import ScienceIcon from '@mui/icons-material/Science';
 import Stack from '@mui/material/Stack';
 import Tooltip, {tooltipClasses} from "@mui/material/Tooltip";
 import Divider from "@mui/material/Divider";
-import Drawer, {drawerClasses} from "@mui/material/Drawer";
-import ArchitectureIcon from "@mui/icons-material/Architecture";
-import Box from '@mui/material/Box';
-
-import "./EMenu.scss"
 import InventoryIcon from "@mui/icons-material/Inventory";
 import MapIcon from "@mui/icons-material/Map";
-import LanguageOutlinedIcon from "@mui/icons-material/Language";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkMode";
-import FullscreenExitOutlinedIcon from "@mui/icons-material/Fullscreen";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import SpeedDial, { SpeedDialProps } from '@mui/material/SpeedDial';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
 import {useContext} from "react";
 import {DarkModeContext} from "../../context/darkModeContext";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
@@ -30,7 +18,7 @@ import {Link} from "react-router-dom";
 import MultilineChartIcon from '@mui/icons-material/MultilineChart';
 import SendTimeExtensionIcon from '@mui/icons-material/SendTimeExtension';
 
-
+import "./EMenu.scss"
 
 
 const menuNames = ["Оптимизация", "Симуляция"]
