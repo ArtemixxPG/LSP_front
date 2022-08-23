@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import SideBar from "../../../components/sidebar/SideBar";
 import Datable from "../../../components/datable/Datable";
-import {columnsDemandFulfillment} from "../../../HeadersTable";
+import {columnsDemandFulfillment, columnsProductFlow} from "../../../HeadersTable";
 import NavBar from "../../../components/navbar/NavBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./demandfulfillment.scss"
@@ -11,6 +11,10 @@ const DemandFulfillment = (props) => {
     const [rowId, setRowId] = useState();
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
+
+    const url = (page) => {
+        return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
 
     useEffect(() => {
         let cleanupFunction = false;
@@ -63,7 +67,7 @@ const DemandFulfillment = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {data.dataTable} columns = {columnsDemandFulfillment}/>
+                    <Datable url = {url} columns = {columnsDemandFulfillment}/>
                 </div>
             </div>
     );

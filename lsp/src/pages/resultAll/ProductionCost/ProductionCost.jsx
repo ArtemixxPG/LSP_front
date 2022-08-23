@@ -14,6 +14,10 @@ const ProductionCost = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
+    const url = (page) => {
+        return 'http://localhost:8080/results/datasets/production_cost?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
+
     useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
@@ -49,7 +53,7 @@ const ProductionCost = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {data.dataTable} columns = {columnsProductionCost}/>
+                    <Datable rows = {url} columns = {columnsProductionCost}/>
                 </div>
         </div>
     );

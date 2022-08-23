@@ -13,6 +13,10 @@ const SharedStoragesConstraints = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
+    const url = (page) => {
+        return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
+
     useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
@@ -48,7 +52,7 @@ const SharedStoragesConstraints = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {data.dataTable} columns = {columnsSharedStoragesConstraints}/>
+                    <Datable rows = {url} columns = {columnsSharedStoragesConstraints}/>
                 </div>
         </div>
     );

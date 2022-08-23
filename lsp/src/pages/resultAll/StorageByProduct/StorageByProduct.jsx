@@ -13,6 +13,10 @@ const StorageByProduct = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
+    const url = (page) => {
+        return 'http://localhost:8080/results/datasets/storages_by_product?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
+
     useEffect(() => {
         let cleanupFunction = false;
         const fetchData = async () => {
@@ -48,7 +52,7 @@ const StorageByProduct = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {data.dataTable} columns = {columnsStorageByProducts}/>
+                    <Datable rows = {url} columns = {columnsStorageByProducts}/>
                 </div>
         </div>
     );

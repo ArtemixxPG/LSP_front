@@ -14,6 +14,9 @@ const ProductFlows = (props) => {
     const [rowId, setRowId] = useState();
     const [icon, setIcon] = useState(false)
 
+    const url = (page) => {
+        return 'http://localhost:8080/sim/datasets/productflows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
 
     useEffect(()=>{
         let cleanupFunction = false;
@@ -56,7 +59,7 @@ const ProductFlows = (props) => {
                 <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
                 </div>
                 <div className="datatable">
-                    <Datable rows={data.dataTable} columns={columnsProductFlow}/>
+                    <Datable url={url} columns={columnsProductFlow}/>
                 </div>
             </div>
 

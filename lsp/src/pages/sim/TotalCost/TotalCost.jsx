@@ -3,7 +3,7 @@ import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
 import Chart from "../../../components/chart/Chart";
 import Datable from "../../../components/datable/Datable";
-import {columnsProductFlow, columnsSharedFlowConstraints} from "../../../HeadersTable";
+import {columnsProductFlow, columnsSharedFlowConstraints, columnsTotalCost} from "../../../HeadersTable";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const TotalCost = (props) => {
@@ -59,7 +59,7 @@ const TotalCost = (props) => {
                     <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
                 </div>
                 <div className="datatable">
-                    <Datable url = {url} columns={columnsProductFlow}/>
+                    <Datable url = {url} columns={columnsTotalCost}/>
                 </div>
             </div>
         </div>

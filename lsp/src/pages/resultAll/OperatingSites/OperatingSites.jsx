@@ -15,7 +15,9 @@ const OperatingSites = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-
+    const url = (page) => {
+        return 'http://localhost:8080/results/datasets/operating_sites?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
 
     useEffect(() => {
         let cleanupFunction = false;
@@ -52,7 +54,7 @@ const OperatingSites = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {data.dataTable} columns = {columnsOperatingSites}/>
+                    <Datable rows = {url} columns = {columnsOperatingSites}/>
             </div>
         </div>
     );

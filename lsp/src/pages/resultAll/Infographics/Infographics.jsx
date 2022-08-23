@@ -27,6 +27,18 @@ const Infographics = (props) => {
      const [data, setData] = useState({ dataTable:[], dataTable1:[], dataTable2:[], dataSetNE:[], dataSetOM:[], dataSetOvS:[]});
      const [icon, setIcon] = useState(false)
 
+    const urlNE = (page) => {
+        return 'http://localhost:8080/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
+
+    const urlOM = (page) => {
+        return 'http://localhost:8080/results/datasets/objective_members?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
+
+    const urlOvS = (page) => {
+        return 'http://localhost:8080/results/datasets/overall_stats?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
+
 
     useEffect( () => {
 
@@ -144,7 +156,7 @@ const Infographics = (props) => {
              <Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
                  <h3>
                      <div className="NEdatatable">
-                         <Datable rows={data.dataTable} columns={columnsNamedExpressions}/>
+                         <Datable url={urlNE} columns={columnsNamedExpressions}/>
                      </div>
                  </h3>
              </Popup>
@@ -152,7 +164,7 @@ const Infographics = (props) => {
              <Popup shown={buttonPopupOM} close={() => {setButtonPopupOM(false);}}>
                  <h3>
                      <div className="OMdatatable">
-                         <Datable rows={data.dataTable1} columns={columnsObjectiveMembers}/>
+                         <Datable url={urlOM} columns={columnsObjectiveMembers}/>
                      </div>
                  </h3>
              </Popup>
@@ -160,7 +172,7 @@ const Infographics = (props) => {
              <Popup shown={buttonPopupOS} close={() => {setButtonPopupOS(false);}}>
                  <h3>
                      <div className="OSdatatable">
-                         <Datable rows={data.dataTable2} columns={columnsOverallStats}/>
+                         <Datable url={urlOvS} columns={columnsOverallStats}/>
                      </div>
                  </h3>
              </Popup>
