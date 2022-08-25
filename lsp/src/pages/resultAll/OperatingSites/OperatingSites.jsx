@@ -54,7 +54,7 @@ const OperatingSites = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsOperatingSites}/>
+                    <Datable rows = {url} columns = {columnsOperatingSites} table={"pageOperatingSites"}/>
             </div>
         </div>
     );

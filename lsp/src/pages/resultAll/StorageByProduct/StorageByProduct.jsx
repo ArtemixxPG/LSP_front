@@ -52,7 +52,7 @@ const StorageByProduct = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsStorageByProducts}/>
+                    <Datable rows = {url} columns = {columnsStorageByProducts} table={"pageStorageByProducts"}/>
                 </div>
         </div>
     );

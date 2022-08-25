@@ -53,7 +53,7 @@ const ProductionCost = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsProductionCost}/>
+                    <Datable rows = {url} columns = {columnsProductionCost} table={"pageProductionCosts"}/>
                 </div>
         </div>
     );

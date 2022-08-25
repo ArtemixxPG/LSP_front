@@ -53,7 +53,7 @@ const SiteState = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsSiteState}/>
+                    <Datable rows = {url} columns = {columnsSiteState} table={"pageSiteState"}/>
                 </div>
             </div>
     );

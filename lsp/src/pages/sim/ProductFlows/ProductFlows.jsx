@@ -59,7 +59,7 @@ const ProductFlows = (props) => {
                 <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
                 </div>
                 <div className="datatable">
-                    <Datable url={url} columns={columnsProductFlow}/>
+                    <Datable url={url} columns={columnsProductFlow} table={"pageProductFlows"}/>
                 </div>
             </div>
 

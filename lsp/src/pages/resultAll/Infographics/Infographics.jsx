@@ -40,6 +40,7 @@ const Infographics = (props) => {
     }
 
 
+
     useEffect( () => {
 
             let cleanupFunction = false;
@@ -52,6 +53,7 @@ const Infographics = (props) => {
                     if(!cleanupFunction){
                         clean(result);
                         setData(result);
+
                     }
 
                 } catch (e) {
@@ -73,18 +75,27 @@ const Infographics = (props) => {
         for(var propName in obj) {
             for(var propInd in obj[propName]) {
                 for(var propKey in obj[propName][propInd]) {
-                    if (obj[propName][propInd][propKey] == null) {
+                    if (obj[propName][propInd][propKey] === null) {
                         delete obj[propName][propInd][propKey];
                     }
-                    /*if (obj[propName][propInd][propKey].name["carrying_cost"]) {
-                        obj[propName][propInd][propKey].name["value"];
-                    }*/
                 }
             }
         }
         return obj;
     }
 
+    /*function replaceL(obj) {
+        for(var propName in obj) {
+            for (var propInd in obj[propName]) {
+                for (var propKey in obj[propName][propInd]) {
+                    if (obj[propName][propInd][propKey] === 'Total Production Cost') {
+                        obj[propName][propInd][propKey].;
+                    }
+                }
+            }
+        }
+        return obj;
+    }*/
 
     /*const removeEmptyOrNull = (obj) => {
         Object.keys(obj).forEach(k =>
@@ -130,13 +141,13 @@ const Infographics = (props) => {
 
                  <div className="NEcharts">
                      <NEChart data = {data.dataSetNE} title = "Гистограмма общей стоимости:"
-                              dataName = "name" dataKeyFirst="it1" dataKeySecond="it2" strokeFirst="#00008B" strokeSecond="#218bff"
+                              dataName = "nameru" dataKeyFirst="it1" dataKeySecond="it2" strokeFirst="#00008B" strokeSecond="#218bff"
                               fillFirst="#00008B" fillSecond="#00BFFF"/>
                  </div>
 
                  <div className="OMcharts">
                      <OMChart data = {data.dataSetOM} title = "Гистограмма закупочной стоимости:"
-                              dataName = "name" dataKeyFirst="it1" strokeFirst="#9ACD32" fillFirst="#9ACD32"/>
+                              dataName = "nameru" dataKeyFirst="it1" strokeFirst="#9ACD32" fillFirst="#9ACD32"/>
                  </div>
 
                  <div className="OScharts">
@@ -156,7 +167,7 @@ const Infographics = (props) => {
              <Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
                  <h3>
                      <div className="NEdatatable">
-                         <Datable url={urlNE} columns={columnsNamedExpressions}/>
+                         <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"}/>
                      </div>
                  </h3>
              </Popup>
@@ -164,7 +175,7 @@ const Infographics = (props) => {
              <Popup shown={buttonPopupOM} close={() => {setButtonPopupOM(false);}}>
                  <h3>
                      <div className="OMdatatable">
-                         <Datable url={urlOM} columns={columnsObjectiveMembers}/>
+                         <Datable url={urlOM} columns={columnsObjectiveMembers} table={"pageObjectiveMember"}/>
                      </div>
                  </h3>
              </Popup>
@@ -172,7 +183,7 @@ const Infographics = (props) => {
              <Popup shown={buttonPopupOS} close={() => {setButtonPopupOS(false);}}>
                  <h3>
                      <div className="OSdatatable">
-                         <Datable url={urlOvS} columns={columnsOverallStats}/>
+                         <Datable url={urlOvS} columns={columnsOverallStats} table={"pageOverallStats"}/>
                      </div>
                  </h3>
              </Popup>

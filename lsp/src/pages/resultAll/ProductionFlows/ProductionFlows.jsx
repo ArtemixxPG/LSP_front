@@ -52,7 +52,7 @@ const ProductionFlows = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsProductionFlows}/>
+                    <Datable rows = {url} columns = {columnsProductionFlows} table={"pageProductionFlows"}/>
             </div>
         </div>
     );

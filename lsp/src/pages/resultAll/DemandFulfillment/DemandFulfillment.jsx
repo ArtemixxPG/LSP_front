@@ -67,7 +67,7 @@ const DemandFulfillment = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable url = {url} columns = {columnsDemandFulfillment}/>
+                    <Datable url = {url} columns = {columnsDemandFulfillment} table={"pageDemandFulfillment"}/>
                 </div>
             </div>
     );

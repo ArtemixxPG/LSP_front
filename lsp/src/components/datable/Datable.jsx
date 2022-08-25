@@ -113,7 +113,7 @@ const Datable = (props) => {
                     if(!cleanupFunction){
 
                         setCount(result["count"])
-                        setRows(result["pageTotalCosts"]);
+                        setRows(result[props.table]);
                         setLoading(false);
 
                     }

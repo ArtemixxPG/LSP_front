@@ -54,7 +54,7 @@ const ShipmentShedule = (props) => {
                     <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="firstValue" dataKeySecond="secondValue"/>
                 </div>
                 <div className="datatable">
-                    <Datable url={url} columns={columnsShipmentShedule}/>
+                    <Datable url={url} columns={columnsShipmentShedule} table={"pageShipmentShedule"}/>
                 </div>
             </div>
         </div>

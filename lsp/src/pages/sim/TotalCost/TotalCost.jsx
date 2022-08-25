@@ -59,7 +59,7 @@ const TotalCost = (props) => {
                     <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
                 </div>
                 <div className="datatable">
-                    <Datable url = {url} columns={columnsTotalCost}/>
+                    <Datable url = {url} columns={columnsTotalCost} table={"pageTotalCosts"}/>
                 </div>
             </div>
         </div>
