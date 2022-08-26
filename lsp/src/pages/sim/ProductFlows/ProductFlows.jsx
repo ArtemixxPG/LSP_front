@@ -56,7 +56,7 @@ const ProductFlows = (props) => {
             />
             <div className="content">
                 <div className="charts">
-                <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
+                <Chart FirstName = "количество" data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
                 </div>
                 <div className="datatable">
                     <Datable url={url} columns={columnsProductFlow} table={"pageProductFlows"}/>

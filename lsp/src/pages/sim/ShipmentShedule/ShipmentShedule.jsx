@@ -4,6 +4,7 @@ import NavBar from "../../../components/navbar/NavBar";
 import Chart from "../../../components/chart/Chart";
 import Datable from "../../../components/datable/Datable";
 import {columnsSharedFlowConstraints, columnsShipmentShedule} from "../../../HeadersTable";
+import "./shipmentshedule.scss"
 import MenuIcon from "@mui/icons-material/Menu";
 //import "./shipmentshedule.scss"
 
@@ -51,7 +52,8 @@ const ShipmentShedule = (props) => {
             />
             <div className="content">
                 <div className="charts">
-                    <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="firstValue" dataKeySecond="secondValue"/>
+                    <Chart FirstName = "величина" SecondName = "количество машин" data={data.dataSet}  dataName ="name"
+                           dataKeyFirst="firstValue" dataKeySecond="secondValue"/>
                 </div>
                 <div className="datatable">
                     <Datable url={url} columns={columnsShipmentShedule} table={"pageShipmentShedule"}/>

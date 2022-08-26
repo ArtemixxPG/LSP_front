@@ -4,7 +4,8 @@ import NavBar from "../../../components/navbar/NavBar";
 import Chart from "../../../components/chart/Chart";
 import Datable from "../../../components/datable/Datable";
 import {columnsProductFlow, columnsSharedFlowConstraints, columnsTotalCost} from "../../../HeadersTable";
-import MenuIcon from "@mui/icons-material/Menu";
+import MenuIcon from "@mui/icons-material/Menu"
+import "./totalcost.scss"
 
 const TotalCost = (props) => {
 
@@ -44,7 +45,7 @@ const TotalCost = (props) => {
     )
 
     return (
-        <div className="productflows">
+        <div className="totalcost">
             <div className="openMenu">
                 <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
             </div>
@@ -56,7 +57,7 @@ const TotalCost = (props) => {
             />
             <div className="content">
                 <div className="charts">
-                    <Chart data={data.dataSet}  dataName = "name" dataKeyFirst="value" dataKeySecond=""/>
+                    <Chart FirstName= "показатель"  data={data.dataSet}  dataName = "name" dataKeyFirst="value"/>
                 </div>
                 <div className="datatable">
                     <Datable url = {url} columns={columnsTotalCost} table={"pageTotalCosts"}/>

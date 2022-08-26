@@ -25,8 +25,8 @@ const Chart = (props) => {
                     <YAxis />
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
-                    <Area type="monotone" dataKey={props.dataKeyFirst} stroke="#8884d8" fillOpacity={1} fill="url(#colorFirst)" />
-                    <Area type="monotone" dataKey={props.dataKeySecond} stroke="#8884d8" fillOpacity={1} fill="url(#colorSecond)" />
+                    <Area name = {props.FirstName} type="monotone" dataKey={props.dataKeyFirst} stroke="#8884d8" fillOpacity={1} fill="url(#colorFirst)" />
+                    <Area name = {props.SecondName} type="monotone" dataKey={props.dataKeySecond} stroke="#8884d8" fillOpacity={1} fill="url(#colorSecond)" />
                 </AreaChart>
             </ResponsiveContainer>
         </div>
