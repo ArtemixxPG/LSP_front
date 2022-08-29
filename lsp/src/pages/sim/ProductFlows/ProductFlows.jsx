@@ -62,7 +62,6 @@ const ProductFlows = (props) => {
                     <Datable url={url} columns={columnsProductFlow} table={"pageProductFlows"}/>
                 </div>
             </div>
-
         </div>
     );
 };
