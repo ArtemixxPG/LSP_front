@@ -86,7 +86,7 @@ function CustomNoRowsOverlay() {
     );
 }
 
-const Datable = (props) => {
+const UploadDatatable = (props) => {
 
     const initialDataSet = {
         count: 0,
@@ -100,65 +100,23 @@ const Datable = (props) => {
     const [selectionModel, setSelectionModel] = React.useState([]);
 
 
-    useEffect(()=>{
-        let active = true;
-            let cleanupFunction = false;
-            const fetchData = async () => {
-                setLoading(true);
-                try {
-                    let result = null
-                    const response = await fetch(props.url(page));
-                    if(response.ok) {
-                        result = await response.json();
-                    } else{
-                        props.setError(true);
-                    }
 
-                    // непосредственное обновление состояния при условии, что компонент не размонтирован
-                    if(!cleanupFunction){
-
-                        setCount(result["count"])
-                        setRows(result[props.table]);
-                        setLoading(false);
-
-                    }
-                } catch (e) {
-                    props.setError(true);
-                    console.error(e.message)
-                }
-            };
-
-
-
-
-
-
-            fetchData().then();
-            // функция очистки useEffect
-            return () => cleanupFunction = true;
-        }, [page]
-    )
 
     return (
         <div className="datable">
             <ThemeProvider theme={theme}>
                 <DataGrid
-                    rows={rows}
+                    components={{
+                        NoRowsOverlay: CustomNoRowsOverlay,
+                    }}
+                    id={Math.random()}
+                    rows={props.rows}
                     columns={props.columns}
                     pagination
                     checkboxSelection
                     pageSize={5}
                     rowsPerPageOptions={[5]}
-                    rowCount={count}
-                    paginationMode="server"
-                    onPageChange={(newPage) => {
-                        setPage(newPage);
-                    }}
-                    onSelectionModelChange={(newSelectionModel) => {
-                        setSelectionModel(newSelectionModel);
-                    }}
-                    selectionModel={selectionModel}
-                    loading={loading}
+                    rowCount={props.count}
                     keepNonExistentRowsSelected
                 />
             </ThemeProvider>
@@ -166,4 +124,4 @@ const Datable = (props) => {
     );
 };
 
-export default Datable;
+export default UploadDatatable;

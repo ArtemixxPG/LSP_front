@@ -6,16 +6,111 @@ import NavBar from "../../components/navbar/NavBar";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import "./compare.scss"
+import CompareDatable from "../../components/datable/CompareDatatable";
 
 const CompareDemandFulfillment = (props) => {
 
+
+    let headersTable = {
+        url: 'http://localhost:8080/results/datasets/demandfulfillment?limit=',
+        headersTable: 'page'
+    }
+
+    // const urlDF = (page) => {
+    //     return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + 5 + '&offset=' + page * 5
+    // }
+    //
+    // const urlOS = (page) => {
+    //     return 'http://localhost:8080/results/datasets/operating_sites?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    // }
+    //
+    // const urlOC = (page) => {
+    //     return 'http://localhost:8080/results/datasets/other_costs?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    // }
+    //
+    // const urlPF = (page) => {
+    //     return 'http://localhost:8080/results/datasets/products_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    // }
+    //
+    // const urlPC = (page) => {
+    //     return 'http://localhost:8080/results/datasets/production_cost?limit=' + 5 + '&offset=' + page * 5
+    // }
+    //
+    //
+    // const urlPnF = (page) => {
+    //     return 'http://localhost:8080/results/datasets/production_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    // }
+    //
+    // const urlSFC = (page) => {
+    //     return 'http://localhost:8080/results/datasets/shared_flow_constraints?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    // }
+    //
+    //
+    // const urlSS= (page) => {
+    //     return 'http://localhost:8080/results/datasets/site_state?limit=' + 5 + '&offset=' + page * 5
+    // }
+    //
+    // const urlSBP = (page) => {
+    //     return 'http://localhost:8080/results/datasets/storages_by_product?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    // }
+    //
+    // const urlVF = (page) => {
+    //     return 'http://localhost:8080/results/datasets/vehicle_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    // }
+    //
+    // const urlSSC = (page) => {
+    //     return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    // }
+
+    const createUrl = (page) => {
+        return url +  5 + '&offset=' + page * 5
+    }
+    const typeTable = (item) => {
+        if(item === 'Приход товара'){
+            return 'http://localhost:8080/results/datasets/demandfulfillment?limit='
+        }
+        if(item === 'Движение товара'){
+            return 'http://localhost:8080/results/datasets/operating_sites?limit='
+        }
+        if(item === 'Прочие расходы'){
+            return 'http://localhost:8080/results/datasets/other_costs?limit='
+        }
+        if(item === 'Операционая стоимость'){
+            return 'http://localhost:8080/results/datasets/production_flows?limit='
+        }
+        if(item === 'Хранилища товаров'){
+            return 'http://localhost:8080/results/datasets/storages_by_product?limit='
+        }
+        if(item === 'Себестоимость продукции'){
+            return 'http://localhost:8080/results/datasets/production_cost?limit='
+        }
+        if(item === 'Производственный поток'){
+            return 'http://localhost:8080/results/datasets/products_flows?limit='
+        }
+        if(item === 'Общие ограничения производства'){
+            return 'http://localhost:8080/results/datasets/shared_flow_constraints?limit='
+        }
+        if(item === 'Общие ограничения хранения'){
+            return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit='
+        }
+        if(item === 'Реализация спроса'){
+            return 'http://localhost:8080/results/datasets/demandfulfillment?limit='
+        }
+        if(item === 'Траспортный поток'){
+            return 'http://localhost:8080/results/datasets/vehicle_flows?limit='
+        }
+    }
+
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
+    const [url, setUrl] = useState('http://localhost:8080/results/datasets/demandfulfillment?limit=')
     const [fileDir, setFileDir] = useState("");
     const [typeExp, setTypeExp] = useState("");
     const [chooseTable1, setChoseTable1] = useState("")
     const [chooseTable2, setChoseTable2] = useState("")
     const [icon, setIcon] = useState(false)
+
+
 
 
     useEffect(() => {
@@ -48,7 +143,7 @@ const CompareDemandFulfillment = (props) => {
     }
 
    const handleChange=(e) => {
-        setTypeExp( e.target.value);
+       setUrl(typeTable(e.target.value));
     }
 
     const handleSubmitTable1=(e) =>{
@@ -85,10 +180,17 @@ const CompareDemandFulfillment = (props) => {
                             <label className="search">
                                 Выберите таблицу:
                                 <select value={typeExp} onChange={handleChange}>
-                                    <option value="Таблица 1">#1</option>
-                                    <option value="Таблица 2">#2</option>
-                                    <option value="Таблица 3">#3</option>
-                                    <option value="Таблица 4">#4</option>
+                                    <option value="Приход товара">Приход товара</option>
+                                    <option value="Движение товара">Движение товара</option>
+                                    <option value="Прочие расходы">Прочие расходы</option>
+                                    <option value="Операционая стоимость">Операционая стоимость</option>
+                                    <option value="Хранилища товаров">Хранилища товаров</option>
+                                    <option value="Себестоимость продукции">Себестоимость продукции</option>
+                                    <option value="Производственный поток">Производственный поток</option>
+                                    <option value="Общие ограничения производства">Общие ограничения производства</option>
+                                    <option value="Общие ограничения хранения">Общие ограничения хранения</option>
+                                    <option value="Реализация спроса">Реализация спроса</option>
+                                    <option value="Траспортный поток">Траспортный поток</option>
                                 </select>
                             </label>
                         </form>
@@ -105,11 +207,10 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <Datable rows = {data}
-                                 columns = {columnsDemandFulfillmentWithColor(data, data)}
-                                 new_id = {rowId}
-                                 pageSize={5}
-                                 rowsPerPageOptions={5}
+                        <CompareDatable
+                            url = {createUrl}
+                            columns = {columnsDemandFulfillmentWithColor}
+                            table = {'pageDemandFulfillment'} setError = {props.setError}
                         />
                     </div>
 
@@ -125,11 +226,10 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <Datable rows = {data}
-                                 columns = {columnsDemandFulfillmentWithColor(data, data)}
-                                 new_id = {rowId}
-                                 pageSize={5}
-                                 rowsPerPageOptions={5}
+                        <CompareDatable
+                            url = {createUrl}
+                                 columns = {columnsDemandFulfillmentWithColor}
+                                table = {'pageDemandFulfillment'} setError = {props.setError}
                         />
                     </div>
                 </div>

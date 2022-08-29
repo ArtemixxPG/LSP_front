@@ -15,7 +15,7 @@ const ProductFlows = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/sim/datasets/productflows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/sim/datasets/productflows?limit=' +  5 + '&offset=' + page * 5
     }
 
     useEffect(()=>{

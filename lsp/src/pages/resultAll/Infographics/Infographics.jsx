@@ -66,9 +66,6 @@ const Infographics = (props) => {
             // функция очистки useEffect
             return () => cleanupFunction = true;
         }, []
-
-
-
     )
 
     function clean(obj) {
@@ -120,6 +117,7 @@ const Infographics = (props) => {
 
      return (
          <div className="inforaph">
+             <div className="content">
              <div className="openMenu">
                  <MenuIcon className="menuButton" onClick={() => setIcon(!icon)}/>
              </div>
@@ -167,7 +165,7 @@ const Infographics = (props) => {
              <Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
                  <h3>
                      <div className="NEdatatable">
-                         <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"}/>
+                         <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"} setError = {props.setError}/>
                      </div>
                  </h3>
              </Popup>
@@ -175,7 +173,7 @@ const Infographics = (props) => {
              <Popup shown={buttonPopupOM} close={() => {setButtonPopupOM(false);}}>
                  <h3>
                      <div className="OMdatatable">
-                         <Datable url={urlOM} columns={columnsObjectiveMembers} table={"pageObjectiveMember"}/>
+                         <Datable url={urlOM} columns={columnsObjectiveMembers} table={"pageObjectiveMember"} setError = {props.setError}/>
                      </div>
                  </h3>
              </Popup>
@@ -183,11 +181,12 @@ const Infographics = (props) => {
              <Popup shown={buttonPopupOS} close={() => {setButtonPopupOS(false);}}>
                  <h3>
                      <div className="OSdatatable">
-                         <Datable url={urlOvS} columns={columnsOverallStats} table={"pageOverallStats"}/>
+                         <Datable url={urlOvS} columns={columnsOverallStats} table={"pageOverallStats"} setError = {props.setError}/>
                      </div>
                  </h3>
              </Popup>
                 </div>
+         </div>
          </div>
 
      );

@@ -13,46 +13,8 @@ const DemandFulfillment = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + 5 + '&offset=' + page * 5
     }
-
-    useEffect(() => {
-        let cleanupFunction = false;
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/results/dfilm/data');
-                const result = await response.json();
-
-                // непосредственное обновление состояния при условии, что компонент не размонтирован
-                if(!cleanupFunction) {
-                    setData(result);
-                }
-
-            } catch (e) {
-                console.error(e.message)
-            }
-        };
-
-
-        fetchData().then();
-        // функция очистки useEffect
-        return () => cleanupFunction = true;
-    }, [])
-
-
-    /*const fetchDataCreateCSV = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/dfilm/create');
-            const result = await response.json();
-
-            setFileDir("Файл загружен: "+result.path);
-
-
-        } catch (e) {
-            console.error(e.message)
-        }
-    }*/
-
 
 
     return (
@@ -67,7 +29,7 @@ const DemandFulfillment = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable url = {url} columns = {columnsDemandFulfillment} table={"pageDemandFulfillment"}/>
+                    <Datable url = {url} columns = {columnsDemandFulfillment} table={"pageDemandFulfillment"} setError = {props.setError}/>
                 </div>
             </div>
     );

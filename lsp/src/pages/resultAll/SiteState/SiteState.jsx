@@ -15,7 +15,7 @@ const SiteState = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/site_state?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/site_state?limit=' + 5 + '&offset=' + page * 5
     }
 
     useEffect(() => {
@@ -53,7 +53,7 @@ const SiteState = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsSiteState} table={"pageSiteState"}/>
+                    <Datable url = {url} columns = {columnsSiteState} table={"pageSiteState"} setError = {props.setError}/>
                 </div>
             </div>
     );

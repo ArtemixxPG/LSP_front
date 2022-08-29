@@ -86,7 +86,7 @@ function CustomNoRowsOverlay() {
     );
 }
 
-const Datable = (props) => {
+const CompareDatable = (props) => {
 
     const initialDataSet = {
         count: 0,
@@ -101,7 +101,7 @@ const Datable = (props) => {
 
 
     useEffect(()=>{
-        let active = true;
+            let active = true;
             let cleanupFunction = false;
             const fetchData = async () => {
                 setLoading(true);
@@ -144,7 +144,7 @@ const Datable = (props) => {
             <ThemeProvider theme={theme}>
                 <DataGrid
                     rows={rows}
-                    columns={props.columns}
+                    columns={props.columns(rows, rows)}
                     pagination
                     checkboxSelection
                     pageSize={5}
@@ -166,4 +166,4 @@ const Datable = (props) => {
     );
 };
 
-export default Datable;
+export default CompareDatable;

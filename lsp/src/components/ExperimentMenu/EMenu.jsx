@@ -168,6 +168,7 @@ export default function EMenu(props) {
                     aria-expanded={open ? "true" : undefined}
                     onClick={() => dispatch({type: "TOGGLE"})}
                     variant="outlined"
+                    disabled
                 >
                 <DarkModeOutlinedIcon className="icon"/>
                 </IconButton>
@@ -227,6 +228,7 @@ export default function EMenu(props) {
                         aria-expanded={open ? "true" : undefined}
                         onClick={() => dispatch({type: "TOGGLE"})}
                         variant="outlined"
+                        disabled
                     >
                         <NotificationsNoneIcon className="icon"/>
                     </IconButton>

@@ -15,7 +15,7 @@ const ProductionCost = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/production_cost?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/production_cost?limit=' + 5 + '&offset=' + page * 5
     }
 
     useEffect(() => {
@@ -53,7 +53,7 @@ const ProductionCost = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsProductionCost} table={"pageProductionCosts"}/>
+                    <Datable url = {url} columns = {columnsProductionCost} table={"pageProductionCosts"} setError = {props.setError}/>
                 </div>
         </div>
     );

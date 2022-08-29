@@ -9,6 +9,8 @@ import "./upload.scss"
 import Chart from "../../components/chart/Chart";
 import Datable from "../../components/datable/Datable";
 import {createTheme} from "@mui/material";
+import UploadDatatable from "../../components/datable/UploadDatatable";
+import OKModal from "../../components/Modal/OKModal";
 
 
 const Upload = (props) => {
@@ -41,6 +43,7 @@ const Upload = (props) => {
                 setUploadResponse(`File uploaded successfully
         
         FILE - uploadFile`);
+                props.setOk(true)
             })
             .catch((error) => {
                 setUploadResponse(`File uploaded successfully
@@ -61,7 +64,9 @@ const Upload = (props) => {
         for (let i = 1; i < dataStringLines.length; i++) {
             const row = dataStringLines[i].split(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/);
             if (headers && row.length == headers.length) {
-                const obj = {};
+                const obj = {
+                    id: Math.random(),
+                };
                 for (let j = 0; j < headers.length; j++) {
                     let d = row[j];
                     if (d.length > 0) {
@@ -77,6 +82,7 @@ const Upload = (props) => {
 
                 // remove the blank rows
                 if (Object.values(obj).filter(x => x).length > 0) {
+
                     list.push(obj);
                 }
             }
@@ -145,10 +151,12 @@ const Upload = (props) => {
                             style={{display:"none"}}/>
                     </div>
                     <div className="right">
+                        <UploadDatatable rows={list} columns = {header} count={list.length}/>
                         <form onSubmit={upload}>
                             <button>Отправить</button>
                         </form>
                     </div>
+                    <OKModal open = {props.ok} close={props.handleClose}/>
                 </div>
             </div>
         </div>

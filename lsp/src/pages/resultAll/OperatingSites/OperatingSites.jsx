@@ -11,12 +11,12 @@ const OperatingSites = (props) => {
 
 
     //const [data, setData] = useState([]);
-    const [rowId, setRowId] = useState();
+    //const [rowId, setRowId] = useState();
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/operating_sites?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/operating_sites?limit=' + 5 + '&offset=' + page * 5
     }
 
     useEffect(() => {
@@ -54,8 +54,8 @@ const OperatingSites = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsOperatingSites} table={"pageOperatingSites"}/>
-                </div>
+                    <Datable url = {url} columns = {columnsOperatingSites} table={"pageOperatingSites"} setError = {props.setError}/>
+            </div>
         </div>
     );
 };

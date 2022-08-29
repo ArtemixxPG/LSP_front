@@ -53,7 +53,7 @@ const SharedFlowConstraints = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsSharedFlowConstraints} table={"pageSharedFlowConstraints"}/>
+                    <Datable url = {url} columns = {columnsSharedFlowConstraints} table={"pageSharedFlowConstraints"} setError = {props.setError}/>
                 </div>
         </div>
     );

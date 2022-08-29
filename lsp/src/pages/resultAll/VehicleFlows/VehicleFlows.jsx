@@ -5,6 +5,7 @@ import NavBar from "../../../components/navbar/NavBar";
 import Datable from "../../../components/datable/Datable";
 import {columnsVehicleFlows} from "../../../HeadersTable";
 import MenuIcon from "@mui/icons-material/Menu";
+import ErrorModal from "../../../components/Modal/ErrorModal";
 
 
 const VehicleFlows = (props) => {
@@ -53,8 +54,10 @@ const VehicleFlows = (props) => {
                 close = {()=>setIcon(!icon)}
             />
                 <div className="datatable">
-                    <Datable url = {url} columns = {columnsVehicleFlows} table={"pageVehicleFlows"}/>
+                    <Datable url = {url} columns = {columnsVehicleFlows} table={"pageVehicleFlows"} setError = {props.setError}/>
                 </div>
+
+            <ErrorModal error = {props.error} handleClose={props.handleClose}/>
         </div>
     );
 };
