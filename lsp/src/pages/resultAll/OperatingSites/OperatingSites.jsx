@@ -11,7 +11,7 @@ const OperatingSites = (props) => {
 
 
     //const [data, setData] = useState([]);
-    //const [rowId, setRowId] = useState();
+    const [rowId, setRowId] = useState();
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
@@ -55,7 +55,7 @@ const OperatingSites = (props) => {
             />
                 <div className="datatable">
                     <Datable rows = {url} columns = {columnsOperatingSites} table={"pageOperatingSites"}/>
-            </div>
+                </div>
         </div>
     );
 };

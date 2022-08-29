@@ -21,7 +21,7 @@ import ProductFlows from "./pages/sim/ProductFlows/ProductFlows";
 import ShipmentShedule from "./pages/sim/ShipmentShedule/ShipmentShedule";
 import TotalCost from "./pages/sim/TotalCost/TotalCost";
 import Upload from "./pages/upload/Upload";
-import "./style/dark.scss"
+import "./style/dark.scss";
 import React, {useContext, useState} from "react";
 import {DarkModeContext} from "./context/darkModeContext";
 import CompareDemandFulfillment from "./pages/compare/compare";
