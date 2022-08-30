@@ -9,8 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const ProductionCost = (props) => {
 
-    //const [data, setData] = useState([]);
-    //const [rowId, setRowId] = useState();
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 

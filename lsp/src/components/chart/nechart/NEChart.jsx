@@ -23,7 +23,7 @@ const NEChart = (props) => {
                            margin={{ top: 12, right: 60, left: 60, bottom: 22 }}>
                         <CartesianGrid strokeDasharray="3 3"/>
                         <XAxis dataKey={props.dataName} interval = {0} hide={true}/>
-                    <YAxis yAxisId="left" orientation="left" dataKey="it1" hide={false} stroke={props.strokeFirst}/>
+                    <YAxis yAxisId="left" orientation="left" dataKey="mun" hide={false} stroke={props.strokeFirst}/>
                     <YAxis yAxisId="right" orientation="right" dataKey="it2" stroke={props.strokeSecond}/>
                     <Tooltip />
                     <Legend verticalAlign="bottom" />
