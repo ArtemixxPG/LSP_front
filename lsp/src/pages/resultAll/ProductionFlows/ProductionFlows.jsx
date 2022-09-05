@@ -12,7 +12,7 @@ const ProductionFlows = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/production_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/production_flows?limit=' + 8 + '&offset=' + page * 8
     }
 
     useEffect(() => {
@@ -48,6 +48,7 @@ const ProductionFlows = (props) => {
                 setMenu = {props.setMenu}
                 open = {icon}
                 close = {()=>setIcon(!icon)}
+                experiments={props.experiments}
             />
                 <div className="datatable">
                     <Datable url = {url} columns = {columnsProductionFlows} table={"pageProductionFlows"} setError = {props.setError}/>

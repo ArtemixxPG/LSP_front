@@ -13,7 +13,7 @@ const DemandFulfillment = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + 8 + '&offset=' + page * 8
     }
 
 
@@ -27,6 +27,7 @@ const DemandFulfillment = (props) => {
                 setMenu = {props.setMenu}
                 open = {icon}
                 close = {()=>setIcon(!icon)}
+                experiments={props.experiments}
             />
                 <div className="datatable">
                     <Datable url = {url} columns = {columnsDemandFulfillment} table={"pageDemandFulfillment"} setError = {props.setError}/>

@@ -16,10 +16,23 @@ import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import * as React from "react";
 import Divider from "@mui/material/Divider";
 import BarChartIcon from '@mui/icons-material/BarChart';
+import Collapse from "@mui/material/Collapse";
+import {ExpandLess, ExpandMore} from "@mui/icons-material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import SendTimeExtensionIcon from "@mui/icons-material/SendTimeExtension";
+import ListItemText from "@mui/material/ListItemText";
 
-export default function OptimizationMenuList (){
+export default function OptimizationMenuList (props){
     return(
         <List component="div" disablePadding>
+            <ListItemButton onClick={props.handleClickOptimization}>
+                <ListItemIcon>
+                    <SendTimeExtensionIcon className="icon"/>
+                </ListItemIcon>
+                <ListItemText primary="Оптимизационный эксперимент" />
+            {props.openOptimization ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={props.openOptimization} timeout="auto" unmountOnExit>
             <ListItemButton>
                 <li>
                     <Link to="/sitestate" style={{textDecoration:"none"}}>
@@ -127,6 +140,7 @@ export default function OptimizationMenuList (){
                     </Link>
                 </li>
             </ListItemButton>
+            </Collapse>
         </List>
     )
 }

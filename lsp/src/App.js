@@ -22,17 +22,18 @@ import ShipmentShedule from "./pages/sim/ShipmentShedule/ShipmentShedule";
 import TotalCost from "./pages/sim/TotalCost/TotalCost";
 import Upload from "./pages/upload/Upload";
 import "./style/dark.scss";
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import {DarkModeContext} from "./context/darkModeContext";
 import CompareDemandFulfillment from "./pages/compare/compare";
 import Map from "./pages/map/MapPage";
 import OptimizationMenuList from "./components/sidebar/MenuList/OptimizationMenuList/OptimizationMenuList";
 
 
+
 function App() {
 
 
-
+    const [experiments, setExperiments] = useState([])
     const [menu, setMenu] = useState(<OptimizationMenuList/>)
     const {darkMode} = useContext(DarkModeContext)
     const [error, setError] = useState(false)
@@ -41,6 +42,29 @@ function App() {
     const handleClose = () => setError(false);
     const handleCloseOk = () => setOk(false);
 
+    useEffect(() => {
+        let cleanupFunction = false;
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/exp');
+                const result = await response.json();
+
+                // непосредственное обновление состояния при условии, что компонент не размонтирован
+                if(!cleanupFunction) {
+                    setExperiments(result);
+                }
+
+            } catch (e) {
+                console.error(e.message)
+            }
+        };
+
+
+        fetchData().then();
+        // функция очистки useEffect
+        return () => cleanupFunction = true;
+    }, []
+    )
 
 
   return (
@@ -48,44 +72,64 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/">
-                    <Route index element={<Home menu = {menu} setMenu = {setMenu}/>}/>
-                    <Route path="dfilm" element={<DemandFulfillment menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                    handleClose ={handleClose}/>}/>
-                    <Route path="opsites" element={<OperatingSites menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                   handleClose ={handleClose}/>}/>
-                    <Route path="othcost" element={<OtherCosts menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                               handleClose ={handleClose}/>}/>
-                    <Route path="prdflow" element={<ProductFlow menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                handleClose ={handleClose}/>}/>
-                    <Route path="pdncost" element={<ProductionCost menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                   handleClose ={handleClose}/>}/>
+                    <Route index element={<Home menu = {menu} setMenu = {setMenu} experiments = {experiments}/>}/>
+                    <Route path="dfilm" element={<DemandFulfillment menu = {menu} setMenu = {setMenu} error = {error}
+                                                                    setError = {setError}
+                                                                    handleClose ={handleClose}
+                                                                    experiments = {experiments}/>}/>
+                    <Route path="opsites" element={<OperatingSites menu = {menu} setMenu = {setMenu} error = {error}
+                                                                   setError = {setError}
+                                                                   handleClose ={handleClose}
+                                                                   experiments = {experiments}/>}/>
+                    <Route path="othcost" element={<OtherCosts menu = {menu} setMenu = {setMenu} error = {error}
+                                                               setError = {setError}
+                                                               handleClose ={handleClose}
+                                                               experiments = {experiments}/>}/>
+                    <Route path="prdflow" element={<ProductFlow menu = {menu} setMenu = {setMenu} error = {error}
+                                                                setError = {setError}
+                                                                handleClose ={handleClose}
+                                                                experiments = {experiments}/>}/>
+                    <Route path="pdncost" element={<ProductionCost menu = {menu} setMenu = {setMenu} error = {error}
+                                                                   setError = {setError}
+                                                                   handleClose ={handleClose}
+                                                                   experiments = {experiments}/>}/>
                     <Route path="pdnflows" element={<ProductionFlows menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                     handleClose ={handleClose}/>}/>
+                                                                     handleClose ={handleClose}
+                                                                     experiments = {experiments}/>}/>
                     <Route path="sfc" element={<SharedFlowConstraints menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
                                                                       handleClose ={handleClose}/>}/>
                     <Route path="ssc" element={<SharedStoragesConstraints menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                          handleClose ={handleClose}/>}/>
+                                                                          handleClose ={handleClose}
+                                                                          experiments = {experiments}/>}/>
                     <Route path="sitestate" element={<SiteState menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                handleClose ={handleClose}/>}/>
+                                                                handleClose ={handleClose}
+                                                                experiments = {experiments}/>}/>
                     <Route path="sbp" element={<StorageByProduct menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                 handleClose ={handleClose}/>} />
+                                                                 handleClose ={handleClose}
+                                                                 experiments = {experiments}/>} />
                     <Route path="vf" element={<VehicleFlows menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                        handleClose ={handleClose}/> }/>
+                        handleClose ={handleClose} experiments = {experiments}/> }/>
                     <Route path="infograph" element={<Infographics menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                   handleClose ={handleClose}/>}/>
+                                                                   handleClose ={handleClose}
+                                                                   experiments = {experiments}/>}/>
                     <Route path="pfsim" element={<ProductFlows menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                               handleClose ={handleClose}/>}/>
-                    <Route path="shsh" element={<ShipmentShedule menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                 handleClose ={handleClose}/>}/>
+                                                               handleClose ={handleClose}
+                                                               experiments = {experiments}/>}/>
+                    <Route path="shsh" element={<ShipmentShedule menu =
+                                                                     {menu} setMenu = {setMenu} error = {error} setError = {setError}
+                                                                 handleClose ={handleClose}
+                                                                 experiments = {experiments}/>}/>
                     <Route path="tc" element={<TotalCost menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
                                                          handleClose ={handleClose}/>}/>
                     <Route path="upload" element={<Upload menu = {menu} setMenu = {setMenu} ok = {ok}
                                                           setOk = {setOk}
                                                           handleClose ={handleCloseOk} error = {error} setError = {setError}
-                                                          handleClose ={handleClose}/>}/>
+                                                          handleClose ={handleClose}
+                                                          experiments = {experiments}/>}/>
                     <Route path="compare" element={<CompareDemandFulfillment menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                             handleClose ={handleClose}/>}/>
-                    <Route path="map" element={<Map menu = {menu} setMenu = {setMenu}/>}/>
+                                                                             handleClose ={handleClose}
+                                                                             experiments = {experiments}/>}/>
+                    <Route path="map" element={<Map menu = {menu} setMenu = {setMenu} experiments = {experiments}/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -147,9 +147,10 @@ const CompareDatable = (props) => {
                     columns={props.columns(rows, rows)}
                     pagination
                     checkboxSelection
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
+                    pageSize={8}
+                    rowsPerPageOptions={[8]}
                     rowCount={count}
+
                     paginationMode="server"
                     onPageChange={(newPage) => {
                         setPage(newPage);

@@ -30,6 +30,7 @@ export default function EMenu(props) {
     const { dispatch } = useContext(DarkModeContext);
 
 
+
     const handleClickExp = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -79,7 +80,7 @@ export default function EMenu(props) {
     ))(({theme}) => ({
         '& .MuiPaper-root': {
             borderRadius: 6,
-            maxWidth: "60px",
+            maxWidth: "300px",
             color:
                 theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
             boxShadow:
@@ -108,37 +109,39 @@ export default function EMenu(props) {
         },
     }));
 
-    const menuItems = menuNames.map((item, key) =>
-        (key !== menuNames.length - 1) ?
-            <div key={item}>
-                <MenuItem  onClick={() => handleClose(item)}>
-                    <CustomTooltip title="Оптимизационный эксперимент" arrow disableInteractive>
-                        <IconButton
-                            id="exp-button"
-                            aria-controls={open ? "demo-positioned-menu" : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? "true" : undefined}
-                            onClick={handleClickExp}
-                        >
-                            <SendTimeExtensionIcon className="icon"/>
-                        </IconButton>
-                    </CustomTooltip>
+    const menuItems = props.experiments.map((item, key) =>
+        (key !== props.experiments.length - 1) ?
+            <div key={item.name}>
+                <MenuItem  onClick={() => handleClose(item.name)}>
+
+                        {/*<IconButton*/}
+                        {/*    id="exp-button"*/}
+                        {/*    aria-controls={open ? "demo-positioned-menu" : undefined}*/}
+                        {/*    aria-haspopup="true"*/}
+                        {/*    aria-expanded={open ? "true" : undefined}*/}
+                        {/*    onClick={handleClickExp}*/}
+                        {/*>*/}
+                        {/*    <SendTimeExtensionIcon className="icon"/>*/}
+                        {/*</IconButton>*/}
+                        {item.name}
+
                 </MenuItem>
                 <Divider/>
             </div>
             :
-            <MenuItem key={item} onClick={() => handleClose(item)}>
-                <CustomTooltip title="Симуляционный эксперимент" arrow disableInteractive>
-                    <IconButton
-                        id="exp-button"
-                        aria-controls={open ? "demo-positioned-menu" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                        onClick={handleClickExp}
-                    >
-                        <MultilineChartIcon className="icon"/>
-                    </IconButton>
-                </CustomTooltip>
+            <MenuItem key={item.name} onClick={() => handleClose(item.name)}>
+                {/*<CustomTooltip title={"Эксперимент:" + item.name} arrow disableInteractive>*/}
+                    {/*<IconButton*/}
+                    {/*    id="exp-button"*/}
+                    {/*    aria-controls={open ? "demo-positioned-menu" : undefined}*/}
+                    {/*    aria-haspopup="true"*/}
+                    {/*    aria-expanded={open ? "true" : undefined}*/}
+                    {/*    onClick={handleClickExp}*/}
+                    {/*>*/}
+                    {/*    <SendTimeExtensionIcon className="icon"/>*/}
+                    {/*</IconButton>*/}
+                    {item.name}
+                {/*</CustomTooltip>*/}
             </MenuItem>
 
     )
@@ -146,7 +149,7 @@ export default function EMenu(props) {
     return (
         <div>
 
-            <Stack direction="row" spacing={1}>
+            <Stack direction="row" spacing={3}>
 
                 <IconButton
                     id="exp-button"
@@ -160,7 +163,7 @@ export default function EMenu(props) {
                     </CustomTooltip>
                 </IconButton>
 
-                <CustomTooltip title="Тёмный режим" arrow disableInteractive>
+                {/*<CustomTooltip title="Тёмный режим" arrow disableInteractive>*/}
                 <IconButton
                     id="tools-button"
                     aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -172,7 +175,7 @@ export default function EMenu(props) {
                 >
                 <DarkModeOutlinedIcon className="icon"/>
                 </IconButton>
-                </CustomTooltip>
+                {/*</CustomTooltip>*/}
                 <CustomTooltip title="Карта" arrow disableInteractive>
                 <IconButton
                     id="tools-button"
@@ -220,7 +223,7 @@ export default function EMenu(props) {
                     </Link>
                 </IconButton>
                 </CustomTooltip>
-                <CustomTooltip title="Уведомления" arrow disableInteractive>
+                {/*<CustomTooltip title="Уведомления" arrow disableInteractive>*/}
                     <IconButton
                         id="tools-button"
                         aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -232,7 +235,7 @@ export default function EMenu(props) {
                     >
                         <NotificationsNoneIcon className="icon"/>
                     </IconButton>
-                </CustomTooltip>
+                {/*</CustomTooltip>*/}
             </Stack>
 
             <StyledMenu

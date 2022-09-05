@@ -14,7 +14,7 @@ const OtherCosts = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/other_costs?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/other_costs?limit=' + 8 + '&offset=' + page * 8
     }
 
     useEffect(() => {
@@ -50,6 +50,7 @@ const OtherCosts = (props) => {
                 setMenu = {props.setMenu}
                 open = {icon}
                 close = {()=>setIcon(!icon)}
+                experiments={props.experiments}
             />
                 <div className="datatable">
                     <Datable url = {url} columns = {columnsOtherCosts} table={"pageOtherCosts"} setError = {props.setError}/>

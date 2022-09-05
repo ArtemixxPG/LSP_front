@@ -6,11 +6,24 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import Divider from "@mui/material/Divider";
+import Collapse from "@mui/material/Collapse";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import SendTimeExtensionIcon from "@mui/icons-material/SendTimeExtension";
+import ListItemText from "@mui/material/ListItemText";
+import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
-export default function SimulationMenuList() {
+export default function SimulationMenuList(props) {
 
         return (
             <List component="div" disablePadding>
+                <ListItemButton onClick={props.handleClickSimulation}>
+                    <ListItemIcon>
+                        <SendTimeExtensionIcon className="icon"/>
+                    </ListItemIcon>
+                    <ListItemText primary="Симмуляционный эксперимент" />
+                    {props.openSimulation ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={props.openSimulation} timeout="auto" unmountOnExit>
                 <ListItemButton>
                     <li>
                         <Link to="/pfsim" style={{textDecoration: "none"}}>
@@ -37,6 +50,7 @@ export default function SimulationMenuList() {
                         </Link>
                     </li>
                 </ListItemButton>
+                </Collapse>
             </List>
         )
 }

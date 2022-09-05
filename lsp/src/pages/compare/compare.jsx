@@ -63,7 +63,7 @@ const CompareDemandFulfillment = (props) => {
     // }
 
     const createUrl = (page) => {
-        return url +  5 + '&offset=' + page * 5
+        return url + 8 + '&offset=' + page * 8
     }
     const typeTable = (item) => {
         if(item === 'Приход товара'){
@@ -173,6 +173,7 @@ const CompareDemandFulfillment = (props) => {
                 setMenu = {props.setMenu}
                 open = {icon}
                 close = {()=>setIcon(!icon)}
+                experiments={props.experiments}
             />
                 <div className="content">
                     <div className="chooseExpirement">

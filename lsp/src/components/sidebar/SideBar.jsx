@@ -12,18 +12,27 @@ import {styled} from "@mui/material/styles";
 import MultilineChartIcon from '@mui/icons-material/MultilineChart';
 import SendTimeExtensionIcon from '@mui/icons-material/SendTimeExtension';
 import {DarkModeContext} from "../../context/darkModeContext";
+import Divider from "@mui/material/Divider";
 
 
 
 const SideBar = (props) => {
 
-    const [check, setCheck] = useState(false)
-
     const [nameRes, setNameRes] = useState("Выбирете эксперимент")
 
-    const checkExp = (type) => {
+    const [openOptimization, setOpenOptimization] = useState(false)
 
-    }
+    const [openSimulation, setOpenSimulation] = useState(false)
+
+    const handleClickOptimization = () => {
+        setOpenOptimization(!openOptimization);
+        setOpenSimulation(false);
+    };
+
+    const handleClickSimulation = () => {
+        setOpenSimulation(!openSimulation);
+        setOpenOptimization(false);
+    };
 
     const StyledDrawer = styled(({className, ...props}) => (
         <Drawer {...props} classes={{popper: className}}/>
@@ -40,9 +49,9 @@ const SideBar = (props) => {
         if(typeof exp==='string')
         setNameRes(exp)
         if(exp.includes("Оптимизация")){
-            props.setMenu( <OptimizationMenuList/>)
+            props.setMenu()
         } else if(exp.includes("Симуляция")){
-            props.setMenu( <SimulationMenuList/>)
+            props.setMenu( )
         }
 
     }
@@ -63,9 +72,11 @@ const SideBar = (props) => {
                 <hr/>
                 <div className="center">
                     <div className="autocomplete">
-                        <EMenu setExperiment = {chooseMenu}/>
+                        <EMenu setExperiment = {chooseMenu} experiments={props.experiments}/>
                     </div>
-                    <MenuList menu={props.menu} nameExp={nameRes}/>
+                    <OptimizationMenuList openOptimization = {openOptimization} handleClickOptimization={handleClickOptimization}/>
+                    <Divider/>
+                    <SimulationMenuList openSimulation = {openSimulation} handleClickSimulation={handleClickSimulation}/>
                 </div>
             </div>
         </StyledDrawer>

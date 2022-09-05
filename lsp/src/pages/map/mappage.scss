@@ -5,6 +5,8 @@
     z-index: 1;
     top: 20px;
     left: 20px;
+    display: flex;
+  margin: 5px;
     .menuButton{
       top: 20px;
       right: 30px;
@@ -12,6 +14,24 @@
       height: 30px;
       color: #222222;
       cursor: pointer;
+    }
+
+    .expInp{
+      margin-bottom: 5px;
+      margin-left: 20px;
+      margin-top: 0px;
+      color:#F0E68C;
+      background: #1E90FF;
+      border: solid 2px #1010ee;
+    }
+
+    .roadsList{
+      margin-bottom: 5px;
+      margin-left: 20px;
+      margin-top: 0px;
+      color:#F0E68C;
+      background: #1E90FF;
+      border: solid 2px #1010ee;
     }
 
     .alert{

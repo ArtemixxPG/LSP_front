@@ -110,6 +110,7 @@ const Infographics = (props) => {
                   setMenu = {props.setMenu}
                   open = {icon}
                   close = {()=>setIcon(!icon)}
+                  experiments={props.experiments}
               />
                 <div className="content">
                  <div className="stack">

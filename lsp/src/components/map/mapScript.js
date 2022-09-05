@@ -3,6 +3,8 @@ import customersImage from './image/customer.png'
 import dcImage from './image/dc.png'
 import factoryImage from './image/factory.png'
 import supplierImage from './image/supplier.png'
+import VKMImage from './image/ВКМ.png'
+import DepoImg from './image/depo.png'
 import demandFulfillment from "../../pages/resultAll/DemandFulfillment/DemandFulfillment";
 let data = []
 
@@ -16,12 +18,13 @@ export const createAllMapObjects = (data) => {
     let suppliers = data["suppliers"]
     let productsFlows = data["productsFlows"]
     let demandFulfillments = data["demandFulfillments"]
+    let groups = data["groupsSites"]
 
-    return createPlacemarks(customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments)
+    return createPlacemarks(customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments, groups)
 }
 
 
-const  createPlacemarks =  (customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments) => {
+const  createPlacemarks =  (customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments, groups) => {
 
     let result ={
         marks:[],
@@ -57,25 +60,94 @@ const  createPlacemarks =  (customers, dcsAndFactories, suppliers, productsFlows
     })
 
     const setIconDCFactories = (item) =>{
+        let icon
         if(item.name.includes("dc")){
             return dcImage
-        } else if(item.name.includes("fact")){
+        } else if(item.name.includes("extsup")){
             return factoryImage
         }
+     else {
+            groups.forEach((gs, key) =>{
+                if(gs.contents === item.name){
+                    if(gs.groupId.includes('ВКМ')){
+                        icon =  VKMImage
+                    }
+                    if(gs.groupId.includes('Fact')){
+                        icon = DepoImg
+                    }
+                }
+            })
+
+    }
+     return icon
     }
 
     dcsAndFactories.forEach((item, index) => {
         if (item.locations !== null) {
             let avilableCoordinate = collection.find(placemark => placemark.geometry.coordinates[1]
                 === item.locations.longitude)
-            if (avilableCoordinate !== null) {
-                if (!item.name.includes('dc_sup') && !item.name.includes('sup_dc')) {
+            if (item.name !== null) {
+                if (avilableCoordinate !== null) {
+                    if (!item.name.includes('dc_sup') && !item.name.includes('sup_dc')) {
+                        let mark = {
+                            type: 'Feature',
+                            id: currentId++,
+                            geometry: {
+                                type: 'Point',
+                                coordinates: [item.locations.latitude, item.locations.longitude + 0.0001]
+                            },
+                            properties: {
+                                hintContent: item.name,
+                                balloonContentHeader: item.name,
+                                balloonContentBody: "Почтовый индекс: " + item.locations.code,
+                            },
+                            options: {
+                                iconLayout: "default#image",
+                                iconImageHref: setIconDCFactories(item),
+                                iconImageSize: [32, 32]
+                            }
+                        }
+                        result.marks.push(mark)
+                    }
+                } else {
+                    if (!item.name.includes('dc_sup') && !item.name.includes('sup_dc')) {
+                        let mark = {
+                            type: 'Feature',
+                            id: currentId++,
+                            geometry: {
+                                type: 'Point',
+                                coordinates: [item.locations.latitude, item.locations.longitude]
+                            },
+                            properties: {
+                                hintContent: item.name,
+                                balloonContentHeader: item.name,
+                                balloonContentBody: "Почтовый индекс: " + item.locations.code,
+                            },
+                            options: {
+                                iconLayout: "default#image",
+                                iconImageHref: setIconDCFactories(item),
+                                iconImageSize: [32, 32]
+                            }
+                        }
+                        result.marks.push(mark)
+                    }
+                }
+            }
+        }
+    })
+
+    suppliers.forEach((item, index) => {
+        if (item.locations !== null) {
+            let avilableCoordinate = collection.find(placemark => placemark.geometry.coordinates[0]
+                === item.locations.latitude)
+            if (item.name !== null) {
+                if (avilableCoordinate !== null) {
                     let mark = {
                         type: 'Feature',
                         id: currentId++,
                         geometry: {
                             type: 'Point',
-                            coordinates: [item.locations.latitude, item.locations.longitude + 0.0001]
+                            coordinates: [item.locations.latitude + 0.0001, item.locations.longitude]
                         },
                         properties: {
                             hintContent: item.name,
@@ -84,14 +156,12 @@ const  createPlacemarks =  (customers, dcsAndFactories, suppliers, productsFlows
                         },
                         options: {
                             iconLayout: "default#image",
-                            iconImageHref: setIconDCFactories(item),
+                            iconImageHref: supplierImage,
                             iconImageSize: [32, 32]
                         }
                     }
                     result.marks.push(mark)
-                }
-            } else {
-                if (!item.name.includes('dc_sup') && !item.name.includes('sup_dc')) {
+                } else {
                     let mark = {
                         type: 'Feature',
                         id: currentId++,
@@ -106,63 +176,15 @@ const  createPlacemarks =  (customers, dcsAndFactories, suppliers, productsFlows
                         },
                         options: {
                             iconLayout: "default#image",
-                            iconImageHref: setIconDCFactories(item),
+                            iconImageHref: supplierImage,
                             iconImageSize: [32, 32]
                         }
                     }
                     result.marks.push(mark)
                 }
             }
-        }
-    })
 
-    suppliers.forEach((item, index) => {
-        if (item.locations !== null) {
-            let avilableCoordinate = collection.find(placemark => placemark.geometry.coordinates[0]
-                === item.locations.latitude)
-            if (avilableCoordinate !== null) {
-                let mark = {
-                    type: 'Feature',
-                    id: currentId++,
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [item.locations.latitude + 0.0001, item.locations.longitude]
-                    },
-                    properties: {
-                        hintContent: item.name,
-                        balloonContentHeader: item.name,
-                        balloonContentBody: "Почтовый индекс: " + item.locations.code,
-                    },
-                    options: {
-                        iconLayout: "default#image",
-                        iconImageHref: supplierImage,
-                        iconImageSize: [32, 32]
-                    }
-                }
-                result.marks.push(mark)
-            } else {
-                let mark = {
-                    type: 'Feature',
-                    id: currentId++,
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [item.locations.latitude, item.locations.longitude]
-                    },
-                    properties: {
-                        hintContent: item.name,
-                        balloonContentHeader: item.name,
-                        balloonContentBody: "Почтовый индекс: " + item.locations.code,
-                    },
-                    options: {
-                        iconLayout: "default#image",
-                        iconImageHref: supplierImage,
-                        iconImageSize: [32, 32]
-                    }
-                }
-                result.marks.push(mark)
-            }
         }
-
     })
 
     productsFlows.forEach((item, index)=>{

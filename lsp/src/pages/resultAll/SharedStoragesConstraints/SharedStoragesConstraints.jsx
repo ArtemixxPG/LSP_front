@@ -14,7 +14,7 @@ const SharedStoragesConstraints = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit=' + 8 + '&offset=' + page * 8
     }
 
     useEffect(() => {
@@ -50,6 +50,7 @@ const SharedStoragesConstraints = (props) => {
                 setMenu = {props.setMenu}
                 open = {icon}
                 close = {()=>setIcon(!icon)}
+                experiments={props.experiments}
             />
                 <div className="datatable">
                     <Datable url= {url} columns = {columnsSharedStoragesConstraints} table={"pageSharedStoragesConstraints"}

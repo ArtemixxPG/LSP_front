@@ -13,7 +13,7 @@ const StorageByProduct = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/storages_by_product?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/storages_by_product?limit=' + 8 + '&offset=' + page * 8
     }
 
     useEffect(() => {
@@ -49,6 +49,7 @@ const StorageByProduct = (props) => {
                 setMenu = {props.setMenu}
                 open = {icon}
                 close = {()=>setIcon(!icon)}
+                experiments={props.experiments}
             />
                 <div className="datatable">
                     <Datable url = {url} columns = {columnsStorageByProducts} table={"pageStorageByProducts"}

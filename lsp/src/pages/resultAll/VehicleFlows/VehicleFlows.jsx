@@ -16,7 +16,7 @@ const VehicleFlows = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/vehicle_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/vehicle_flows?limit=' + 8 + '&offset=' + page * 8
     }
 
     useEffect(() => {
@@ -52,6 +52,7 @@ const VehicleFlows = (props) => {
                 setMenu = {props.setMenu}
                 open = {icon}
                 close = {()=>setIcon(!icon)}
+                experiments={props.experiments}
             />
                 <div className="datatable">
                     <Datable url = {url} columns = {columnsVehicleFlows} table={"pageVehicleFlows"} setError = {props.setError}/>

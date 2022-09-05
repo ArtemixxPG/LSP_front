@@ -14,7 +14,7 @@ const OperatingSites = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/operating_sites?limit=' + 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/operating_sites?limit=' + 8 + '&offset=' + page * 8
     }
 
     useEffect(() => {
@@ -50,6 +50,7 @@ const OperatingSites = (props) => {
                 setMenu = {props.setMenu}
                 open = {icon}
                 close = {()=>setIcon(!icon)}
+                experiments={props.experiments}
             />
                 <div className="datatable">
                     <Datable url = {url} columns = {columnsOperatingSites} table={"pageOperatingSites"} setError = {props.setError}/>
