@@ -1,7 +1,7 @@
 const createCompareDataset = (data) =>{
 
     const vehicleFlows = data["vehicleFlows"]
-    const demandFulfilment = data["demandFulfilment"]
+    const demandFulfillment = data["demandFulfillment"]
     const namedExpressions = data["namedExpressions"]
 
     let namedExpressionsNew =
@@ -18,7 +18,7 @@ const createCompareDataset = (data) =>{
         }
         ]
 
-    let demandFulfilmentNew = [
+    let demandFulfillmentNew = [
         {
             demandForOrder:0,
             demandForProduct:0
@@ -56,27 +56,27 @@ const createCompareDataset = (data) =>{
 
     vehicleFlows.forEach((item, index)=>{
         if(item.vehicleType==="Авто 20 т КП"){
-            vehicleParametersCapacity.auto20T+=item.vehicleTrips
+            vehicleParametersCapacity.auto20T+=item.vehicleTrips;
             vehicleParameters.auto20T = item.actualLoad;
         }
 
         if(item.vehicleType==="Авто 10 т КП"){
-            vehicleParametersCapacity.auto10T+=item.vehicleTrips
+            vehicleParametersCapacity.auto10T+=item.vehicleTrips;
             vehicleParameters.auto10T = item.actualLoad;
         }
 
         if(item.vehicleType==="Авто 5 т КП"){
-            vehicleParametersCapacity.auto5T+=item.vehicleTrips
+            vehicleParametersCapacity.auto5T+=item.vehicleTrips;
             vehicleParameters.auto5T = item.actualLoad;
         }
 
         if(item.vehicleType==="Полувагон КП"){
-            vehicleParametersCapacity.poluvagon+=item.vehicleTrips
+            vehicleParametersCapacity.poluvagon+=item.vehicleTrips;
             vehicleParameters.poluvagon = item.actualLoad;
         }
 
         if(item.vehicleType==="Ж/д платформа КП"){
-            vehicleParametersCapacity.platforma+=item.vehicleTrips
+            vehicleParametersCapacity.platforma+=item.vehicleTrips;
             vehicleParameters.platforma = item.actualLoad;
         }
 
@@ -108,7 +108,6 @@ const createCompareDataset = (data) =>{
                     }
                 }
             }
-
         })
     })
 

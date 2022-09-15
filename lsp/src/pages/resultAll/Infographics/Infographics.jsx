@@ -17,33 +17,29 @@ import {columnsNamedExpressions, columnsObjectiveMembers, columnsOverallStats} f
 
 
 
-
-
-
 const Infographics = (props) => {
 
-     var numeral = require('numeral');
-     const [buttonPopupNE, setButtonPopupNE] = React.useState(false);
-     const [buttonPopupOM, setButtonPopupOM] = React.useState(false);
-     const [buttonPopupOS, setButtonPopupOS] = React.useState(false);
-     const [data, setData] = useState({ dataTable:[], dataTable1:[], dataTable2:[], dataSetNE:[], dataSetOM:[], dataSetOvS:[]});
-     const [icon, setIcon] = useState(false)
+    var numeral = require('numeral');
+    const [buttonPopupNE, setButtonPopupNE] = React.useState(false);
+    const [buttonPopupOM, setButtonPopupOM] = React.useState(false);
+    const [buttonPopupOS, setButtonPopupOS] = React.useState(false);
+    const [data, setData] = useState({
+        dataTable: [],
+        dataTable1: [],
+        dataTable2: [],
+        dataSetNE: [],
+        dataSetOM: [],
+        dataSetOvS: []
+    });
+    const [icon, setIcon] = useState(false)
 
     const urlNE = (page) => {
-        return 'http://localhost:8080/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 5
-    }
-
-    const urlOM = (page) => {
-        return 'http://localhost:8080/results/datasets/objective_members?limit=' + (page + 1) * 5 + '&offset=' + page * 5
-    }
-
-    const urlOvS = (page) => {
-        return 'http://localhost:8080/results/datasets/overall_stats?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://localhost:8080/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 1
     }
 
 
 
-    useEffect( () => {
+    useEffect(() => {
 
             let cleanupFunction = false;
             const fetchData = async () => {
@@ -51,10 +47,10 @@ const Infographics = (props) => {
                     const response = await fetch('http://localhost:8080/results/ne/data');
                     const result = await response.json();
 
+
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
-                    if(!cleanupFunction){
+                    if (!cleanupFunction) {
                         clean(result);
-                        //formData(result);
                         setData(result);
 
                     }
@@ -69,14 +65,17 @@ const Infographics = (props) => {
             // функция очистки useEffect
             return () => cleanupFunction = true;
         }, []
+
     )
 
+
     function clean(obj) {
-        for(var propName in obj) {
-            for(var propInd in obj[propName]) {
-                for(var propKey in obj[propName][propInd]) {
+        for (var propName in obj) {
+            for (var propInd in obj[propName]) {
+                for (var propKey in obj[propName][propInd]) {
                     if (obj[propName][propInd][propKey] === null) {
                         delete obj[propName][propInd][propKey];
+
                     }
                 }
             }
@@ -84,19 +83,6 @@ const Infographics = (props) => {
         return obj;
     }
 
-    /*function formData(obj) {
-         for(let propName in obj) {
-             for(let propInd in obj[propName]) {
-                 for (let propKey in obj[propName][propInd]) {
-                     for(let propNum in obj[propName][propInd][propKey]) {
-                         if (typeof(obj[propName][propInd][propKey][propNum]) == "number") {
-                             let num = numeral(obj[propName][propInd][propKey][propNum]).format('0.0a')
-                         }
-                     }
-                 }
-             }
-         }
-    }*/
 
 
      return (
@@ -113,16 +99,16 @@ const Infographics = (props) => {
                   experiments={props.experiments}
               />
                 <div className="content">
-                 <div className="stack">
-                 <Stack  direction="row" spacing={2}>
+                    {/*<div className="stack">
+                     <Stack  direction="row" spacing={2}>
                      <Button  className="buttonNE" onClick={() => setButtonPopupNE(!buttonPopupNE)}>Общая статистика</Button>
-                 </Stack>
+                 </Stack>*/}
                  </div>
 
 
                  <div className="NEcharts">
                      <NEChart data = {data.dataSetNE} title = "Гистограмма общей стоимости:"
-                              dataName = "nameru" dataKeyFirst="mun" dataKeySecond="it2" strokeFirst="#00008B" strokeSecond="#218bff"
+                              dataName = "nameru" dataKeyFirst="mun" dataKeySecond="mun" strokeFirst="#00008B" strokeSecond="#218bff"
                               fillFirst="#00008B" fillSecond="#00BFFF"/>
                  </div>
 
@@ -137,7 +123,7 @@ const Infographics = (props) => {
                  </div>
 
 
-             <Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
+                 {/*<Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
                  <h3>
                      <div className="NEdatatable">
                          <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"} setError = {props.setError}/>
@@ -145,7 +131,7 @@ const Infographics = (props) => {
                  </h3>
              </Popup>
 
-             /*<Popup shown={buttonPopupOM} close={() => {setButtonPopupOM(false);}}>
+             <Popup shown={buttonPopupOM} close={() => {setButtonPopupOM(false);}}>
                  <h3>
                      <div className="OMdatatable">
                          <Datable url={urlOM} columns={columnsObjectiveMembers} table={"pageObjectiveMember"} setError = {props.setError}/>
@@ -159,8 +145,8 @@ const Infographics = (props) => {
                          <Datable url={urlOvS} columns={columnsOverallStats} table={"pageOverallStats"} setError = {props.setError}/>
                      </div>
                  </h3>
-             </Popup>*/
-                </div>
+             </Popup>
+                </div>*/}
          </div>
          </div>
 

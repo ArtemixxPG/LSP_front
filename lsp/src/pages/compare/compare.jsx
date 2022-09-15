@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import SideBar from "../../components/sidebar/SideBar";
 import Datable from "../../components/datable/Datable";
-import {columnsDemandFulfillment, columnsDemandFulfillmentWithColor} from "../../HeadersTable";
+import {columnsDemandFulfillmentWithColor, columnsOverallStatsWithColor, columnsVehicleFlowsWithColor} from "../../HeadersTable";
 import NavBar from "../../components/navbar/NavBar";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -10,12 +10,22 @@ import CompareDatable from "../../components/datable/CompareDatatable";
 
 const CompareDemandFulfillment = (props) => {
 
+    var numeral = require('numeral');
 
     let headersTable = {
         url: 'http://localhost:8080/results/datasets/demandfulfillment?limit=',
         headersTable: 'page'
     }
 
+    /*const [data, setData] = useState({
+        dataTable: [],
+        dataTable1: [],
+        dataTable2: [],
+        dataSetNE: [],
+        dataSetOM: [],
+        dataSetOvS: []
+        dataSet
+    });*/
     // const urlDF = (page) => {
     //     return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + 5 + '&offset=' + page * 5
     // }
@@ -61,57 +71,84 @@ const CompareDemandFulfillment = (props) => {
     // const urlSSC = (page) => {
     //     return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     // }
+    //
+    // const urlNE = (page) => {
+    //     return 'http://localhost:8080/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 1
+    // }
 
-    const createUrl = (page) => {
-        return url + 8 + '&offset=' + page * 8
+    const createUrlDF = (page) => {
+        return urlDF + 8 + '&offset=' + page * 8
     }
-    const typeTable = (item) => {
-        if(item === 'Приход товара'){
-            return 'http://localhost:8080/results/datasets/demandfulfillment?limit='
-        }
-        if(item === 'Движение товара'){
-            return 'http://localhost:8080/results/datasets/operating_sites?limit='
-        }
-        if(item === 'Прочие расходы'){
-            return 'http://localhost:8080/results/datasets/other_costs?limit='
-        }
-        if(item === 'Операционая стоимость'){
-            return 'http://localhost:8080/results/datasets/production_flows?limit='
-        }
-        if(item === 'Хранилища товаров'){
-            return 'http://localhost:8080/results/datasets/storages_by_product?limit='
-        }
-        if(item === 'Себестоимость продукции'){
-            return 'http://localhost:8080/results/datasets/production_cost?limit='
-        }
-        if(item === 'Производственный поток'){
-            return 'http://localhost:8080/results/datasets/products_flows?limit='
-        }
-        if(item === 'Общие ограничения производства'){
-            return 'http://localhost:8080/results/datasets/shared_flow_constraints?limit='
-        }
-        if(item === 'Общие ограничения хранения'){
-            return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit='
-        }
-        if(item === 'Реализация спроса'){
-            return 'http://localhost:8080/results/datasets/demandfulfillment?limit='
-        }
-        if(item === 'Траспортный поток'){
-            return 'http://localhost:8080/results/datasets/vehicle_flows?limit='
-        }
+
+    const createUrlNE = (page) => {
+        return urlOvS + 8 + '&offset=' + page * 8
     }
+
+    const createUrlVF = (page) => {
+        return urlVF + 8 + '&offset=' + page * 8
+    }
+
+    // const typeTable = (item) => {
+    //     if(item === 'Общая статистика'){
+    //         return 'http://localhost:8080/results/datasets/named_expressions?limit='
+    //     }
+    //     if(item === 'Приход товара'){
+    //         return 'http://localhost:8080/results/datasets/demandfulfillment?limit='
+    //     }
+    //     if(item === 'Движение товара'){
+    //         return 'http://localhost:8080/results/datasets/operating_sites?limit='
+    //     }
+    //     if(item === 'Прочие расходы'){
+    //         return 'http://localhost:8080/results/datasets/other_costs?limit='
+    //     }
+    //     if(item === 'Операционая стоимость'){
+    //         return 'http://localhost:8080/results/datasets/production_flows?limit='
+    //     }
+    //     if(item === 'Хранилища товаров'){
+    //         return 'http://localhost:8080/results/datasets/storages_by_product?limit='
+    //     }
+    //     if(item === 'Себестоимость продукции'){
+    //         return 'http://localhost:8080/results/datasets/production_cost?limit='
+    //     }
+    //     if(item === 'Производственный поток'){
+    //         return 'http://localhost:8080/results/datasets/products_flows?limit='
+    //     }
+    //     if(item === 'Общие ограничения производства'){
+    //         return 'http://localhost:8080/results/datasets/shared_flow_constraints?limit='
+    //     }
+    //     if(item === 'Общие ограничения хранения'){
+    //         return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit='
+    //     }
+    //     if(item === 'Реализация спроса'){
+    //         return 'http://localhost:8080/results/datasets/demandfulfillment?limit='
+    //     }
+    //     if(item === 'Траспортный поток'){
+    //         return 'http://localhost:8080/results/datasets/vehicle_flows?limit='
+    //     }
+    // }
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
-    const [url, setUrl] = useState('http://localhost:8080/results/datasets/demandfulfillment?limit=')
+    //const [urlDF, setUrlDF] = useState('http://localhost:8080/results/datasets/demandfulfillment?limit=');
+    //const [urlNE, setUrlNE] = useState('http://localhost:8080/results/datasets/named_expressions?limit=');
+    //const [urlVF, setUrlVF] = useState('http://localhost:8080/results/datasets/vehicle_flows?limit=');
     const [fileDir, setFileDir] = useState("");
     const [typeExp, setTypeExp] = useState("");
-    const [chooseTable1, setChoseTable1] = useState("")
-    const [chooseTable2, setChoseTable2] = useState("")
-    const [icon, setIcon] = useState(false)
+    const [chooseTable1, setChoseTable1] = useState("");
+    const [chooseTable2, setChoseTable2] = useState("");
+    const [icon, setIcon] = useState(false);
 
+    const urlDF = (page) => {
+        return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + (page + 1) * 5 + '&offset=' + page * 1
+    }
 
+    const urlOvS = (page) => {
+        return 'http://localhost:8080/results/datasets/overall_stats?limit=' + (page + 1) * 5 + '&offset=' + page * 1
+    }
 
+    const urlVF = (page) => {
+        return 'http://localhost:8080/results/datasets/vehicle_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 1
+    }
 
     useEffect(() => {
         let cleanupFunction = false;
@@ -142,17 +179,16 @@ const CompareDemandFulfillment = (props) => {
         e.preventDefault();
     }
 
-   const handleChange=(e) => {
+   /*const handleChange=(e) => {
        setUrl(typeTable(e.target.value));
-    }
+    }*/
 
     const handleSubmitTable1=(e) =>{
-
         e.preventDefault();
     }
 
     const handleChangeTable1=(e) => {
-        setChoseTable1( e.target.value);
+        setChoseTable1(e.target.value);
     }
 
     const handleSubmitTable2=(e) =>{
@@ -176,64 +212,121 @@ const CompareDemandFulfillment = (props) => {
                 experiments={props.experiments}
             />
                 <div className="content">
-                    <div className="chooseExpirement">
-                        <form onSubmit={handleSubmit}>
-                            <label className="search">
-                                Выберите таблицу:
-                                <select value={typeExp} onChange={handleChange}>
-                                    <option value="Приход товара">Приход товара</option>
-                                    <option value="Движение товара">Движение товара</option>
-                                    <option value="Прочие расходы">Прочие расходы</option>
-                                    <option value="Операционая стоимость">Операционая стоимость</option>
-                                    <option value="Хранилища товаров">Хранилища товаров</option>
-                                    <option value="Себестоимость продукции">Себестоимость продукции</option>
-                                    <option value="Производственный поток">Производственный поток</option>
-                                    <option value="Общие ограничения производства">Общие ограничения производства</option>
-                                    <option value="Общие ограничения хранения">Общие ограничения хранения</option>
-                                    <option value="Реализация спроса">Реализация спроса</option>
-                                    <option value="Траспортный поток">Траспортный поток</option>
-                                </select>
-                            </label>
-                        </form>
-                    </div>
-                    <div className="datatable">
+                    <div className="datatableDF">Удовлетворение спроса
                         <form onSubmit={handleSubmitTable1}>
                             <label className="search">
                                 Выберите номер эксперимента:
                                 <select value={chooseTable1} onChange={handleChangeTable1}>
-                                    <option value="#1">#1</option>
-                                    <option value="#2">#2</option>
-                                    <option value="#3">#3</option>
-                                    <option value="#4">#4</option>
+                                    <option value="#1">Result March NO KP</option>
+                                    <option value="#2">Result March with DC f,s-dc KP</option>
                                 </select>
                             </label>
                         </form>
                         <CompareDatable
-                            url = {createUrl}
+                            url = {urlDF}
                             columns = {columnsDemandFulfillmentWithColor}
                             table = {'pageDemandFulfillment'} setError = {props.setError}
                         />
                     </div>
 
-                    <div className="datatable">
+                    <div className="datatableDF">
                         <form onSubmit={handleSubmitTable2}>
                             <label className="search">
                                 Выберите номер эксперимента:
                                 <select value={chooseTable2} onChange={handleChangeTable2}>
-                                    <option value="#1">#1</option>
-                                    <option value="#2">#2</option>
-                                    <option value="#3">#3</option>
-                                    <option value="#4">#4</option>
+                                    <option value="#1">Result March NO KP</option>
+                                    <option value="#2">Result March with DC f,s-dc KP</option>
                                 </select>
                             </label>
                         </form>
                         <CompareDatable
-                            url = {createUrl}
-                                 columns = {columnsDemandFulfillmentWithColor}
-                                table = {'pageDemandFulfillment'} setError = {props.setError}
+                            url = {urlDF}
+                            columns = {columnsDemandFulfillmentWithColor}
+                            table = {'pageDemandFulfillment'} setError = {props.setError}
+                        />
+                    </div>
+
+
+                    <div className="datatableOvS">Общая статистика
+                        <form onSubmit={handleSubmitTable1}>
+                            <label className="search">
+                                Выберите номер эксперимента:
+                                <select value={chooseTable1} onChange={handleChangeTable1}>
+                                    <option value="#1">Result March NO KP</option>
+                                    <option value="#2">Result March with DC f,s-dc KP</option>
+                                </select>
+                            </label>
+                        </form>
+                        <CompareDatable
+                            url = {urlOvS}
+                            columns = {columnsOverallStatsWithColor}
+                            table = {'pageOverallStats'} setError = {props.setError}
+                        />
+                    </div>
+
+                    <div className="datatableOvS">
+                        <form onSubmit={handleSubmitTable2}>
+                            <label className="search">
+                                Выберите номер эксперимента:
+                                <select value={chooseTable2} onChange={handleChangeTable2}>
+                                    <option value="#1">Result March NO KP</option>
+                                    <option value="#2">Result March with DC f,s-dc KP</option>
+                                </select>
+                            </label>
+                        </form>
+                        <CompareDatable
+                            url = {urlOvS}
+                            columns = {columnsOverallStatsWithColor}
+                            table = {'pageOverallStats'} setError = {props.setError}
+                        />
+                    </div>
+
+                    <div className="datatableVF">Транспортный поток
+                        <form onSubmit={handleSubmitTable1}>
+                            <label className="search">
+                                Выберите номер эксперимента:
+                                <select value={chooseTable1} onChange={handleChangeTable1}>
+                                    <option value="#1">Result March NO KP</option>
+                                    <option value="#2">Result March with DC f,s-dc KP</option>
+                                </select>
+                            </label>
+                        </form>
+                        <CompareDatable
+                            url = {urlVF}
+                            columns = {columnsVehicleFlowsWithColor}
+                            table = {'pageVehicleFlows'} setError = {props.setError}
+                        />
+                    </div>
+
+                    <div className="datatableVF">
+                        <form onSubmit={handleSubmitTable2}>
+                            <label className="search">
+                                Выберите номер эксперимента:
+                                <select value={chooseTable2} onChange={handleChangeTable2}>
+                                    <option value="#1">Result March NO KP</option>
+                                    <option value="#2">Result March with DC f,s-dc KP</option>
+                                </select>
+                            </label>
+                        </form>
+                        <CompareDatable
+                            url = {urlVF}
+                            columns = {columnsVehicleFlowsWithColor}
+                            table = {'pageVehicleFlows'} setError = {props.setError}
                         />
                     </div>
                 </div>
+
+            {/*<div className="stack">
+                     <Stack  direction="row" spacing={2}>
+                     <Button  className="buttonNE" onClick={() => setButtonPopupNE(!buttonPopupNE)}>Общая статистика</Button>
+                 </Stack>*/}
+            {/*<Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
+                 <h3>
+                     <div className="NEdatatable">
+                         <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"} setError = {props.setError}/>
+                     </div>
+                 </h3>
+             </Popup>*/}
             </div>
     );
 };

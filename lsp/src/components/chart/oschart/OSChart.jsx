@@ -27,7 +27,7 @@ const OSChart = (props) => {
                     <Tooltip/>
                     <Legend/>
                     <ReferenceLine y={0} stroke="#000" />
-                    <Bar name = "показатель" dataKey={props.dataKey} fill={props.dataFill} />
+                    <Bar name = "Result March NO KP" dataKey={props.dataKey} fill={props.dataFill} />
                 </BarChart>
             </ResponsiveContainer>
         </div>

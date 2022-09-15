@@ -43,6 +43,7 @@ function App() {
     const handleCloseOk = () => setOk(false);
 
     useEffect(() => {
+        document.title = 'ЛСП ТРАНСРЕСУРС';
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
@@ -55,7 +56,7 @@ function App() {
                 }
 
             } catch (e) {
-                console.error(e.message)
+                console.error(e.message);
             }
         };
 
@@ -108,19 +109,19 @@ function App() {
                                                                  handleClose ={handleClose}
                                                                  experiments = {experiments}/>} />
                     <Route path="vf" element={<VehicleFlows menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                        handleClose ={handleClose} experiments = {experiments}/> }/>
+                                                            handleClose ={handleClose}
+                                                            experiments = {experiments}/> }/>
                     <Route path="infograph" element={<Infographics menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
                                                                    handleClose ={handleClose}
                                                                    experiments = {experiments}/>}/>
-                    <Route path="pfsim" element={<ProductFlows menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                               handleClose ={handleClose}
-                                                               experiments = {experiments}/>}/>
-                    <Route path="shsh" element={<ShipmentShedule menu =
-                                                                     {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                 handleClose ={handleClose}
-                                                                 experiments = {experiments}/>}/>
-                    <Route path="tc" element={<TotalCost menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                         handleClose ={handleClose}/>}/>
+                    {/*<Route path="pfsim" element={<ProductFlows menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}*/}
+                    {/*                                           handleClose ={handleClose}*/}
+                    {/*                                           experiments = {experiments}/>}/>*/}
+                    {/*<Route path="shsh" element={<ShipmentShedule menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}*/}
+                    {/*                                             handleClose ={handleClose}*/}
+                    {/*                                             experiments = {experiments}/>}/>*/}
+                    {/*<Route path="tc" element={<TotalCost menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}*/}
+                    {/*                                     handleClose ={handleClose}/>}/>*/}
                     <Route path="upload" element={<Upload menu = {menu} setMenu = {setMenu} ok = {ok}
                                                           setOk = {setOk}
                                                           handleClose ={handleCloseOk} error = {error} setError = {setError}
@@ -135,6 +136,8 @@ function App() {
         </BrowserRouter>
     </div>
   );
+
+
 }
 
 export default App;

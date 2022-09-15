@@ -291,125 +291,182 @@ export const columnsDemandFulfillment = [
     // }
 ];
 
+export const columnsVehicleFlowsWithColor = (data1, data2)=> {
+    return [
+        {
+            field: 'vehicleParametersCapacity', headerName: 'ИСПОЛЬЗУЕМАЯ ЕМКОСТЬ ТС ПО ТИПУ', flex: 1, renderCell: (params) => {
+                if (params.row.vehicleParametersCapacity === chooseColor("vehicleParametersCapacity", params.row.vehicleParametersCapacity, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.vehicleParametersCapacity}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.vehicleParametersCapacity}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'vehicleParameters', headerName: 'МАКСИМАЛЬНОЕ КОЛ-ВО ТС ПО ТИПУ', flex: 1, renderCell: (params) => {
+                if (params.row.vehicleParameters === chooseColor("vehicleParameters", params.row.vehicleParameters, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.vehicleParameters}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.vehicleParameters}</div>
+                    )
+                }
+            }
+        },
+    ]
+}
+
+/*export const columnsNamedExpressionWithColor = (data1, data2)=> {
+    return [
+        {
+            field: 'inbound_processing_cost', headerName: 'РАЗГРУЗКА', flex: 1, renderCell: (params) => {
+                if (params.row.inbound_processing_cost === chooseColor("inbound_processing_cost", params.row.inbound_processing_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.inbound_processing_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.inbound_processing_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'outbound_processing_cost', headerName: 'ЗАГРУЗКА', flex: 1, renderCell: (params) => {
+                if (params.row.outbound_processing_cost === chooseColor("outbound_processing_cost", params.row.outbound_processing_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.outbound_processing_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.outbound_processing_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'production_cost', headerName: 'ПРОИЗВОДСТВО', flex: 1, renderCell: (params) => {
+                if (params.row.production_cost === chooseColor("production_cost", params.row.production_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.production_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.production_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'transportation_cost', headerName: 'ТРАНСПОРТ', flex: 1, renderCell: (params) => {
+                if (params.row.transportation_cost === chooseColor("transportation_cost", params.row.transportation_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.transportation_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.transportation_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'supply_cost', headerName: 'ЗАКУПКИ У ПОСТАВЩИКОВ', flex: 1, renderCell: (params) => {
+                if (params.row.supply_cost === chooseColor("supply_cost", params.row.supply_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.supply_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.supply_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'total_cost', headerName: 'ОБЩИЕ ЗАТРАТЫ', flex: 1, renderCell: (params) => {
+                if (params.row.total_cost === chooseColor("total_cost", params.row.total_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.total_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.total_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'revenue', headerName: 'ВЫРУЧКА', flex: 1, renderCell: (params) => {
+                if (params.row.revenue === chooseColor("revenue", params.row.revenue, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.revenue}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.revenue}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'profit', headerName: 'ПРИБЫЛЬ', flex: 1, renderCell: (params) => {
+                if (params.row.profit === chooseColor("profit", params.row.profit, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.profit}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.profit}</div>
+                    )
+                }
+            }
+        },
+    ]
+}*/
+
 export const columnsDemandFulfillmentWithColor = (data1, data2)=> {
     return [
-
-
         {
-            field: 'iterationCell', headerName: 'ИТЕРАЦИЯ', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.iteration}</div>
-                )
-            }
-        },
-
-
-        {
-            field: 'period', headerName: 'ПЕРИОД', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.period}</div>
-                )
-            }
-        },
-        {
-            field: 'customer', headerName: 'ПОКУПАТЕЛЬ', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.customer}</div>
-                )
-            }
-        },
-        {
-            field: 'product', headerName: 'ТОВАР', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.product}</div>
-                )
-            }
-        },
-
-        {
-            field: 'demandMin', headerName: 'МИН.ТРЕБОВАНИЕ', flex: 1, renderCell: (params) => {
-                if (params.row.demandMin === chooseColor("demandMin", params.row.demandMin, data1, data2)) {
+            field: 'demandForProduct', headerName: 'УДОВЛЕТВОРЕНИЕ СПРОСА ПО ПРОДУКТАМ', flex: 1, renderCell: (params) => {
+                if (params.row.demandForProduct === chooseColor("demandForProduct", params.row.demandForProduct, data1, data2)) {
                     return (
-                        <div className="cell over">{params.row.demandMin}</div>
+                        <div className="cell over">{params.row.demandForProduct}</div>
                     )
                 } else {
                     return (
-                        <div className="cell lower">{params.row.demandMin}</div>
+                        <div className="cell lower">{params.row.demandForProduct}</div>
                     )
                 }
             }
         },
         {
-            field: 'demandMax', headerName: 'МАКС.ТРЕБОВАНИЕ', flex: 1, renderCell: (params) => {
-                if (params.row.demandMax < chooseColor("demandMin", params.row.demandMax, data1, data2)) {
+            field: 'demandForOrder', headerName: 'УДОВЛЕТВОРЕНИЕ СПРОСА ПО ЗАКАЗАМ', flex: 1, renderCell: (params) => {
+                if (params.row.demandForOrder < chooseColor("demandForOrder", params.row.demandForOrder, data1, data2)) {
                     return (
-                        <div className="cell over">{params.row.demandMax}</div>
+                        <div className="cell over">{params.row.demandForOrder}</div>
                     )
                 } else {
                     return (
-                        <div className="cell lower">{params.row.demandMax}</div>
+                        <div className="cell lower">{params.row.demandForOrder}</div>
                     )
                 }
             }
         },
-        {
-            field: 'satisfied', headerName: "ВЫПОЛНЕНО", flex: 1, renderCell: (params) => {
-                if (params.row.demandMax < chooseColor("demandMin", params.row.demandMax, data1, data2)) {
-                    return (
-                        <div className="cell over">{params.row.satisfied}</div>
-                    )
-                } else {
-                    return (
-                        <div className="cell lower">{params.row.satisfied}</div>
-                    )
-                }
-            }
-        },
-        {
-            field: 'percentage', headerName: '%', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.percentage}</div>
-                )
-            }
-        },
-        {
-            field: 'revenue_per_item', headerName: 'ДОХОД, ЗА ЕД.', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.revenue_per_item}</div>
-                )
-            }
-        },
-        {
-            field: 'revenueTotal', headerName: 'ОБЩИЙ ДОХОД', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.revenueTotal}</div>
-                )
-            }
-        },
-
-        {
-            field: 'under_cost', headerName: 'НИЖЕ СТОИМОСТИ', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.under_cost}</div>
-                )
-            }
-        },
-
-        {
-            field: 'over_cost', headerName: 'ВЫШЕ СТОИМОСТИ', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.over_cost}</div>
-                )
-            }
-        },
-
-        {
-            field: 'penalty', headerName: 'ШТРАФ', flex: 1, renderCell: (params) => {
-                return (
-                    <div className="cell">{params.row.penalty}</div>
-                )
-            }
-        }
     ];
 }
 
@@ -431,8 +488,8 @@ export const columnsProductFlows = [
         )
         }},
 
-    { field: 'period', headerName: 'ПЕРИОД', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.period}</div>
+    { field: 'timePeriod', headerName: 'ПЕРИОД', flex:1,  renderCell:(params)=>{return(
+            <div className="cell">{params.row.timePeriod}</div>
         )} },
 
     { field: 'from', headerName: 'ОТКУДА', flex:1,  renderCell:(params)=>{return(
@@ -443,8 +500,8 @@ export const columnsProductFlows = [
             <div className="cell">{params.row.to}</div>
         )} },
 
-    { field: 'arrival_period', headerName: 'ВРЕМЯ ПРИБЫТИЯ', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.arrival_period}</div>
+    { field: 'arrivalPeriod', headerName: 'ВРЕМЯ ПРИБЫТИЯ', flex:1, renderCell:(params)=>{return(
+            <div className="cell">{params.row.arrivalPeriod}</div>
         )}},
 
     { field: 'product', headerName: 'ТОВАР', flex:1,  renderCell:(params)=>{return(
@@ -462,35 +519,35 @@ export const columnsProductFlows = [
         )} },
 
     {
-        field: 'flow_min',
+        field: 'flowMin',
         headerName: 'МИН.РАСХОД',
         type: 'number',
         width: 90,
     },
 
     {
-        field: 'flow_max',
+        field: 'flowMax',
         headerName: 'МАКС.РАСХОД',
         type: 'number',
         width: 90,
     },
 
     {
-        field: 'percantage',
+        field: 'percentage',
         headerName: '%',
         type: 'number',
         width: 80,
     },
 
     {
-        field: 'flow_under',
+        field: 'flowUnderCost',
         headerName: 'НЕДОРАСХОД',
         type: 'number',
         width: 90,
     },
 
     {
-        field: 'flow_over',
+        field: 'flowOverCost',
         headerName: 'СВЕРХ РАСХОД',
         type: 'number',
         width: 90,
@@ -503,75 +560,75 @@ export const columnsProductFlows = [
         width: 100,
     },
 
-    { field: 'vehicle_type', headerName: 'ТИП ТРАНСПОРТА', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.vehicle_type}</div>
+    { field: 'vehicleType', headerName: 'ТИП ТРАНСПОРТА', flex:1,  renderCell:(params)=>{return(
+            <div className="cell">{params.row.vehicleType}</div>
         )} },
 
     {
-        field: 'travel_time_day',
+        field: 'travelTime',
         headerName: 'ВРЕМЯ ПЕРЕВОЗКИ, ДЕНЬ',
         type: 'number',
         width: 100,
     },
 
     {
-        field: 'out_processing_cost',
+        field: 'outProcessingCostPi',
         headerName: 'СТОИМОСТЬ ВЫХОДЯЩЕЙ ОБРАБОТКИ, ЗА ДЕНЬ',
         type: 'number',
         width: 100,
     },
 
     {
-        field: 'out_processing_cost_t',
+        field: 'outProcessingCosT',
         headerName: 'СТОИМОСТЬ ВЫХОДЯЩЕЙ ОБРАБОТКИ, ВСЕГО',
         type: 'number',
         width: 100,
     },
 
     {
-        field: 'transportation_cost',
+        field: 'transportationCostPi',
         headerName: 'СТОИМОСТЬ ПЕРЕВОЗКИ, ЗА ДЕНЬ',
         type: 'number',
         width: 100,
     },
 
     {
-        field: 'transportation_cost_t',
+        field: 'transportationCostT',
         headerName: 'СТОИМОСТЬ ПЕРЕВОЗКИ, ВСЕГО',
         type: 'number',
         width: 100,
     },
 
     {
-        field: 'tariff_pi',
+        field: 'tariffPi',
         headerName: 'ТАРИФ, ЗА ЕД.',
         type: 'number',
         width: 90,
     },
 
     {
-        field: 'tariff_t',
+        field: 'tariffT',
         headerName: 'ТАРИФ, ВСЕГО',
         type: 'number',
         width: 90,
     },
 
     {
-        field: 'in_processing_cost',
+        field: 'inProcessingCostPi',
         headerName: 'СТОИМОСТЬ ВХОДЯЩЕЙ ОБРАБОТКИ, ЗА ЕД.',
         type: 'number',
         width: 100,
     },
 
     {
-        field: 'in_processing_cost_t',
+        field: 'inProcessingCostT',
         headerName: 'СТОИМОСТЬ ВХОДЯЩЕЙ ОБРАБОТКИ, ВСЕГО',
         type: 'number',
         width: 100,
     },
 
     {
-        field: 'flow_cost',
+        field: 'flowCostPi',
         headerName: 'РАСХОДЫ, ЗА ЕД.',
         type: 'number',
         width: 90,
@@ -585,29 +642,25 @@ export const columnsProductFlows = [
     },
 
     {
-        field: 'flow_cost_t',
+        field: 'flowCostT',
         headerName: 'РАСХОДЫ, ВСЕГО',
         type: 'number',
         width: 90,
     },
 
     {
-        field: 'flow_cost_co2',
+        field: 'flowCO2pi',
         headerName: 'РАСХОД CO2, ЗА ЕД.',
         type: 'number',
         width: 90,
     },
 
     {
-        field: 'flow_cost_co2_t',
+        field: 'flowCO2t',
         headerName: 'РАСХОД CO2, ВСЕГО',
         type: 'number',
         width: 90,
     },
-
-    { field: 'statistics', headerName: 'СТАТИСТИКА', flex:1,  renderCell:(params)=>{return(
-            <div className="cell">{params.row.statistics}</div>
-        )} },
 
 ];
 
@@ -997,20 +1050,37 @@ export const columnsVehicleFlows = [
         )}},
 ];
 
-export const columnsNamedExpressions = [
-    { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.iteration}</div>
-        )}},
+export const columnsNamedExpressionsWithColor = (data1, data2)=> {
+    return [
+        {
+            field: 'objective_member', headerName: 'ОБЩАЯ СТАТИСТИКА', flex: 1, renderCell: (params) => {
+                if (params.row.objective_member === chooseColor("objective_member", params.row.objective_member, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.objective_member}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.objective_member}</div>
+                    )
+                }
+            }
+        },
 
-    { field: 'expression_name', headerName: 'НАЗВАНИЕ ОПЕРАЦИИ', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.expression_name}</div>
-        )}},
-
-    { field: 'value', headerName: 'ЗНАЧЕНИЕ', flex:1, renderCell:(params)=>{return(
-            <div className="cell">{params.row.value}</div>
-        )}},
-
-];
+        {
+            field: 'value', headerName: 'ЗНАЧЕНИЕ', flex: 1, renderCell: (params) => {
+                if (params.row.value === chooseColor("value", params.row.value, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.value}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.value}</div>
+                    )
+                }
+            }
+        },
+    ];
+}
 
 export const columnsObjectiveMembers = [
     { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{return(
@@ -1084,6 +1154,121 @@ export const columnsOverallStats = [
         )}},
 ];
 
+export const columnsOverallStatsWithColor = (data1, data2)=> {
+    return [
+        {
+            field: 'inbound_processing_cost', headerName: 'РАЗГРУЗКА', flex: 1, renderCell: (params) => {
+                if (params.row.inbound_processing_cost === chooseColor("inbound_processing_cost", params.row.inbound_processing_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.inbound_processing_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.inbound_processing_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'outbound_processing_cost', headerName: 'ЗАГРУЗКА', flex: 1, renderCell: (params) => {
+                if (params.row.outbound_processing_cost === chooseColor("outbound_processing_cost", params.row.outbound_processing_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.outbound_processing_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.outbound_processing_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'production_cost', headerName: 'ПРОИЗВОДСТВО', flex: 1, renderCell: (params) => {
+                if (params.row.production_cost === chooseColor("production_cost", params.row.production_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.production_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.production_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'transportation_cost', headerName: 'ТРАНСПОРТ', flex: 1, renderCell: (params) => {
+                if (params.row.transportation_cost === chooseColor("transportation_cost", params.row.transportation_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.transportation_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.transportation_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'supply_cost', headerName: 'ЗАКУПКИ У ПОСТАВЩИКОВ', flex: 1, renderCell: (params) => {
+                if (params.row.supply_cost === chooseColor("supply_cost", params.row.supply_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.supply_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.supply_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'total_cost', headerName: 'ОБЩИЕ ЗАТРАТЫ', flex: 1, renderCell: (params) => {
+                if (params.row.total_cost === chooseColor("total_cost", params.row.total_cost, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.total_cost}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.total_cost}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'revenue', headerName: 'ВЫРУЧКА', flex: 1, renderCell: (params) => {
+                if (params.row.revenue === chooseColor("revenue", params.row.revenue, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.revenue}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.revenue}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'profit', headerName: 'ПРИБЫЛЬ', flex: 1, renderCell: (params) => {
+                if (params.row.profit === chooseColor("profit", params.row.profit, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.profit}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.profit}</div>
+                    )
+                }
+            }
+        },
+    ];
+}
 // export const dataCSV = (data) => {
 //     const dataStringLines = data.split(/\r\n|\n/);
 //     const headers = dataStringLines[0].split(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/);

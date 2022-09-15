@@ -4,7 +4,6 @@ import {
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
-
 import "./datable.scss"
 import {createTheme, ThemeProvider} from "@mui/material";
 
@@ -93,7 +92,9 @@ const CompareDatable = (props) => {
         data: []
     }
 
-    const [count, setCount] = useState(0)
+    var numeral = require('numeral');
+
+    const [count, setCount] = useState(0);
     const [page, setPage] = React.useState(0);
     const [rows, setRows] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
@@ -117,20 +118,96 @@ const CompareDatable = (props) => {
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
                     if(!cleanupFunction){
 
-                        setCount(result["count"])
+                        setCount(result["count"] = 1);
                         setRows(result[props.table]);
+                        formData(result[props.table]);
                         setLoading(false);
-
                     }
                 } catch (e) {
                     props.setError(true);
-                    console.error(e.message)
+                    console.error(e.message);
+                }
+
+                function formData(obj) {
+                    let dfps = 0;
+                    let dfpm = 0;
+                    let dfop = 0;
+                    let dfopp = 0;
+                    let vpc = 0;
+                    let vp = 0;
+                    for (let propKey in obj) {
+
+                        if(obj[propKey]["vehicleType"] === "Авто 20 т КП") {
+                            vpc += obj[propKey]["vehicleTrips"];
+                            vp += obj[propKey]["actualLoad"];
+                        }
+                        if(obj[propKey]["vehicleType"] === "Авто 10 т КП") {
+                            vpc += obj[propKey]["vehicleTrips"];
+                            vp += obj[propKey]["actualLoad"];
+                        }
+                        if(obj[propKey]["vehicleType"] === "Авто 5 т КП") {
+                            vpc += obj[propKey]["vehicleTrips"];
+                            vp += obj[propKey]["actualLoad"];
+                        }
+                        if(obj[propKey]["vehicleType"] === "Полувагон КП") {
+                            vpc += obj[propKey]["vehicleTrips"];
+                            vp += obj[propKey]["actualLoad"];
+                        }
+                        if(obj[propKey]["vehicleType"] === "Ж/д платформа КП") {
+                            vpc += obj[propKey]["vehicleTrips"];
+                            vp += obj[propKey]["actualLoad"];
+                        }
+                        let str = numeral(obj[propKey]["value"]).format("0.000e+0");
+                        obj[propKey]["value"] = parseFloat(str);
+                        if((obj[propKey]["iteration"] && obj[propKey]["expression_name"]) != null) {
+                            obj[propKey]["lol"] = str;
+                        }
+                        if(obj[propKey] == 0){
+                            delete obj[propKey];
+                        }
+                        if(obj[propKey]["iteration"] && obj[propKey]["revenue"] == null) {
+                            delete obj[propKey]["iteration"];
+                            delete obj[propKey]["inbound_processing_cost"];
+                            delete obj[propKey]["outbound_processing_cost"];
+                            delete obj[propKey]["production_cost"];
+                            delete obj[propKey]["transportation_cost"];
+                            delete obj[propKey]["supply_cost"];
+                            delete obj[propKey]["revenue"];
+                            delete obj[propKey]["total_cost"];
+                            delete obj[propKey]["profit"];
+                        }
+
+                        dfps += obj[propKey]["satisfied"];
+                        dfpm += obj[propKey]["demandMin"];
+
+                        if(obj[propKey]["percentage"] >= 90) {
+                            dfop += 1;
+                        }
+                        if(obj[propKey]["percentage"]) {
+                            dfopp += 1;
+                        }
+
+                        if((obj[propKey]["inbound_processing_cost"] && obj[propKey]["outbound_processing_cost"]) != null) {
+                            let num1 = obj[propKey]["inbound_processing_cost"] + obj[propKey]["outbound_processing_cost"] +
+                                obj[propKey]["production_cost"] + obj[propKey]["transportation_cost"] + obj[propKey]["supply_cost"];
+                            obj[propKey]["total_cost"] = num1;
+                        }
+                        if((obj[propKey]["revenue"] && obj[propKey]["total_cost"]) != null) {
+                            let num2 = obj[propKey]["revenue"] + obj[propKey]["total_cost"];
+                            obj[propKey]["profit"] = num2;
+                        }
+                    }
+                    obj["0"]["vehicleParametersCapacity"] = vpc;
+                    obj["0"]["vehicleParameters"] = vp;
+
+                    let dfores = (dfop * 100) / dfopp;
+                    obj["0"]["demandForOrder"] = dfopp;
+
+                    let dfp = (dfps * 100) / dfpm;
+                    obj["0"]["demandForProduct"] = dfp;
+                    return obj;
                 }
             };
-
-
-
-
 
 
             fetchData().then();

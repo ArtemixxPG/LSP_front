@@ -4,6 +4,7 @@ import Datable from "../../../components/datable/Datable";
 import {columnsProductFlows} from "../../../HeadersTable";
 import NavBar from "../../../components/navbar/NavBar";
 import MenuIcon from "@mui/icons-material/Menu";
+import ErrorModal from "../../../components/Modal/ErrorModal";
 
 
 import './productflow.scss'
@@ -53,9 +54,10 @@ const ProductFlow = (props) => {
                 experiments={props.experiments}
             />
                 <div className="datatable">
-                    <Datable rows = {url} columns = {columnsProductFlows} table={"pageProductsFlows"} setError = {props.setError}/>
+                    <Datable url = {url} columns = {columnsProductFlows} table={"pageProductsFlows"} setError = {props.setError}/>
                 </div>
-            </div>
+            <ErrorModal error = {props.error} handleClose={props.handleClose}/>
+        </div>
     );
 };
 

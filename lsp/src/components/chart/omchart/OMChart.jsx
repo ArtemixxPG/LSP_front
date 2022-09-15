@@ -27,7 +27,7 @@ const OMChart = (props) => {
                     <Tooltip />
                     <Legend />
                     <ReferenceLine y={0} stroke="#000" />
-                    <Bar name = "итерация-1" dataKey={props.dataKeyFirst} fill={props.fillFirst} />
+                    <Bar name = "Result March NO KP" dataKey={props.dataKeyFirst} fill={props.fillFirst} />
                 </BarChart>
             </ResponsiveContainer>
         </div>

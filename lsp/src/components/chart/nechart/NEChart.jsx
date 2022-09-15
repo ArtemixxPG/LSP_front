@@ -24,11 +24,11 @@ const NEChart = (props) => {
                         <CartesianGrid strokeDasharray="3 3"/>
                         <XAxis dataKey={props.dataName} interval = {0} hide={true}/>
                     <YAxis yAxisId="left" orientation="left" dataKey="mun" hide={false} stroke={props.strokeFirst}/>
-                    <YAxis yAxisId="right" orientation="right" dataKey="it2" stroke={props.strokeSecond}/>
+                    <YAxis yAxisId="right" orientation="right" dataKey="mun" stroke={props.strokeSecond}/>
                     <Tooltip />
                     <Legend verticalAlign="bottom" />
-                    <Bar name = "итерация-1" yAxisId="left" dataKey={props.dataKeyFirst} stroke={props.strokeFirst} fill={props.fillFirst} />
-                    <Bar name = "итерация-2" yAxisId="right" dataKey={props.dataKeySecond} stroke={props.strokeSecond}  fill={props.fillSecond}/>
+                    <Bar name = "Result March NO KP" yAxisId="left" dataKey={props.dataKeyFirst} stroke={props.strokeFirst} fill={props.fillFirst} />
+                    <Bar name = "Result March with DC f,s-dc KP" yAxisId="right" dataKey={props.dataKeySecond} stroke={props.strokeSecond}  fill={props.fillSecond}/>
                 </BarChart>
             </ResponsiveContainer>
         </div>

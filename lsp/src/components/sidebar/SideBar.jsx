@@ -22,17 +22,17 @@ const SideBar = (props) => {
 
     const [openOptimization, setOpenOptimization] = useState(false)
 
-    const [openSimulation, setOpenSimulation] = useState(false)
+    //const [openSimulation, setOpenSimulation] = useState(false)
 
     const handleClickOptimization = () => {
         setOpenOptimization(!openOptimization);
-        setOpenSimulation(false);
+        //setOpenSimulation(false);
     };
 
-    const handleClickSimulation = () => {
-        setOpenSimulation(!openSimulation);
-        setOpenOptimization(false);
-    };
+    // const handleClickSimulation = () => {
+    //     setOpenSimulation(!openSimulation);
+    //     setOpenOptimization(false);
+    // };
 
     const StyledDrawer = styled(({className, ...props}) => (
         <Drawer {...props} classes={{popper: className}}/>
@@ -76,7 +76,7 @@ const SideBar = (props) => {
                     </div>
                     <OptimizationMenuList openOptimization = {openOptimization} handleClickOptimization={handleClickOptimization}/>
                     <Divider/>
-                    <SimulationMenuList openSimulation = {openSimulation} handleClickSimulation={handleClickSimulation}/>
+                    {/*<SimulationMenuList openSimulation = {openSimulation} handleClickSimulation={handleClickSimulation}/>*/}
                 </div>
             </div>
         </StyledDrawer>

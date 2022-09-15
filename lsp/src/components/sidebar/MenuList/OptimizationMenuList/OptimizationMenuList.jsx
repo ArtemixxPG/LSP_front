@@ -35,18 +35,18 @@ export default function OptimizationMenuList (props){
             <Collapse in={props.openOptimization} timeout="auto" unmountOnExit>
             <ListItemButton>
                 <li>
-                    <Link to="/sitestate" style={{textDecoration:"none"}}>
+                    <Link to="/prdflow" style={{textDecoration:"none"}}>
                         <InventoryIcon className="icon"/>
-                        <span>Приход товара</span>
+                        <span>Товарные потоки</span>
                     </Link>
                 </li>
             </ListItemButton>
             <Divider/>
             <ListItemButton>
                 <li>
-                    <Link to="/opsites" style={{textDecoration:"none"}}>
+                    <Link to="/sitestate" style={{textDecoration:"none"}}>
                         <AirlineStopsIcon className="icon"/>
-                        <span>Движение объекта</span>
+                        <span>Статус узла</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -55,7 +55,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/othcost" style={{textDecoration:"none"}}>
                         <MoneyIcon className="icon"/>
-                        <span>Прочие расходы</span>
+                        <span>Прочие затраты</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -64,7 +64,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/opsites" style={{textDecoration:"none"}}>
                         <MonetizationOnIcon className="icon"/>
-                        <span>Операционая стоимость</span>
+                        <span>Операционные затраты</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -73,7 +73,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/sbp" style={{textDecoration:"none"}}>
                         <WarehouseIcon className="icon"/>
-                        <span>Хранилища товаров</span>
+                        <span>Хранение продукции</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -82,7 +82,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/pdncost" style={{textDecoration:"none"}}>
                         <AttachMoneyIcon className="icon"/>
-                        <span>Себестоимость продукции</span>
+                        <span>Затраты на производство</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -91,7 +91,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/pdnflows" style={{textDecoration:"none"}}>
                         <BuildIcon className="icon"/>
-                        <span>Производственный поток</span>
+                        <span>Производственные потоки</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -100,7 +100,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/sfc" style={{textDecoration:"none"}}>
                         <RunningWithErrorsIcon className="icon"/>
-                        <span>Общие ограничения производства</span>
+                        <span>Ограничения на потоки</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -109,7 +109,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/ssc" style={{textDecoration:"none"}}>
                         <AssignmentLateIcon className="icon"/>
-                        <span>Общие ограничения хранения</span>
+                        <span>Ограничения на хранение</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -118,7 +118,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/dfilm" style={{textDecoration:"none"}}>
                         <FactCheckIcon className="icon"/>
-                        <span>Реализация спроса</span>
+                        <span>Удовлетворение спроса</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -127,7 +127,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/vf" style={{textDecoration:"none"}}>
                         <DirectionsRailwayFilledIcon className="icon"/>
-                        <span>Траспортный поток</span>
+                        <span>Траспортные потоки</span>
                     </Link>
                 </li>
             </ListItemButton>
@@ -136,7 +136,7 @@ export default function OptimizationMenuList (props){
                 <li>
                     <Link to="/infograph" style={{textDecoration:"none"}}>
                         <BarChartIcon className="icon"/>
-                        <span>Инфографика</span>
+                        <span>Итоговая статистика</span>
                     </Link>
                 </li>
             </ListItemButton>

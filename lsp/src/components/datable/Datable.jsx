@@ -37,8 +37,6 @@ const StyledGridOverlay = styled('div')(({ theme }) => ({
 }));
 
 
-
-
 function CustomNoRowsOverlay() {
     return (
         <StyledGridOverlay>
@@ -93,6 +91,7 @@ const Datable = (props) => {
         data: []
     }
 
+    var numeral = require('numeral');
     const [count, setCount] = useState(0)
     const [page, setPage] = React.useState(0);
     const [rows, setRows] = React.useState([]);
@@ -106,18 +105,21 @@ const Datable = (props) => {
             const fetchData = async () => {
                 setLoading(true);
                 try {
-                    let result = null
+                    let result = null;
                     const response = await fetch(props.url(page));
+
                     if(response.ok) {
                         result = await response.json();
-                    } else{
+
+                    } else {
                         props.setError(true);
                     }
 
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
-                    if(!cleanupFunction){
+                    if(!cleanupFunction) {
 
-                        setCount(result["count"])
+                        setCount(result["count"]);
+                        formData(result[props.table]);
                         setRows(result[props.table]);
                         setLoading(false);
 
@@ -126,12 +128,21 @@ const Datable = (props) => {
                     props.setError(true);
                     console.error(e.message)
                 }
+
+                function formData(obj) {
+                    for (let propKey in obj) {
+                        let str = numeral(obj[propKey]["value"]).format("0.000e+0");
+                        obj[propKey]["value"] = parseFloat(str);
+                        if((obj[propKey]["iteration"] && obj[propKey]["expression_name"]) != null) {
+                            obj[propKey]["lol"] = str;
+                        }
+                        if (obj[propKey]["lol"] == "0.000e+0") {
+                            obj[propKey]["lol"] = "0";
+                        }
+                    }
+                    return obj;
+                }
             };
-
-
-
-
-
 
             fetchData().then();
             // функция очистки useEffect
