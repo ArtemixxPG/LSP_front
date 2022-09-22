@@ -29,16 +29,14 @@ import Map from "./pages/map/MapPage";
 import OptimizationMenuList from "./components/sidebar/MenuList/OptimizationMenuList/OptimizationMenuList";
 
 
-
 function App() {
 
-
-    const [experiments, setExperiments] = useState([])
-    const [menu, setMenu] = useState(<OptimizationMenuList/>)
-    const {darkMode} = useContext(DarkModeContext)
-    const [error, setError] = useState(false)
-    const [ok, setOk] = useState(false)
-
+    const [experiments, setExperiments] = useState([]);
+    const [menu, setMenu] = useState(<OptimizationMenuList/>);
+    const {darkMode} = useContext(DarkModeContext);
+    const [error, setError] = useState(false);
+    const [ok, setOk] = useState(false);
+    const [loc, setLoc] = useState(false);
     const handleClose = () => setError(false);
     const handleCloseOk = () => setOk(false);
 
@@ -59,7 +57,6 @@ function App() {
                 console.error(e.message);
             }
         };
-
 
         fetchData().then();
         // функция очистки useEffect
@@ -98,7 +95,8 @@ function App() {
                                                                      handleClose ={handleClose}
                                                                      experiments = {experiments}/>}/>
                     <Route path="sfc" element={<SharedFlowConstraints menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
-                                                                      handleClose ={handleClose}/>}/>
+                                                                      handleClose ={handleClose}
+                                                                      experiments = {experiments}/>}/>
                     <Route path="ssc" element={<SharedStoragesConstraints menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
                                                                           handleClose ={handleClose}
                                                                           experiments = {experiments}/>}/>

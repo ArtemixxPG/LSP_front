@@ -23,7 +23,7 @@ const Map = (props) => {
 
     const [icon, setIcon] = useState(false)
     const [message, setMessage] = useState("")
-    const [typeMsg, setTeypeMsg] = useState("")
+    const [typeMsg, setTypeMsg] = useState("")
     const [chooseTable2, setChoseTable2] = useState("")
     const [roads, setRoads] = useState([])
     const [road, setRoad] = useState({})
@@ -86,7 +86,7 @@ const Map = (props) => {
     const callBackMsg = (text, type) => {
         if (text!=="" && type!==""){
             setMessage(text)
-            setTeypeMsg(type)
+            setTypeMsg(type)
         }
     }
 
@@ -105,10 +105,8 @@ const Map = (props) => {
                     <label className="search">
                         Выберите номер эксперимента:
                         <select value={chooseTable2} onChange={handleChangeTable2}>
-                            <option value="#1">#1</option>
-                            <option value="#2">#2</option>
-                            <option value="#3">#3</option>
-                            <option value="#4">#4</option>
+                            <option value="#1">Result March NO KP</option>
+                            <option value="#2">Result March with DC f,s-dc KP</option>
                         </select>
                     </label>
                 </form>
@@ -116,7 +114,7 @@ const Map = (props) => {
                 <div className="roadsList">
                     <form onSubmit={handleSubmitTable2}>
                         <label className="roads">
-                            Выберите доорогу:
+                            Выберите дорогу:
                             <select value={chooseTable2} onChange={handleChangeTable2}>
                                 {roadsList}
                             </select>
@@ -138,4 +136,4 @@ const Map = (props) => {
     );
 };
 
-export default Map
+export default Map;

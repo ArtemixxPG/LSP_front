@@ -92,7 +92,7 @@ const CompareDatable = (props) => {
         data: []
     }
 
-    var numeral = require('numeral');
+    let numeral = require('numeral');
 
     const [count, setCount] = useState(0);
     const [page, setPage] = React.useState(0);
@@ -107,17 +107,16 @@ const CompareDatable = (props) => {
             const fetchData = async () => {
                 setLoading(true);
                 try {
-                    let result = null
+                    let result = null;
                     const response = await fetch(props.url(page));
                     if(response.ok) {
                         result = await response.json();
-                    } else{
+                    } else {
                         props.setError(true);
                     }
 
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
-                    if(!cleanupFunction){
-
+                    if(!cleanupFunction) {
                         setCount(result["count"] = 1);
                         setRows(result[props.table]);
                         formData(result[props.table]);
@@ -136,7 +135,6 @@ const CompareDatable = (props) => {
                     let vpc = 0;
                     let vp = 0;
                     for (let propKey in obj) {
-
                         if(obj[propKey]["vehicleType"] === "Авто 20 т КП") {
                             vpc += obj[propKey]["vehicleTrips"];
                             vp += obj[propKey]["actualLoad"];

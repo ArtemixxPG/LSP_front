@@ -291,7 +291,7 @@ const  createPlacemarks =  (customers, dcsAndFactories, suppliers, productsFlows
                         },
                         properties: {
                             hintContent: from.name + " ➔ " + to.name,
-                            balloonContentHeader: '<h3>'+'Даные о перемещении грузов'+'</h3>',
+                            balloonContentHeader: '<h3>'+'Данные о перемещении грузов'+'</h3>',
                             balloonContentBody: setBalloonContent(demands)
                         }
                     }

@@ -17,15 +17,6 @@ const CompareDemandFulfillment = (props) => {
         headersTable: 'page'
     }
 
-    /*const [data, setData] = useState({
-        dataTable: [],
-        dataTable1: [],
-        dataTable2: [],
-        dataSetNE: [],
-        dataSetOM: [],
-        dataSetOvS: []
-        dataSet
-    });*/
     // const urlDF = (page) => {
     //     return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + 5 + '&offset=' + page * 5
     // }
@@ -129,9 +120,6 @@ const CompareDemandFulfillment = (props) => {
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
-    //const [urlDF, setUrlDF] = useState('http://localhost:8080/results/datasets/demandfulfillment?limit=');
-    //const [urlNE, setUrlNE] = useState('http://localhost:8080/results/datasets/named_expressions?limit=');
-    //const [urlVF, setUrlVF] = useState('http://localhost:8080/results/datasets/vehicle_flows?limit=');
     const [fileDir, setFileDir] = useState("");
     const [typeExp, setTypeExp] = useState("");
     const [chooseTable1, setChoseTable1] = useState("");
@@ -150,32 +138,7 @@ const CompareDemandFulfillment = (props) => {
         return 'http://localhost:8080/results/datasets/vehicle_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 1
     }
 
-    useEffect(() => {
-        let cleanupFunction = false;
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/dfilm');
-                const result = await response.json();
-
-                // непосредственное обновление состояния при условии, что компонент не размонтирован
-                if(!cleanupFunction) {
-                    setData(result);
-                }
-
-            } catch (e) {
-                console.error(e.message)
-            }
-        };
-
-
-        fetchData().then();
-        // функция очистки useEffect
-        return () => cleanupFunction = true;
-    }, [])
-
-
-
-   const handleSubmit=(e) =>{
+    const handleSubmit=(e) =>{
         e.preventDefault();
     }
 
@@ -316,17 +279,17 @@ const CompareDemandFulfillment = (props) => {
                     </div>
                 </div>
 
-            {/*<div className="stack">
-                     <Stack  direction="row" spacing={2}>
-                     <Button  className="buttonNE" onClick={() => setButtonPopupNE(!buttonPopupNE)}>Общая статистика</Button>
-                 </Stack>*/}
-            {/*<Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
-                 <h3>
-                     <div className="NEdatatable">
-                         <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"} setError = {props.setError}/>
-                     </div>
-                 </h3>
-             </Popup>*/}
+            {/*<div className="stack">*/}
+            {/*         <Stack  direction="row" spacing={2}>*/}
+            {/*         <Button  className="buttonNE" onClick={() => setButtonPopupNE(!buttonPopupNE)}>Общая статистика</Button>*/}
+            {/*     </Stack>*/}
+            {/*<Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>*/}
+            {/*     <h3>*/}
+            {/*         <div className="NEdatatable">*/}
+            {/*             <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"} setError = {props.setError}/>*/}
+            {/*         </div>*/}
+            {/*     </h3>*/}
+            {/*</Popup>*/}
             </div>
     );
 };

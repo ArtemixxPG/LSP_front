@@ -29,12 +29,12 @@ const createCompareDataset = (data) =>{
     let demandForProduct = {
         min:0,
         satisfied: 0,
-        result:0
+        result:0,
     }
 
     let  demandForOrder = {
         percentage:0,
-        result:0
+        result:0,
     }
 
     let vehicleParametersCapacity = {
@@ -42,7 +42,7 @@ const createCompareDataset = (data) =>{
         auto5T: 0,
         auto10T: 0,
         poluvagon: 0,
-        platforma: 0
+        platforma: 0,
     }
 
     let vehicleParameters = {
@@ -50,7 +50,7 @@ const createCompareDataset = (data) =>{
         auto5T: 0,
         auto10T: 0,
         poluvagon: 0,
-        platforma: 0
+        platforma: 0,
     }
 
 

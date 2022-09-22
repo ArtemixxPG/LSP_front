@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-
 import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
 import "./infographics.scss"
@@ -24,18 +23,15 @@ const Infographics = (props) => {
     const [buttonPopupOM, setButtonPopupOM] = React.useState(false);
     const [buttonPopupOS, setButtonPopupOS] = React.useState(false);
     const [data, setData] = useState({
-        dataTable: [],
-        dataTable1: [],
-        dataTable2: [],
         dataSetNE: [],
         dataSetOM: [],
         dataSetOvS: []
     });
     const [icon, setIcon] = useState(false)
 
-    const urlNE = (page) => {
-        return 'http://localhost:8080/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 1
-    }
+    // const urlNE = (page) => {
+    //     return 'http://localhost:8080/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 1
+    // }
 
 
 
@@ -52,7 +48,6 @@ const Infographics = (props) => {
                     if (!cleanupFunction) {
                         clean(result);
                         setData(result);
-
                     }
 
                 } catch (e) {
@@ -65,7 +60,6 @@ const Infographics = (props) => {
             // функция очистки useEffect
             return () => cleanupFunction = true;
         }, []
-
     )
 
 
@@ -75,7 +69,6 @@ const Infographics = (props) => {
                 for (var propKey in obj[propName][propInd]) {
                     if (obj[propName][propInd][propKey] === null) {
                         delete obj[propName][propInd][propKey];
-
                     }
                 }
             }

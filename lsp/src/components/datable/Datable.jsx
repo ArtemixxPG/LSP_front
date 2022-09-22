@@ -91,7 +91,7 @@ const Datable = (props) => {
         data: []
     }
 
-    var numeral = require('numeral');
+    let numeral = require('numeral');
     const [count, setCount] = useState(0)
     const [page, setPage] = React.useState(0);
     const [rows, setRows] = React.useState([]);

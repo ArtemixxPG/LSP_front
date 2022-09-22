@@ -75,7 +75,6 @@ function getWindowDimensions() {
                          console.log(result)
                          setDataObjectsMap(createAllMapObjects(result))
                      }
-
                  } catch (e) {
                      console.error(e.message)
                  }
