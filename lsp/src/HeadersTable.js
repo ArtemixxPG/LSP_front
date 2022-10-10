@@ -1,3 +1,33 @@
+export const columnsMapSONK = [
+    {
+        name: "vkm",
+        label: "ВКМ",
+        options: {
+            filter: true,
+            sort: true,
+        }
+    },
+
+    {
+        name: "client",
+        label: "КЛИЕНТ",
+        options: {
+            filter: true,
+            sort: true,
+        }
+    },
+
+    {
+        name: "sonk",
+        label: "СОНК",
+        options: {
+            filter: true,
+            sort: true,
+        }
+    }
+]
+
+
 export const columnsProductFlow = [
     { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{return(
             <div className="cell">{params.row.iteration}</div>
@@ -1306,7 +1336,6 @@ export const columnsOperatingSites = [
 
 
 export const columnsStorageByProducts = [
-
     {
         name: "iteration",
         label: "ИТЕРАЦИЯ",
@@ -1677,6 +1706,7 @@ export const columnsProductionCost = [
 
 export const columnsProductionFlows = [
 
+
     {
         name: "iteration",
         label: "ИТЕРАЦИЯ",
@@ -1770,6 +1800,7 @@ export const columnsProductionFlows = [
 
 
 export const columnsSharedFlowConstraints = [
+
 
     {
         name: "iteration",
@@ -1917,6 +1948,7 @@ export const columnsSharedFlowConstraints = [
 
 export const columnsSharedStoragesConstraints = [
 
+
     {
         name: "iteration",
         label: "ИТЕРАЦИЯ",
@@ -2062,8 +2094,11 @@ export const columnsSharedStoragesConstraints = [
 
 
 export const columnsVehicleFlows = [
-
-    {
+    // { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{return(
+    //         <div className="cell">{params.row.iteration}</div>
+    //     )}},
+    //
+     {
         name: "iteration",
         label: "ИТЕРАЦИЯ",
         options: {

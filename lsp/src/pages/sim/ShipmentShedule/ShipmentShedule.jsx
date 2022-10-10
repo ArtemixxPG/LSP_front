@@ -15,14 +15,14 @@ const ShipmentShedule = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/sim/datasets/shipmentshedule?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/sim/datasets/shipmentshedule?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     }
 
     useEffect(()=>{
             let cleanupFunction = false;
             const fetchData = async () => {
                 try {
-                    const response = await fetch('http://localhost:8080/sim/ss/data');
+                    const response = await fetch('http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/sim/ss/data');
                     const result = await response.json();
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
                     if(!cleanupFunction) { setData(result);

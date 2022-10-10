@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
-import Datable from "../../../components/datable/Datable";
+import Datatable from "../../../components/datable/NewDatatable/Datatable";
 import {columnsStorageByProducts} from "../../../HeadersTable";
 import './storagebyproduct.scss'
 import MenuIcon from "@mui/icons-material/Menu";
@@ -12,9 +12,10 @@ const StorageByProduct = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-    const url = (page) => {
-        return 'http://localhost:8080/results/datasets/storages_by_product?limit=' + 8 + '&offset=' + page * 8
-    }
+    const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/sbp'
+
+
+
 
     return (
         <div className="storagebyproduct">
@@ -29,7 +30,7 @@ const StorageByProduct = (props) => {
                 experiments={props.experiments}
             />
                 <div className="datatable">
-                    <Datable url = {url} columns = {columnsStorageByProducts} table={"pageStorageByProducts"}
+                    <Datatable url = {url} columns = {columnsStorageByProducts} table={"pageStorageByProducts"}
                              setError = {props.setError}/>
                 </div>
         </div>

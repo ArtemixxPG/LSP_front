@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
-import Datable from "../../../components/datable/Datable";
+import Datatable from "../../../components/datable/NewDatatable/Datatable";
 import {columnsSiteState} from "../../../HeadersTable";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -14,9 +14,9 @@ const SiteState = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-    const url = (page) => {
-        return 'http://localhost:8080/results/datasets/site_state?limit=' + 8 + '&offset=' + page * 8
-    }
+    const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/sitestate'
+
+
 
     return (
         <div className="sitestate">
@@ -31,7 +31,7 @@ const SiteState = (props) => {
                 experiments={props.experiments}
             />
                 <div className="datatable">
-                    <Datable url = {url} columns = {columnsSiteState} table={"pageSiteState"} setError = {props.setError}/>
+                    <Datatable url = {url} columns = {columnsSiteState} table={"pageSiteState"} setError = {props.setError}/>
                 </div>
             </div>
     );

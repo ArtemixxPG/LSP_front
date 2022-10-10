@@ -32,6 +32,7 @@ import OptimizationMenuList from "./components/sidebar/MenuList/OptimizationMenu
 function App() {
 
     const [experiments, setExperiments] = useState([]);
+    const [experiment, setExperiment] = useState('Не выбран')
     const [menu, setMenu] = useState(<OptimizationMenuList/>);
     const {darkMode} = useContext(DarkModeContext);
     const [error, setError] = useState(false);
@@ -45,7 +46,7 @@ function App() {
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/exp');
+                const response = await fetch('http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/exp');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -128,7 +129,8 @@ function App() {
                     <Route path="compare" element={<CompareDemandFulfillment menu = {menu} setMenu = {setMenu} error = {error} setError = {setError}
                                                                              handleClose ={handleClose}
                                                                              experiments = {experiments}/>}/>
-                    <Route path="map" element={<Map menu = {menu} setMenu = {setMenu} experiments = {experiments}/>}/>
+                    <Route path="map" element={<Map menu = {menu} setMenu = {setMenu} experiments = {experiments}
+                                                    experiment={experiment}/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

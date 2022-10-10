@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+
 import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
 import "./infographics.scss"
@@ -29,9 +30,17 @@ const Infographics = (props) => {
     });
     const [icon, setIcon] = useState(false)
 
-    // const urlNE = (page) => {
-    //     return 'http://localhost:8080/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 1
-    // }
+    const urlNE = (page) => {
+        return 'http://infotrans-logistic.ru:3577/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
+
+    const urlOM = (page) => {
+        return 'http://infotrans-logistic.ru:3577/results/datasets/objective_members?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
+
+    const urlOvS = (page) => {
+        return 'http://infotrans-logistic.ru:3577/results/datasets/overall_stats?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    }
 
 
 
@@ -48,6 +57,7 @@ const Infographics = (props) => {
                     if (!cleanupFunction) {
                         clean(result);
                         setData(result);
+
                     }
 
                 } catch (e) {
@@ -60,6 +70,7 @@ const Infographics = (props) => {
             // функция очистки useEffect
             return () => cleanupFunction = true;
         }, []
+
     )
 
 
@@ -69,6 +80,7 @@ const Infographics = (props) => {
                 for (var propKey in obj[propName][propInd]) {
                     if (obj[propName][propInd][propKey] === null) {
                         delete obj[propName][propInd][propKey];
+
                     }
                 }
             }

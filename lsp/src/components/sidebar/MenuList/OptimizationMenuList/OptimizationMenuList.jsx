@@ -30,7 +30,8 @@ export default function OptimizationMenuList (props){
                     <SendTimeExtensionIcon className="icon"/>
                 </ListItemIcon>
                 <ListItemText primary="Оптимизационный эксперимент" />
-            {props.openOptimization ? <ExpandLess /> : <ExpandMore />}
+                {/*// eslint-disable-next-line no-restricted-globals*/}
+                {props.openOptimization ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={props.openOptimization} timeout="auto" unmountOnExit>
             <ListItemButton>

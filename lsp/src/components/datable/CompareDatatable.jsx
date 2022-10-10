@@ -4,7 +4,7 @@ import {
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
-import "./datable.scss"
+import "./NewDatatable/datable.scss"
 import {createTheme, ThemeProvider} from "@mui/material";
 
 const theme = createTheme(

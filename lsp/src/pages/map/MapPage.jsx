@@ -1,19 +1,35 @@
-import SideBar from "../../components/sidebar/SideBar";
-import NavBar from "../../components/navbar/NavBar";
-import React, {useEffect, useState} from "react";
+//imports React.js
+import React, {useEffect, useRef, useState} from "react";
+
+//imports Yandex Map API
 import YMap from "../../components/map/Map";
 
-import "./mappage.scss"
-import {resizeHeight, resizeWidth} from "../../ResizeElement";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+//imports Material MUI
 import MenuIcon from '@mui/icons-material/Menu';
 import Alert from "@mui/material/Alert";
-import Checkbox from '@mui/material/Checkbox';
+import TrainIcon from '@mui/icons-material/Train';
+import IconButton from "@mui/material/IconButton";
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import PodcastsIcon from '@mui/icons-material/Podcasts';
+import ScienceIcon from '@mui/icons-material/Science';
+import Button from '@mui/material/Button';
+
+//imports Components
+import SideBar from "../../components/sidebar/SideBar";
+import Modal from "../../components/Modal/Modal";
+import MapTable from "../../components/datable/NewDatatable/MapTable";
+import SubMenuList from "../../components/List/RoadList/SubMenuList";
+
+//imports Columns for headers
+import {columnsMapSONK} from "../../HeadersTable";
+
+//imports css
+import "./mappage.scss"
+
 
 const Map = (props) => {
-
-
 
     const [checked, setChecked] = React.useState(true);
 
@@ -26,13 +42,25 @@ const Map = (props) => {
     const [typeMsg, setTypeMsg] = useState("")
     const [chooseTable2, setChoseTable2] = useState("")
     const [roads, setRoads] = useState([])
-    const [road, setRoad] = useState({})
+    const [road, setRoad] = useState('Общая')
+    const [openModal, setOpenModal] = useState(false)
+    const [dataTable, setDataTable] = useState([])
+    const [experiment, setExperiment] = useState(props.experiment)
+    const [change, setChange] = useState(false)
+
+    let onMapTableChange = null
+
+    const didOnMapTableChange = (mapChange) => {
+        onMapTableChange = mapChange
+    }
+
 
     useEffect(()=>{
+        setExperiment(props.experiment)
         let cleanupFunction = false;
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/roads');
+                const response = await fetch('http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/roads');
                 const result = await response.json();
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -51,35 +79,45 @@ const Map = (props) => {
         return () => cleanupFunction = true;
     }, [])
 
-    const handleSubmitTable2=(e) =>{
-        e.preventDefault();
+
+
+    const handleChangeExperiment=(event: React.MouseEvent<HTMLDivElement, MouseEvent>, experimentName:string) => {
+        event.preventDefault();
+        setExperiment(experimentName);
     }
 
-    const handleChangeTable2=(e) => {
-        setChoseTable2(e.target.value);
+    const handleChangeRoad=(event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+                            roadName:string) => {
+        event.preventDefault()
+        setDataTable(prevDataTable => dataTable.splice(0, dataTable.length))
+        console.log(dataTable)
+        setRoad(prevRoad => roadName)
+        onMapTableChange(true)
     }
+
+
 
     const roadsList = roads.map((item)=>{
         return(
-        <option key={item.id} id={item.id} value={item}>
-            {item.name}</option>
+            <div key={item.name}>
+            <ListItemButton onClick={(event)=>handleChangeRoad(event, item.name)}>
+                <ListItemText primary={item.name} />
+            </ListItemButton>
+                <Divider/>
+            </div>
         )
     })
 
-    const chooseRoad = ()=>{
+    const experimentsList = props.experiments.map((item)=>{
         return(
-        <div className="roadsList">
-            <form onSubmit={handleSubmitTable2}>
-                <label className="roads">
-                    Выберите доорогу:
-                    {/*<select value={chooseTable2} onChange={handleChangeTable2}>*/}
-                    {/*    {roadsList}*/}
-                    {/*</select>*/}
-                </label>
-            </form>
-        </div>
+            <div key={item.name}>
+                <ListItemButton onClick={(event)=>handleChangeExperiment(event, item.name)}>
+                    <ListItemText primary={item.name} />
+                </ListItemButton>
+                <Divider/>
+            </div>
         )
-    }
+    })
 
 
 
@@ -100,28 +138,22 @@ const Map = (props) => {
         <div className="mappage">
             <div className="openMenu">
             <MenuIcon  className="menuButton" onClick={() => setIcon(!icon)}/>
-                <div className="expInp">
-                <form onSubmit={handleSubmitTable2}>
-                    <label className="search">
-                        Выберите номер эксперимента:
-                        <select value={chooseTable2} onChange={handleChangeTable2}>
-                            <option value="#1">Result March NO KP</option>
-                            <option value="#2">Result March with DC f,s-dc KP</option>
-                        </select>
-                    </label>
-                </form>
+                <div className="list">
+                    <SubMenuList listItems={experimentsList} subheader='Поле выбора экспериментов'
+                              header={ "Эксперимент: " + experiment} icon = {<ScienceIcon style={{color:'#1010ee'}}/>}/>
                 </div>
-                <div className="roadsList">
-                    <form onSubmit={handleSubmitTable2}>
-                        <label className="roads">
-                            Выберите дорогу:
-                            <select value={chooseTable2} onChange={handleChangeTable2}>
-                                {roadsList}
-                            </select>
-                        </label>
-                    </form>
+                <div className="list">
+                    <SubMenuList listItems={roadsList} subheader='Поле выбора ВКМ' header={ "Дорога: " + road}
+                              icon = {<PodcastsIcon style={{color:'#1010ee'}}/>}/>
                 </div>
+
+                <div className="stat">
+                    <Button style={{color:'#1010ee'}} onClick={()=>setOpenModal(!openModal)}>Таблица СОНК
+                    </Button>
+                </div>
+
             </div>
+
             <SideBar
                 menu = {props.menu}
                 setMenu = {props.setMenu}
@@ -129,9 +161,11 @@ const Map = (props) => {
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
             />
-            <YMap>
+            <Modal open={openModal} handleClose={()=> setOpenModal(!openModal)}
+                   content ={ <MapTable columns = {columnsMapSONK} data={dataTable}/>}/>
+            <YMap road = {road} dataTable={dataTable} setDataTable={setDataTable}  didOnMapTableChange = {didOnMapTableChange}>
             </YMap>
-            {openAlert()}
+
         </div>
     );
 };

@@ -3,7 +3,7 @@ import './sharedflowconstraints.scss'
 import {columnsSharedFlowConstraints} from "../../../HeadersTable";
 import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
-import Datable from "../../../components/datable/Datable";
+import Datatable from "../../../components/datable/NewDatatable/Datatable";
 import MenuIcon from "@mui/icons-material/Menu";
 
 
@@ -14,9 +14,10 @@ const SharedFlowConstraints = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-    const url = (page) => {
-        return 'http://localhost:8080/results/datasets/shared_flow_constraints?limit=' + 8 + '&offset=' + page * 8
-    }
+    const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/sfc'
+
+
+
 
     return (
         <div className="sharedflowconstraints">
@@ -31,7 +32,7 @@ const SharedFlowConstraints = (props) => {
                 experiments={props.experiments}
             />
                 <div className="datatable">
-                    <Datable url = {url} columns = {columnsSharedFlowConstraints} table={"pageSharedFlowConstraints"} setError = {props.setError}/>
+                    <Datatable url = {url} columns = {columnsSharedFlowConstraints} table={"pageSharedFlowConstraints"} setError = {props.setError}/>
                 </div>
         </div>
     );

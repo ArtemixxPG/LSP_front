@@ -13,58 +13,67 @@ const CompareDemandFulfillment = (props) => {
     var numeral = require('numeral');
 
     let headersTable = {
-        url: 'http://localhost:8080/results/datasets/demandfulfillment?limit=',
+        url: 'http://infotrans-logistic.ru:3577/results/datasets/demandfulfillment?limit=',
         headersTable: 'page'
     }
 
+    /*const [data, setData] = useState({
+        dataTable: [],
+        dataTable1: [],
+        dataTable2: [],
+        dataSetNE: [],
+        dataSetOM: [],
+        dataSetOvS: []
+        dataSet
+    });*/
     // const urlDF = (page) => {
-    //     return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/demandfulfillment?limit=' + 5 + '&offset=' + page * 5
     // }
     //
     // const urlOS = (page) => {
-    //     return 'http://localhost:8080/results/datasets/operating_sites?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/operating_sites?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     // }
     //
     // const urlOC = (page) => {
-    //     return 'http://localhost:8080/results/datasets/other_costs?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/other_costs?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     // }
     //
     // const urlPF = (page) => {
-    //     return 'http://localhost:8080/results/datasets/products_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/products_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     // }
     //
     // const urlPC = (page) => {
-    //     return 'http://localhost:8080/results/datasets/production_cost?limit=' + 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/production_cost?limit=' + 5 + '&offset=' + page * 5
     // }
     //
     //
     // const urlPnF = (page) => {
-    //     return 'http://localhost:8080/results/datasets/production_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/production_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     // }
     //
     // const urlSFC = (page) => {
-    //     return 'http://localhost:8080/results/datasets/shared_flow_constraints?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/shared_flow_constraints?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     // }
     //
     //
     // const urlSS= (page) => {
-    //     return 'http://localhost:8080/results/datasets/site_state?limit=' + 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/site_state?limit=' + 5 + '&offset=' + page * 5
     // }
     //
     // const urlSBP = (page) => {
-    //     return 'http://localhost:8080/results/datasets/storages_by_product?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/storages_by_product?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     // }
     //
     // const urlVF = (page) => {
-    //     return 'http://localhost:8080/results/datasets/vehicle_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/vehicle_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     // }
     //
     // const urlSSC = (page) => {
-    //     return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/shared_storages_constraints?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     // }
     //
     // const urlNE = (page) => {
-    //     return 'http://localhost:8080/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 1
+    //     return 'http://infotrans-logistic.ru:3577/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 1
     // }
 
     const createUrlDF = (page) => {
@@ -81,45 +90,48 @@ const CompareDemandFulfillment = (props) => {
 
     // const typeTable = (item) => {
     //     if(item === 'Общая статистика'){
-    //         return 'http://localhost:8080/results/datasets/named_expressions?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/named_expressions?limit='
     //     }
     //     if(item === 'Приход товара'){
-    //         return 'http://localhost:8080/results/datasets/demandfulfillment?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/demandfulfillment?limit='
     //     }
     //     if(item === 'Движение товара'){
-    //         return 'http://localhost:8080/results/datasets/operating_sites?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/operating_sites?limit='
     //     }
     //     if(item === 'Прочие расходы'){
-    //         return 'http://localhost:8080/results/datasets/other_costs?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/other_costs?limit='
     //     }
     //     if(item === 'Операционая стоимость'){
-    //         return 'http://localhost:8080/results/datasets/production_flows?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/production_flows?limit='
     //     }
     //     if(item === 'Хранилища товаров'){
-    //         return 'http://localhost:8080/results/datasets/storages_by_product?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/storages_by_product?limit='
     //     }
     //     if(item === 'Себестоимость продукции'){
-    //         return 'http://localhost:8080/results/datasets/production_cost?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/production_cost?limit='
     //     }
     //     if(item === 'Производственный поток'){
-    //         return 'http://localhost:8080/results/datasets/products_flows?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/products_flows?limit='
     //     }
     //     if(item === 'Общие ограничения производства'){
-    //         return 'http://localhost:8080/results/datasets/shared_flow_constraints?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/shared_flow_constraints?limit='
     //     }
     //     if(item === 'Общие ограничения хранения'){
-    //         return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/shared_storages_constraints?limit='
     //     }
     //     if(item === 'Реализация спроса'){
-    //         return 'http://localhost:8080/results/datasets/demandfulfillment?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/demandfulfillment?limit='
     //     }
     //     if(item === 'Траспортный поток'){
-    //         return 'http://localhost:8080/results/datasets/vehicle_flows?limit='
+    //         return 'http://infotrans-logistic.ru:3577/results/datasets/vehicle_flows?limit='
     //     }
     // }
 
     const [data, setData] = useState([]);
     const [rowId, setRowId] = useState();
+    //const [urlDF, setUrlDF] = useState('http://localhost:8080/results/datasets/demandfulfillment?limit=');
+    //const [urlNE, setUrlNE] = useState('http://localhost:8080/results/datasets/named_expressions?limit=');
+    //const [urlVF, setUrlVF] = useState('http://localhost:8080/results/datasets/vehicle_flows?limit=');
     const [fileDir, setFileDir] = useState("");
     const [typeExp, setTypeExp] = useState("");
     const [chooseTable1, setChoseTable1] = useState("");
@@ -127,18 +139,43 @@ const CompareDemandFulfillment = (props) => {
     const [icon, setIcon] = useState(false);
 
     const urlDF = (page) => {
-        return 'http://localhost:8080/results/datasets/demandfulfillment?limit=' + (page + 1) * 5 + '&offset=' + page * 1
+        return 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/demandfulfillment?limit=' + (page + 1) * 5 + '&offset=' + page * 1
     }
 
     const urlOvS = (page) => {
-        return 'http://localhost:8080/results/datasets/overall_stats?limit=' + (page + 1) * 5 + '&offset=' + page * 1
+        return 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/overall_stats?limit=' + (page + 1) * 5 + '&offset=' + page * 1
     }
 
     const urlVF = (page) => {
-        return 'http://localhost:8080/results/datasets/vehicle_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 1
+        return 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/vehicle_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 1
     }
 
-    const handleSubmit=(e) =>{
+    useEffect(() => {
+        let cleanupFunction = false;
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/dfilm');
+                const result = await response.json();
+
+                // непосредственное обновление состояния при условии, что компонент не размонтирован
+                if(!cleanupFunction) {
+                    setData(result);
+                }
+
+            } catch (e) {
+                console.error(e.message)
+            }
+        };
+
+
+        fetchData().then();
+        // функция очистки useEffect
+        return () => cleanupFunction = true;
+    }, [])
+
+
+
+   const handleSubmit=(e) =>{
         e.preventDefault();
     }
 
@@ -279,17 +316,17 @@ const CompareDemandFulfillment = (props) => {
                     </div>
                 </div>
 
-            {/*<div className="stack">*/}
-            {/*         <Stack  direction="row" spacing={2}>*/}
-            {/*         <Button  className="buttonNE" onClick={() => setButtonPopupNE(!buttonPopupNE)}>Общая статистика</Button>*/}
-            {/*     </Stack>*/}
-            {/*<Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>*/}
-            {/*     <h3>*/}
-            {/*         <div className="NEdatatable">*/}
-            {/*             <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"} setError = {props.setError}/>*/}
-            {/*         </div>*/}
-            {/*     </h3>*/}
-            {/*</Popup>*/}
+            {/*<div className="stack">
+                     <Stack  direction="row" spacing={2}>
+                     <Button  className="buttonNE" onClick={() => setButtonPopupNE(!buttonPopupNE)}>Общая статистика</Button>
+                 </Stack>*/}
+            {/*<Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
+                 <h3>
+                     <div className="NEdatatable">
+                         <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"} setError = {props.setError}/>
+                     </div>
+                 </h3>
+             </Popup>*/}
             </div>
     );
 };

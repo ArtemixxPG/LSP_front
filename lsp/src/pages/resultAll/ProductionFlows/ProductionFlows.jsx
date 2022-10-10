@@ -3,7 +3,7 @@ import './productionflows.scss'
 import {columnsProductionFlows} from "../../../HeadersTable";
 import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
-import Datable from "../../../components/datable/Datable";
+import Datatable from "../../../components/datable/NewDatatable/Datatable";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const ProductionFlows = (props) => {
@@ -11,9 +11,10 @@ const ProductionFlows = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-    const url = (page) => {
-        return 'http://localhost:8080/results/datasets/production_flows?limit=' + 8 + '&offset=' + page * 8
-    }
+    const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/prdflow'
+
+
+
 
     return (
         <div className="productionflows">
@@ -28,7 +29,7 @@ const ProductionFlows = (props) => {
                 experiments={props.experiments}
             />
                 <div className="datatable">
-                    <Datable url = {url} columns = {columnsProductionFlows} table={"pageProductionFlows"} setError = {props.setError}/>
+                    <Datatable url = {url} columns = {columnsProductionFlows} table={"pageProductionFlows"} setError = {props.setError}/>
             </div>
         </div>
     );

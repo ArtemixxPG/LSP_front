@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './sharedstoragesconstraints.scss'
 import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
-import Datable from "../../../components/datable/Datable";
+import Datatable from "../../../components/datable/NewDatatable/Datatable";
 import {columnsSharedStoragesConstraints} from "../../../HeadersTable";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -14,8 +14,10 @@ const SharedStoragesConstraints = (props) => {
     const [icon, setIcon] = useState(false)
 
     const url = (page) => {
-        return 'http://localhost:8080/results/datasets/shared_storages_constraints?limit=' + 8 + '&offset=' + page * 8
+        return 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/ssc'
     }
+
+
 
     return (
         <div className="sharedstoragesconstraints">
@@ -30,7 +32,7 @@ const SharedStoragesConstraints = (props) => {
                 experiments={props.experiments}
             />
                 <div className="datatable">
-                    <Datable url= {url} columns = {columnsSharedStoragesConstraints} table={"pageSharedStoragesConstraints"}
+                    <Datatable url= {url} columns = {columnsSharedStoragesConstraints} table={"pageSharedStoragesConstraints"}
                              setError = {props.setError}/>
                 </div>
         </div>

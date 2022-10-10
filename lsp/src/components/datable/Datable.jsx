@@ -1,11 +1,11 @@
-import React, {useEffect, useState, useReducer} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     DataGrid, ruRU} from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
 
-import "./datable.scss"
+import "./NewDatatable/datable.scss"
 import {createTheme, ThemeProvider} from "@mui/material";
 
 const theme = createTheme(
@@ -84,7 +84,7 @@ function CustomNoRowsOverlay() {
     );
 }
 
-const Datable = (props) => {
+const Datatable = (props) => {
 
     const initialDataSet = {
         count: 0,
@@ -156,19 +156,7 @@ const Datable = (props) => {
                 <DataGrid
                     rows={rows}
                     columns={props.columns}
-                    pagination
                     checkboxSelection
-                    pageSize={8}
-                    rowsPerPageOptions={[8]}
-                    rowCount={count}
-                    paginationMode="server"
-                    onPageChange={(newPage) => {
-                        setPage(newPage);
-                    }}
-                    onSelectionModelChange={(newSelectionModel) => {
-                        setSelectionModel(newSelectionModel);
-                    }}
-                    selectionModel={selectionModel}
                     loading={loading}
                     keepNonExistentRowsSelected
                 />
@@ -177,4 +165,4 @@ const Datable = (props) => {
     );
 };
 
-export default Datable;
+export default Datatable;

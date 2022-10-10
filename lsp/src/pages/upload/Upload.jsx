@@ -33,7 +33,7 @@ const Upload = (props) => {
         uploadData.append("csv", csv);
 
       await axios
-            .post("http://localhost:8080/upload", uploadData, {
+            .post("http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/upload", uploadData, {
                 headers: {
                     "Content-type": "multipart/form-data"
                 }

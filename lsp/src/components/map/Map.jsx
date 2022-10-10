@@ -12,7 +12,7 @@ import {resizeHeight, resizeWidth} from "../../ResizeElement";
 
 import "./map.scss"
 import {createAllMapObjects, createMapObj, mapPolylines} from "./mapScript";
-import {useRef, useState} from "react";
+import {forwardRef, useImperativeHandle, useRef, useState} from "react";
 import {useEffect} from "react";
 import SideBar from "../sidebar/SideBar";
 import NavBar from "../navbar/NavBar";
@@ -23,7 +23,8 @@ const mapState = { center: [55.76, 37.64], zoom: 10 };
 
 const dataMapObjs = {
     marks:[],
-    lines:[]
+    lines:[],
+    sonks:[]
 }
 
 function getWindowDimensions() {
@@ -56,24 +57,37 @@ function getWindowDimensions() {
  const YMap = (props) => {
 
      const [dataObjectsMap, setDataObjectsMap] = useState(dataMapObjs)
-     const dataObjectsMapRef = useRef(dataObjectsMap)
+     const [prevMapObjects, setPrevMapObjects] = useState({})
+     const [onChange, setOnChange] = useState(false)
 
 
-     useEffect(()=>{
-         dataObjectsMapRef.current = dataMapObjs
-     }, [dataMapObjs])
+
+     useEffect( ()=> {
+         props.didOnMapTableChange(setOnChange)
+         if(onChange) {
+             let mapObjects = createAllMapObjects(prevMapObjects, props.road)
+             setDataObjectsMap(mapObjects)
+             props.setDataTable(dataObjectsMap.sonks)
+         }
+         if(props.dataTable.length === 0) {
+             props.setDataTable(dataObjectsMap.sonks)
+         }
+             setOnChange(false)
+     }, [props.didOnMapTableChange]
+     )
 
      useEffect(
          ()=>{
              let cleanupFunction = false;
              const fetchData = async () => {
                  try {
-                     const response = await fetch('http://localhost:8080/map');
+                     const response = await fetch('http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/map');
                      const result = await response.json();
                      // непосредственное обновление состояния при условии, что компонент не размонтирован
                      if(!cleanupFunction){
-                         console.log(result)
-                         setDataObjectsMap(createAllMapObjects(result))
+                         setPrevMapObjects(result)
+                         setDataObjectsMap(createAllMapObjects(result, props.road))
+
                      }
                  } catch (e) {
                      console.error(e.message)
@@ -87,45 +101,48 @@ function getWindowDimensions() {
          }, []
      )
 
+     // useImperativeHandle(ref, () => ({
+     //  changeRoad  (road) {
+     //
+     // },}))
 
      return(
 
      <div className="container">
 
-         {/*<SideBar/>*/}
      <YMaps>
 
-             <Map style={{width:document.documentElement.clientWidth, height:document.documentElement.clientHeight-1}}
-                  state={{ center: [50, 50],
-                      zoom: 3,
-                       }}
-                  options={{
-                      minZoom:3
-                  }}>
-                 <ZoomControl options={{
-                     position:{
-                         right:10,
-                         top:108
-                     }
-                 }} />
-                 <TypeSelector options={{
-                     float: 'right'
-                 }} />
+         <Map style={{width:document.documentElement.clientWidth, height:document.documentElement.clientHeight-1}}
+              state={{ center: [50, 50],
+                  zoom: 3,
+              }}
+              options={{
+                  minZoom:3
+              }}>
+             <ZoomControl options={{
+                 position:{
+                     right:10,
+                     top:108
+                 }
+             }} />
+             <TypeSelector options={{
+                 float: 'right'
+             }} />
 
-                 <RulerControl options={{
-                     float: 'right'
-                 }} />
+             <RulerControl options={{
+                 float: 'right'
+             }} />
 
-                 <ObjectManager options={{
-                     gridSize: 32
-                 }} objects={{
-                     openBalloonOnClick: true,
-                     preset: 'islands#greenDotIcon'
-                 }}  features={dataObjectsMap.marks} modules={['objectManager.addon.objectsBalloon', 'objectManager.addon.objectsHint']} />
+             <ObjectManager options={{
+                 gridSize: 32
+             }} objects={{
+                 openBalloonOnClick: true,
+                 preset: 'islands#greenDotIcon'
+             }}  features={dataObjectsMap.marks} modules={['objectManager.addon.objectsBalloon', 'objectManager.addon.objectsHint']} />
 
-                 <ObjectManager  features={dataObjectsMap.lines}  />
+             <ObjectManager  features={dataObjectsMap.lines}  />
 
-             </Map>
+         </Map>
      </YMaps>
 
      </div>

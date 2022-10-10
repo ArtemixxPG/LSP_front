@@ -15,14 +15,14 @@ const TotalCost = (props) => {
 
 
     const url = (page) => {
-        return 'http://localhost:8080/sim/datasets/totalcost?limit=' + (page + 1) * 5 + '&offset=' + page * 5
+        return 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/sim/datasets/totalcost?limit=' + (page + 1) * 5 + '&offset=' + page * 5
     }
 
     useEffect(()=>{
             let cleanupFunction = false;
             const fetchData = async () => {
                 try {
-                    const response = await fetch('http://localhost:8080/sim/tc/data');
+                    const response = await fetch('http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/sim/tc/data');
                     const result = await response.json();
 
                     // непосредственное обновление состояния при условии, что компонент не размонтирован
