@@ -8,14 +8,15 @@ import ErrorModal from "../../../components/Modal/ErrorModal";
 
 
 import './productflow.scss'
+import numeral from "numeral";
 
 const ProductFlow = (props) => {
 
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-    const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/prdflow'
-
+    //const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/prdflow'
+    const url =  'http://localhost:8080/results/prdflow'
 
 
 
@@ -31,10 +32,10 @@ const ProductFlow = (props) => {
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
             />
-                <div className="datatable">
-                    <Datatable url = {url} columns = {columnsProductFlows} table={"pageProductsFlows"} setError = {props.setError}/>
+                <div className="datatable">ТОВАРНЫЕ ПОТОКИ
+                    <Datatable url = {url} columns = {columnsProductFlows} /*table={"pageProductsFlows"} setError = {props.setError}*//>
                 </div>
-            <ErrorModal error = {props.error} handleClose={props.handleClose}/>
+            {/*<ErrorModal error = {props.error} handleClose={props.handleClose}/>*/}
         </div>
     );
 };

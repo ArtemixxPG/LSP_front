@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import SideBar from "../../../components/sidebar/SideBar";
 import NavBar from "../../../components/navbar/NavBar";
-import "./infographics.scss"
+import "./infographics.scss";
 import Widget from "../../../components/widget/Widget";
 import Widget13 from "../../../components/widget/Widget13";
 import Popup from "../../../components/popup/Popup";
@@ -49,7 +49,7 @@ const Infographics = (props) => {
             let cleanupFunction = false;
             const fetchData = async () => {
                 try {
-                    const response = await fetch('http://localhost:8080/results/ne/data');
+                    const response = await fetch('http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/ne/data');
                     const result = await response.json();
 
 

@@ -13,7 +13,9 @@ const OperatingSites = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-    const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/opsites'
+    //const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/opsites'
+    const url =  'http://localhost:8080/results/opsites'
+
 
 
 
@@ -30,7 +32,7 @@ const OperatingSites = (props) => {
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
             />
-                <div className="datatable">
+                <div className="datatable">ОПЕРАЦИОННЫЕ ЗАТРАТЫ
                     <Datatable url = {url} columns = {columnsOperatingSites} table={"pageOperatingSites"} setError = {props.setError}/>
             </div>
         </div>

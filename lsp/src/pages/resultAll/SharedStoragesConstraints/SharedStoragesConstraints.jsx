@@ -31,7 +31,7 @@ const SharedStoragesConstraints = (props) => {
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
             />
-                <div className="datatable">
+                <div className="datatable">ОГРАНИЧЕНИЯ НА ХРАНЕНИЕ
                     <Datatable url= {url} columns = {columnsSharedStoragesConstraints} table={"pageSharedStoragesConstraints"}
                              setError = {props.setError}/>
                 </div>

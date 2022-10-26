@@ -33,7 +33,7 @@ const Datatable = (props) => {
         }
     });
 
-
+    let numeral = require('numeral');
     const [data, setData] = useState([])
 
 
@@ -63,14 +63,82 @@ const Datatable = (props) => {
 
             function formData(obj) {
                 for (let propKey in obj) {
-                    let str = numeral(obj[propKey]["value"]).format("0.000e+0");
-                    obj[propKey]["value"] = parseFloat(str);
-                    if((obj[propKey]["iteration"] && obj[propKey]["expression_name"]) != null) {
-                        obj[propKey]["lol"] = str;
-                    }
-                    if (obj[propKey]["lol"] == "0.000e+0") {
-                        obj[propKey]["lol"] = "0";
-                    }
+                    //vehicle_flows
+                    let strC = numeral(obj[propKey]["cost"]).format("0.000");
+                    obj[propKey]["cost"] = parseFloat(strC);
+                    let strTPF = numeral(obj[propKey]["total_products_flow"]).format("0.00");
+                    obj[propKey]["total_products_flow"] = parseFloat(strTPF);
+                    let strAL = numeral(obj[propKey]["actual_load"]).format("0.000");
+                    obj[propKey]["actual_load"] = parseFloat(strAL);
+                    let strFL = numeral(obj[propKey]["flow"]).format("0.00");
+
+                    //product_flows
+                    obj[propKey]["flow"] = parseFloat(strFL);
+                    let strD = numeral(obj[propKey]["distance"]).format("0.00");
+                    obj[propKey]["distance"] = parseFloat(strD);
+                    let strFCP = numeral(obj[propKey]["flowCostPi"]).format("0.00");
+                    obj[propKey]["flowCostPi"] = parseFloat(strFCP);
+                    let strFCT = numeral(obj[propKey]["flowCostT"]).format("0.00");
+                    obj[propKey]["flowCostT"] = parseFloat(strFCT);
+                    let strIPCp = numeral(obj[propKey]["inProcessingCostPi"]).format("0.00");
+                    obj[propKey]["inProcessingCostPi"] = parseFloat(strIPCp);
+                    let strIPCt = numeral(obj[propKey]["inProcessingCostT"]).format("0.00");
+                    obj[propKey]["inProcessingCostT"] = parseFloat(strIPCt);
+                    let strOPCt = numeral(obj[propKey]["outProcessingCosT"]).format("0.00");
+                    obj[propKey]["outProcessingCosT"] = parseFloat(strOPCt);
+                    let strOPCp = numeral(obj[propKey]["outProcessingCostPi"]).format("0.00");
+                    obj[propKey]["outProcessingCostPi"] = parseFloat(strOPCp);
+                    let strTT = numeral(obj[propKey]["travelTime"]).format("0.00");
+                    obj[propKey]["travelTime"] = parseFloat(strTT);
+                    let strTCt = numeral(obj[propKey]["transportationCostT"]).format("0.00");
+                    obj[propKey]["transportationCostT"] = parseFloat(strTCt);
+                    let strTCp = numeral(obj[propKey]["transportationCostPi"]).format("0.00");
+                    obj[propKey]["transportationCostPi"] = parseFloat(strTCp);
+                    let strFC2p = numeral(obj[propKey]["flowCO2pi"]).format("0.00");
+                    obj[propKey]["flowCO2pi"] = parseFloat(strFC2p);
+                    let strFC2t = numeral(obj[propKey]["flowCO2t"]).format("0.00");
+                    obj[propKey]["flowCO2t"] = parseFloat(strFC2t);
+                    let strFmin = numeral(obj[propKey]["flowMin"]).format("0.00");
+                    obj[propKey]["flowMin"] = parseFloat(strFmin);
+                    let strFmax = numeral(obj[propKey]["flowMax"]).format("0.00");
+                    obj[propKey]["flowMax"] = parseFloat(strFmax);
+                    let strFOC = numeral(obj[propKey]["flowOverCost"]).format("0.00");
+                    obj[propKey]["flowOverCost"] = parseFloat(strFOC);
+                    let strFUC = numeral(obj[propKey]["flowUnderCost"]).format("0.00");
+                    obj[propKey]["flowUnderCost"] = parseFloat(strFUC);
+                    let strTp = numeral(obj[propKey]["tariffPi"]).format("0.00");
+                    obj[propKey]["tariffPi"] = parseFloat(strTp);
+                    let strTt = numeral(obj[propKey]["tariffT"]).format("0.00");
+                    obj[propKey]["tariffT"] = parseFloat(strTt);
+                    let strPen = numeral(obj[propKey]["penalty"]).format("0.00");
+                    obj[propKey]["penalty"] = parseFloat(strPen);
+
+                    //storage by product
+                    let strSif = numeral(obj[propKey]["in_flow"]).format("0.00");
+                    obj[propKey]["in_flow"] = parseFloat(strSif);
+                    let strSis = numeral(obj[propKey]["initial_storage"]).format("0.00");
+                    obj[propKey]["initial_storage"] = parseFloat(strSis);
+                    let strSs = numeral(obj[propKey]["storage"]).format("0.00");
+                    obj[propKey]["storage"] = parseFloat(strSs);
+                    let strSof = numeral(obj[propKey]["out_flow"]).format("0.00");
+                    obj[propKey]["out_flow"] = parseFloat(strSof);
+                    let strSccp = numeral(obj[propKey]["carrying_cost_pu"]).format("0.00");
+                    obj[propKey]["carrying_cost_pu"] = parseFloat(strSccp);
+                    let strScct = numeral(obj[propKey]["carrying_cost_t"]).format("0.00");
+                    obj[propKey]["carrying_cost_t"] = parseFloat(strScct);
+                    let strSsm = numeral(obj[propKey]["storage_min"]).format("0.00");
+                    obj[propKey]["storage_min"] = parseFloat(strSsm);
+                    let strSsmax = numeral(obj[propKey]["storage_max"]).format("0.00");
+                    obj[propKey]["storage_max"] = parseFloat(strSsmax);
+                    let strSup = numeral(obj[propKey]["understock_penalty"]).format("0.00");
+                    obj[propKey]["understock_penalty"] = parseFloat(strSup);
+                    let strSop = numeral(obj[propKey]["overstock_penalty"]).format("0.00");
+                    obj[propKey]["overstock_penalty"] = parseFloat(strSop);
+                    let strSsp = numeral(obj[propKey]["storage_penalty"]).format("0.00");
+                    obj[propKey]["storage_penalty"] = parseFloat(strSsp);
+                    let strStc = numeral(obj[propKey]["total_cost"]).format("0.00");
+                    obj[propKey]["total_cost"] = parseFloat(strStc);
+
                 }
                 return obj;
             }
@@ -131,7 +199,7 @@ const Datatable = (props) => {
     };
 
     const theme  =
-        createTheme({
+        createTheme( {
             typography: {
                 useNextVariants: true
             },

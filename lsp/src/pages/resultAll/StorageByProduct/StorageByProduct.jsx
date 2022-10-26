@@ -12,9 +12,8 @@ const StorageByProduct = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-    const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/sbp'
-
-
+    //const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/sbp'
+    const url = 'http://localhost:8080/results/sbp'
 
 
     return (
@@ -29,7 +28,7 @@ const StorageByProduct = (props) => {
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
             />
-                <div className="datatable">
+                <div className="datatable">ХРАНЕНИЕ ПРОДУКЦИИ
                     <Datatable url = {url} columns = {columnsStorageByProducts} table={"pageStorageByProducts"}
                              setError = {props.setError}/>
                 </div>

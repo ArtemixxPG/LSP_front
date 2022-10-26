@@ -12,7 +12,7 @@ const DemandFulfillment = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-    const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/dfilm'
+    const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/dfilm'
 
 
 
@@ -28,8 +28,8 @@ const DemandFulfillment = (props) => {
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
             />
-                <div className="datatable">
-                    <Datatable url = {url} columns = {columnsDemandFulfillment} table={"pageDemandFulfillment"} setError = {props.setError}/>
+                <div className="datatable">УДОВЛЕТВОРЕНИЕ СПРОСА
+                    <Datatable url = {url} columns = {columnsDemandFulfillment} /*table={"pageDemandFulfillment"}*/ setError = {props.setError}/>
                 </div>
             </div>
     );

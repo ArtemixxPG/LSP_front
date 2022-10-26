@@ -30,7 +30,7 @@ const SiteState = (props) => {
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
             />
-                <div className="datatable">
+                <div className="datatable">СТАТУС УЗЛА
                     <Datatable url = {url} columns = {columnsSiteState} table={"pageSiteState"} setError = {props.setError}/>
                 </div>
             </div>

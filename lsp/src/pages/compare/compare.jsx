@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import SideBar from "../../components/sidebar/SideBar";
-import Datable from "../../components/datable/Datable";
-import {columnsDemandFulfillmentWithColor, columnsOverallStatsWithColor, columnsVehicleFlowsWithColor} from "../../HeadersTable";
+import {
+    columnsDemandFulfillmentWithColor,
+    columnsOverallStatsWithColor,
+    columnsVehicleFlowsWithColor,
+} from "../../HeadersTable";
 import NavBar from "../../components/navbar/NavBar";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import "./compare.scss"
 import CompareDatable from "../../components/datable/CompareDatatable";
+import Datatable from "../../components/datable/NewDatatable/Datatable";
+import ErrorModal from "../../components/Modal/ErrorModal";
 
 const CompareDemandFulfillment = (props) => {
 
     var numeral = require('numeral');
-
-    let headersTable = {
-        url: 'http://infotrans-logistic.ru:3577/results/datasets/demandfulfillment?limit=',
-        headersTable: 'page'
-    }
 
     /*const [data, setData] = useState({
         dataTable: [],
@@ -76,17 +76,17 @@ const CompareDemandFulfillment = (props) => {
     //     return 'http://infotrans-logistic.ru:3577/results/datasets/named_expressions?limit=' + (page + 1) * 5 + '&offset=' + page * 1
     // }
 
-    const createUrlDF = (page) => {
-        return urlDF + 8 + '&offset=' + page * 8
-    }
-
-    const createUrlNE = (page) => {
-        return urlOvS + 8 + '&offset=' + page * 8
-    }
-
-    const createUrlVF = (page) => {
-        return urlVF + 8 + '&offset=' + page * 8
-    }
+    // const createUrlDF = (page) => {
+    //     return urlDF + 8 + '&offset=' + page * 8
+    // }
+    //
+    // const createUrlNE = (page) => {
+    //     return urlOvS + 8 + '&offset=' + page * 8
+    // }
+    //
+    // const createUrlVF = (page) => {
+    //     return urlVF + 8 + '&offset=' + page * 8
+    // }
 
     // const typeTable = (item) => {
     //     if(item === 'Общая статистика'){
@@ -138,40 +138,38 @@ const CompareDemandFulfillment = (props) => {
     const [chooseTable2, setChoseTable2] = useState("");
     const [icon, setIcon] = useState(false);
 
-    const urlDF = (page) => {
-        return 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/demandfulfillment?limit=' + (page + 1) * 5 + '&offset=' + page * 1
-    }
+    const urlDF = 'http://localhost:8080/results/dfilm'
+         //'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/dfilm'
 
-    const urlOvS = (page) => {
-        return 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/overall_stats?limit=' + (page + 1) * 5 + '&offset=' + page * 1
-    }
+    const urlOvS = 'http://localhost:8080/results/ovs'
+        //'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/ovs'
 
-    const urlVF = (page) => {
-        return 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/vehicle_flows?limit=' + (page + 1) * 5 + '&offset=' + page * 1
-    }
-
-    useEffect(() => {
-        let cleanupFunction = false;
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/dfilm');
-                const result = await response.json();
-
-                // непосредственное обновление состояния при условии, что компонент не размонтирован
-                if(!cleanupFunction) {
-                    setData(result);
-                }
-
-            } catch (e) {
-                console.error(e.message)
-            }
-        };
+    const urlVF = 'http://localhost:8080/results/vf'
+        //'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/vf'
 
 
-        fetchData().then();
-        // функция очистки useEffect
-        return () => cleanupFunction = true;
-    }, [])
+    // useEffect(() => {
+    //     let cleanupFunction = false;
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await fetch('http://localhost:8080/dfilm');
+    //             const result = await response.json();
+    //
+    //             // непосредственное обновление состояния при условии, что компонент не размонтирован
+    //             if(!cleanupFunction) {
+    //                 setData(result);
+    //             }
+    //
+    //         } catch (e) {
+    //             console.error(e.message)
+    //         }
+    //     };
+    //
+    //
+    //     fetchData().then();
+    //     // функция очистки useEffect
+    //     return () => cleanupFunction = true;
+    // }, [])
 
 
 
@@ -212,7 +210,7 @@ const CompareDemandFulfillment = (props) => {
                 experiments={props.experiments}
             />
                 <div className="content">
-                    <div className="datatableDF">Удовлетворение спроса
+                    <div className="datatableDF">УДОВЛЕТВОРЕНИЕ СПРОСА
                         <form onSubmit={handleSubmitTable1}>
                             <label className="search">
                                 Выберите номер эксперимента:
@@ -222,11 +220,8 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable
-                            url = {urlDF}
-                            columns = {columnsDemandFulfillmentWithColor}
-                            table = {'pageDemandFulfillment'} setError = {props.setError}
-                        />
+                        <CompareDatable url = {urlDF} columns = {columnsDemandFulfillmentWithColor} table={"pageDemandFulfillment"} setError = {props.setError}/>
+                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
                     </div>
 
                     <div className="datatableDF">
@@ -239,15 +234,12 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable
-                            url = {urlDF}
-                            columns = {columnsDemandFulfillmentWithColor}
-                            table = {'pageDemandFulfillment'} setError = {props.setError}
-                        />
+                        <CompareDatable url = {urlDF} columns = {columnsDemandFulfillmentWithColor} table={"pageDemandFulfillment"} setError = {props.setError}/>
+                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
                     </div>
 
 
-                    <div className="datatableOvS">Общая статистика
+                    <div className="datatableOvS">ОБЩАЯ СТАТИСТИКА
                         <form onSubmit={handleSubmitTable1}>
                             <label className="search">
                                 Выберите номер эксперимента:
@@ -257,11 +249,8 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable
-                            url = {urlOvS}
-                            columns = {columnsOverallStatsWithColor}
-                            table = {'pageOverallStats'} setError = {props.setError}
-                        />
+                        <CompareDatable url = {urlOvS} columns = {columnsOverallStatsWithColor} table={"pageOverallStats"} setError = {props.setError}/>
+                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
                     </div>
 
                     <div className="datatableOvS">
@@ -274,14 +263,11 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable
-                            url = {urlOvS}
-                            columns = {columnsOverallStatsWithColor}
-                            table = {'pageOverallStats'} setError = {props.setError}
-                        />
+                        <CompareDatable url = {urlOvS} columns = {columnsOverallStatsWithColor} table={"pageOverallStats"} setError = {props.setError}/>
+                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
                     </div>
 
-                    <div className="datatableVF">Транспортный поток
+                    <div className="datatableVF">ТРАНСПОРТНЫЙ ПОТОК
                         <form onSubmit={handleSubmitTable1}>
                             <label className="search">
                                 Выберите номер эксперимента:
@@ -291,11 +277,8 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable
-                            url = {urlVF}
-                            columns = {columnsVehicleFlowsWithColor}
-                            table = {'pageVehicleFlows'} setError = {props.setError}
-                        />
+                        <CompareDatable url = {urlVF} columns = {columnsVehicleFlowsWithColor} table={"pageVehicleFlows"} setError = {props.setError}/>
+                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
                     </div>
 
                     <div className="datatableVF">
@@ -308,25 +291,10 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable
-                            url = {urlVF}
-                            columns = {columnsVehicleFlowsWithColor}
-                            table = {'pageVehicleFlows'} setError = {props.setError}
-                        />
+                        <CompareDatable url = {urlVF} columns = {columnsVehicleFlowsWithColor} table={"pageVehicleFlows"} setError = {props.setError}/>
+                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
                     </div>
                 </div>
-
-            {/*<div className="stack">
-                     <Stack  direction="row" spacing={2}>
-                     <Button  className="buttonNE" onClick={() => setButtonPopupNE(!buttonPopupNE)}>Общая статистика</Button>
-                 </Stack>*/}
-            {/*<Popup shown={buttonPopupNE} close={() => {setButtonPopupNE(false);}}>
-                 <h3>
-                     <div className="NEdatatable">
-                         <Datable url={urlNE} columns={columnsNamedExpressions} table={"pageNamedExpression"} setError = {props.setError}/>
-                     </div>
-                 </h3>
-             </Popup>*/}
             </div>
     );
 };

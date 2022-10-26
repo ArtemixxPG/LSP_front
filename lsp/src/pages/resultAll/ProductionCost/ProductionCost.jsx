@@ -29,7 +29,7 @@ const ProductionCost = (props) => {
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
             />
-                <div className="datatable">
+                <div className="datatable">ЗАТРАТЫ НА ПРОИЗВОДСТВО
                     <Datatable url = {url} columns = {columnsProductionCost} table={"pageProductionCosts"} setError = {props.setError}/>
                 </div>
         </div>

@@ -31,7 +31,7 @@ const SharedFlowConstraints = (props) => {
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
             />
-                <div className="datatable">
+                <div className="datatable">ОГРАНИЧЕНИЯ НА ПОТОКИ
                     <Datatable url = {url} columns = {columnsSharedFlowConstraints} table={"pageSharedFlowConstraints"} setError = {props.setError}/>
                 </div>
         </div>

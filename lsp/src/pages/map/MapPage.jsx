@@ -108,6 +108,7 @@ const Map = (props) => {
         )
     })
 
+
     const experimentsList = props.experiments.map((item)=>{
         return(
             <div key={item.name}>
