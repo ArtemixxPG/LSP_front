@@ -22,7 +22,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import SendTimeExtensionIcon from "@mui/icons-material/SendTimeExtension";
 import ListItemText from "@mui/material/ListItemText";
 
-export default function OptimizationMenuList (props){
+
+export default function OptimizationMenuList(props) {
     return(
         <List component="div" disablePadding>
             <ListItemButton onClick={props.handleClickOptimization}>

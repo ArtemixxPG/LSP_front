@@ -1,4 +1,4 @@
-import React, {useState, Fragment, Component, useEffect} from 'react';
+import React, {useState, Fragment, useEffect} from 'react';
 import { Waypoint } from "react-waypoint";
 import MUIDataTable from "mui-datatables";
 import {
@@ -8,7 +8,7 @@ import {createTheme, ThemeProvider} from "@mui/material";
 import numeral from "numeral";
 import "./NewDatatable/datable.scss"
 
-const Datatable = (props) => {
+const CompareDatatable = (props) => {
 
     const styles = theme => ({
         root: {
@@ -63,7 +63,6 @@ const Datatable = (props) => {
             }
 
             function formData(obj) {
-                let mas = [];
                 let dfps = 0;
                 let dfpm = 0;
                 let dfop = 0;
@@ -234,4 +233,4 @@ const Datatable = (props) => {
     );
 };
 
-export default Datatable;
+export default CompareDatatable;

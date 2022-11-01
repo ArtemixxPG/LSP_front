@@ -9,8 +9,7 @@ import NavBar from "../../components/navbar/NavBar";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import "./compare.scss"
-import CompareDatable from "../../components/datable/CompareDatatable";
-import Datatable from "../../components/datable/NewDatatable/Datatable";
+import CompareDatatable from "../../components/datable/CompareDatatable";
 import ErrorModal from "../../components/Modal/ErrorModal";
 
 const CompareDemandFulfillment = (props) => {
@@ -127,13 +126,13 @@ const CompareDemandFulfillment = (props) => {
     //     }
     // }
 
-    const [data, setData] = useState([]);
-    const [rowId, setRowId] = useState();
+    //const [data, setData] = useState([]);
+    //const [rowId, setRowId] = useState();
     //const [urlDF, setUrlDF] = useState('http://localhost:8080/results/datasets/demandfulfillment?limit=');
     //const [urlNE, setUrlNE] = useState('http://localhost:8080/results/datasets/named_expressions?limit=');
     //const [urlVF, setUrlVF] = useState('http://localhost:8080/results/datasets/vehicle_flows?limit=');
-    const [fileDir, setFileDir] = useState("");
-    const [typeExp, setTypeExp] = useState("");
+    //const [fileDir, setFileDir] = useState("");
+    //const [typeExp, setTypeExp] = useState("");
     const [chooseTable1, setChoseTable1] = useState("");
     const [chooseTable2, setChoseTable2] = useState("");
     const [icon, setIcon] = useState(false);
@@ -220,8 +219,8 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable url = {urlDF} columns = {columnsDemandFulfillmentWithColor} table={"pageDemandFulfillment"} setError = {props.setError}/>
-                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
+                        <CompareDatatable url = {urlDF} columns = {columnsDemandFulfillmentWithColor} /*table={"pageDemandFulfillment"} setError = {props.setError}*//>
+                        {/*<ErrorModal error = {props.error} handleClose={props.handleClose} />*/}
                     </div>
 
                     <div className="datatableDF">
@@ -234,8 +233,8 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable url = {urlDF} columns = {columnsDemandFulfillmentWithColor} table={"pageDemandFulfillment"} setError = {props.setError}/>
-                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
+                        <CompareDatatable url = {urlDF} columns = {columnsDemandFulfillmentWithColor} /*table={"pageDemandFulfillment"} setError = {props.setError}*//>
+                        {/*<ErrorModal error = {props.error} handleClose={props.handleClose} />*/}
                     </div>
 
 
@@ -249,8 +248,8 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable url = {urlOvS} columns = {columnsOverallStatsWithColor} table={"pageOverallStats"} setError = {props.setError}/>
-                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
+                        <CompareDatatable url = {urlOvS} columns = {columnsOverallStatsWithColor} /*table={"pageOverallStats"} setError = {props.setError}*//>
+                        {/*<ErrorModal error = {props.error} handleClose={props.handleClose} />*/}
                     </div>
 
                     <div className="datatableOvS">
@@ -263,8 +262,8 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable url = {urlOvS} columns = {columnsOverallStatsWithColor} table={"pageOverallStats"} setError = {props.setError}/>
-                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
+                        <CompareDatatable url = {urlOvS} columns = {columnsOverallStatsWithColor} /*table={"pageOverallStats"} setError = {props.setError}*//>
+                        {/*<ErrorModal error = {props.error} handleClose={props.handleClose} />*/}
                     </div>
 
                     <div className="datatableVF">ТРАНСПОРТНЫЙ ПОТОК
@@ -277,8 +276,8 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable url = {urlVF} columns = {columnsVehicleFlowsWithColor} table={"pageVehicleFlows"} setError = {props.setError}/>
-                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
+                        <CompareDatatable url = {urlVF} columns = {columnsVehicleFlowsWithColor} /*table={"pageVehicleFlows"} setError = {props.setError}*//>
+                        {/*<ErrorModal error = {props.error} handleClose={props.handleClose} />*/}
                     </div>
 
                     <div className="datatableVF">
@@ -291,8 +290,8 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatable url = {urlVF} columns = {columnsVehicleFlowsWithColor} table={"pageVehicleFlows"} setError = {props.setError}/>
-                        <ErrorModal error = {props.error} handleClose={props.handleClose} />
+                        <CompareDatatable url = {urlVF} columns = {columnsVehicleFlowsWithColor} /*table={"pageVehicleFlows"} setError = {props.setError}*//>
+                        {/*<ErrorModal error = {props.error} handleClose={props.handleClose} />*/}
                     </div>
                 </div>
             </div>
