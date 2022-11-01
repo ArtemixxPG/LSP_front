@@ -15,7 +15,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 
 const SubMenuList = (props) => {
 
-    const [open, setOpen] = useState(false)
+
 
 
     return (
@@ -25,20 +25,21 @@ const SubMenuList = (props) => {
             bgcolor:'background.paper',
             color:'#1E90FF'
         }}
+              onClose={props.close}
         component='nav'
               aria-labelledby="road-list"
               subheader={
                   <ListSubheader component="div" id="road-list" style={{height:"30px",fontSize:12,color:'#1E90FF'}}>
                       {props.subheader}
                   </ListSubheader>}>
-            <ListItemButton onClick={()=>setOpen(!open)}>
+            <ListItemButton onClick={props.changeStateList}>
                 <ListItemIcon>
                     {props.icon}
                 </ListItemIcon>
                 <ListItemText primary={props.header} />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                {props.open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse in={props.open} timeout="auto" unmountOnExit>
                     {props.listItems}
             </Collapse>
         </List>

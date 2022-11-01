@@ -22,17 +22,12 @@ const SideBar = (props) => {
 
     const [openOptimization, setOpenOptimization] = useState(false)
 
-    //const [openSimulation, setOpenSimulation] = useState(false)
 
     const handleClickOptimization = () => {
         setOpenOptimization(!openOptimization);
         //setOpenSimulation(false);
     };
 
-    // const handleClickSimulation = () => {
-    //     setOpenSimulation(!openSimulation);
-    //     setOpenOptimization(false);
-    // };
 
     const StyledDrawer = styled(({className, ...props}) => (
         <Drawer {...props} classes={{popper: className}}/>
@@ -47,12 +42,7 @@ const SideBar = (props) => {
 
     const chooseMenu = (exp) =>{
         if(typeof exp==='string')
-        setNameRes(exp)
-        if(exp.includes("Оптимизация")){
-            props.setMenu()
-        } else if(exp.includes("Симуляция")){
-            props.setMenu( )
-        }
+            props.setExperiment(exp)
 
     }
 

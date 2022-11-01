@@ -26,7 +26,7 @@ const TableModal = (props) => {
             aria-describedby="modal-modal-description"
         >
             <Box sx={styleErrorModal}>
-                <h2 style={{marginBottom:"10px"}}>ВКМ-таблица СОНК</h2>
+                {props.header}
                 {props.content}
             </Box>
         </Modal>

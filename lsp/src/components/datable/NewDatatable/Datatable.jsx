@@ -49,7 +49,9 @@ const Datatable = (props) => {
                     result = await response.json();
 
                 } else {
-                    props.setError(true);
+
+                        props.setError(true);
+
                 }
 
                 // непосредственное обновление состояния при условии, что компонент не размонтирован
@@ -150,42 +152,42 @@ const Datatable = (props) => {
     }, [])
 
 
-    const columns = [
-        {
-            name: "Id",
-            options: {
-                filter: false,
-                customBodyRender: (value, tableMeta, updateValue) => {
-                    const rowIndex = tableMeta.rowIndex;
-                    const { filteredMessages } = this.state;
-
-                    if (rowIndex === filteredMessages.length - 10) {
-                        return (
-                            <Fragment>
-                                <Waypoint
-                                    onEnter={() => {
-                                        console.log("WAYPOINT REACHED");
-                                        setData({
-                                            // filteredMessages: [...filteredMessages, ...newData]
-                                        });
-                                    }}
-                                />
-                                {value}*
-                            </Fragment>
-                        );
-                    } else {
-                        return <Fragment>{value}</Fragment>;
-                    }
-                }
-            }
-        },
-        {
-            name: "Message"
-        },
-        {
-            name: "Requester"
-        }
-    ];
+    // const columns = [
+    //     {
+    //         name: "Id",
+    //         options: {
+    //             filter: false,
+    //             customBodyRender: (value, tableMeta, updateValue) => {
+    //                 const rowIndex = tableMeta.rowIndex;
+    //                 const { filteredMessages } = this.state;
+    //
+    //                 if (rowIndex === filteredMessages.length - 10) {
+    //                     return (
+    //                         <Fragment>
+    //                             <Waypoint
+    //                                 onEnter={() => {
+    //                                     console.log("WAYPOINT REACHED");
+    //                                     setData({
+    //                                         // filteredMessages: [...filteredMessages, ...newData]
+    //                                     });
+    //                                 }}
+    //                             />
+    //                             {value}*
+    //                         </Fragment>
+    //                     );
+    //                 } else {
+    //                     return <Fragment>{value}</Fragment>;
+    //                 }
+    //             }
+    //         }
+    //     },
+    //     {
+    //         name: "Message"
+    //     },
+    //     {
+    //         name: "Requester"
+    //     }
+    // ];
 
     const options = {
         filter: false,

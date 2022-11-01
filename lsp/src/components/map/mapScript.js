@@ -409,6 +409,8 @@ if(suppliers) {
 
     })
 
+
+
     return result;
 }
 
@@ -440,6 +442,7 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
     let newProductFlows = []
     let newCustomers = []
     let newSuppliers = []
+    let newDcsAndFactoriesWithProduct = []
 
 
 
@@ -462,14 +465,17 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
 
         newDcsAndFactories.forEach((newDcsAndFactory)=>{
            productsFlows.forEach((productsFlow)=>{
-                if(productsFlow.from === newDcsAndFactory.name ||
-                    productsFlow.to === newDcsAndFactory.name){
-
-                    newProductFlows.push(productsFlow)
-
-                }
+               if(productsFlow.product.includes('СОНК')) {
+                   if (productsFlow.from === newDcsAndFactory.name ||
+                       productsFlow.to === newDcsAndFactory.name) {
+                       newProductFlows.push(productsFlow)
+                       newDcsAndFactoriesWithProduct.push(newDcsAndFactory)
+                   }
+               }
             })
         })
+
+
 
         newProductFlows.forEach((newProductFlow)=>{
             customers.forEach((customer)=>{
@@ -489,6 +495,7 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
 
         newProductFlows.forEach((newProductFlow)=>{
             dcsAndFactories.forEach((dcsAndFactory)=>{
+
                 if(newProductFlow.from === dcsAndFactory.name ||
                     newProductFlow.to === dcsAndFactory.name){
                     if(newSuppliers.filter(i=>JSON.stringify(  Object.entries(i).sort()) !==
@@ -505,6 +512,6 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
 
 
 
-   return  createPlacemarks(newCustomers, newDcsAndFactories, null,
+   return  createPlacemarks(newCustomers, newDcsAndFactoriesWithProduct, null,
        newProductFlows, demandFulfillments, groups, road, true)
 }

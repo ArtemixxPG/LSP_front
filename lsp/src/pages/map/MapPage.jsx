@@ -47,11 +47,16 @@ const Map = (props) => {
     const [dataTable, setDataTable] = useState([])
     const [experiment, setExperiment] = useState(props.experiment)
     const [change, setChange] = useState(false)
+    const [listOpen, setListOpen] = useState(false)
 
     let onMapTableChange = null
 
     const didOnMapTableChange = (mapChange) => {
         onMapTableChange = mapChange
+    }
+
+    const changeStateList = () => {
+        setListOpen(!listOpen)
     }
 
 
@@ -89,10 +94,12 @@ const Map = (props) => {
     const handleChangeRoad=(event: React.MouseEvent<HTMLDivElement, MouseEvent>,
                             roadName:string) => {
         event.preventDefault()
+        setListOpen(!listOpen)
         setDataTable(prevDataTable => dataTable.splice(0, dataTable.length))
         console.log(dataTable)
         setRoad(prevRoad => roadName)
         onMapTableChange(true)
+
     }
 
 
@@ -145,7 +152,7 @@ const Map = (props) => {
                 </div>
                 <div className="list">
                     <SubMenuList listItems={roadsList} subheader='Поле выбора ВКМ' header={ "Дорога: " + road}
-                              icon = {<PodcastsIcon style={{color:'#1010ee'}}/>}/>
+                              icon = {<PodcastsIcon style={{color:'#1010ee'}}/>} changeStateList={changeStateList} open ={listOpen}/>
                 </div>
 
                 <div className="stat">
@@ -163,7 +170,8 @@ const Map = (props) => {
                 experiments={props.experiments}
             />
             <Modal open={openModal} handleClose={()=> setOpenModal(!openModal)}
-                   content ={ <MapTable columns = {columnsMapSONK} data={dataTable}/>}/>
+                   content ={ <MapTable columns = {columnsMapSONK} data={dataTable}/>}
+                   header= { <h2 style={{marginBottom:"10px"}}>{"ВКМ-таблица СОНК"}</h2>}/>
             <YMap road = {road} dataTable={dataTable} setDataTable={setDataTable}  didOnMapTableChange = {didOnMapTableChange}>
             </YMap>
 
