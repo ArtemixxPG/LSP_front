@@ -28,11 +28,13 @@ export default function EMenu(props) {
     const open = Boolean(anchorEl);
     const [hidden, setHidden] = React.useState(false);
     const { dispatch } = useContext(DarkModeContext);
+    const [showOptimization, setShowOptimization] = React.useState(false)
 
 
 
     const handleClickExp = (event) => {
         setAnchorEl(event.currentTarget);
+        setShowOptimization(!showOptimization);
     };
 
     const handleClose = (item) => {
@@ -148,9 +150,7 @@ export default function EMenu(props) {
 
     return (
         <div>
-
             <Stack direction="row" spacing={3}>
-
                 <IconButton
                     id="exp-button"
                     aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -192,7 +192,7 @@ export default function EMenu(props) {
                     </Link>
                 </IconButton>
                 </CustomTooltip>
-                <CustomTooltip title="Сравнение значеений эспериментов" arrow disableInteractive>
+                <CustomTooltip title="Сравнение значений эспериментов" arrow disableInteractive>
                 <IconButton
                     id="tools-button"
                     aria-controls={open ? "demo-positioned-menu" : undefined}

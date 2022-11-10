@@ -5,7 +5,6 @@ import {
     Paper
 } from "@mui/material";
 import {createTheme, ThemeProvider} from "@mui/material";
-import numeral from "numeral";
 import "./NewDatatable/datable.scss"
 
 const CompareDatatable = (props) => {
@@ -35,7 +34,6 @@ const CompareDatatable = (props) => {
 
     let numeral = require('numeral');
     const [data, setData] = useState([])
-
 
 
     useEffect(()=>{

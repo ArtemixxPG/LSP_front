@@ -16,15 +16,6 @@ const CompareDemandFulfillment = (props) => {
 
     var numeral = require('numeral');
 
-    /*const [data, setData] = useState({
-        dataTable: [],
-        dataTable1: [],
-        dataTable2: [],
-        dataSetNE: [],
-        dataSetOM: [],
-        dataSetOvS: []
-        dataSet
-    });*/
     // const urlDF = (page) => {
     //     return 'http://infotrans-logistic.ru:3577/results/datasets/demandfulfillment?limit=' + 5 + '&offset=' + page * 5
     // }

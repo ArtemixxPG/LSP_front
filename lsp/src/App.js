@@ -29,7 +29,7 @@ import Map from "./pages/map/MapPage";
 import OptimizationMenuList from "./components/sidebar/MenuList/OptimizationMenuList/OptimizationMenuList";
 
 
-function App() {
+function App(props) {
 
     const [experiments, setExperiments] = useState([]);
     const [experiment, setExperiment] = useState('Не выбран')
@@ -39,6 +39,8 @@ function App() {
     const [ok, setOk] = useState(false);
     const [loc, setLoc] = useState(false);
     const handleCloseOk = () => setOk(false);
+    const [showOptList, setShowOptList] = useState(false);
+
 
     useEffect(() => {
         document.title = 'ЛСП ТРАНСРЕСУРС';
@@ -61,8 +63,8 @@ function App() {
         fetchData().then();
         // функция очистки useEffect
         return () => cleanupFunction = true;
-    }, []
-    )
+    }, [])
+
 
 
   return (

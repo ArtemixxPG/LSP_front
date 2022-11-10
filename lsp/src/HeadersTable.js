@@ -751,7 +751,7 @@ export const columnsProductFlows = [
 
     {
         name: "flow",
-        label: "РАСХОД",
+        label: "ПОТОК",
         options: {
             filter: true,
             sort: true,
@@ -769,7 +769,7 @@ export const columnsProductFlows = [
 
     {
         name: "flowMin",
-        label: "МИН.РАСХОД",
+        label: "МИН.ПОТОК",
         options: {
             filter: true,
             sort: true,
@@ -778,7 +778,7 @@ export const columnsProductFlows = [
 
     {
         name: "flowMax",
-        label: "МАКС.РАСХОД",
+        label: "МАКС.ПОТОК",
         options: {
             filter: true,
             sort: true,
@@ -1928,7 +1928,7 @@ export const columnsSharedFlowConstraints = [
 
     {
         name: "flow",
-        label: "РАСХОД, ОБЪЁМ",
+        label: "ПОТОК, ОБЪЁМ",
         options: {
             filter: true,
             sort: true,
@@ -1937,7 +1937,7 @@ export const columnsSharedFlowConstraints = [
 
     {
         name: "flow_min",
-        label: "МИН.РАСХОД, ОБЪЁМ",
+        label: "МИН.ПОТОК, ОБЪЁМ",
         options: {
             filter: true,
             sort: true,
@@ -1946,7 +1946,7 @@ export const columnsSharedFlowConstraints = [
 
     {
         name: "flow_max",
-        label: "МАКС.РАСХОД, ОБЪЁМ",
+        label: "МАКС.ПОТОК, ОБЪЁМ",
         options: {
             filter: true,
             sort: true,
@@ -1955,7 +1955,7 @@ export const columnsSharedFlowConstraints = [
 
     {
         name: "flow_under_cost",
-        label: "РАСХОД НИЖЕ ЗАТРАТ",
+        label: "ПОТОК НИЖЕ СТОИМОСТИ",
         options: {
             filter: true,
             sort: true,
@@ -1964,7 +1964,7 @@ export const columnsSharedFlowConstraints = [
 
     {
         name: "flow_over_cost",
-        label: "РАСХОД ВЫШЕ ЗАТРАТ",
+        label: "ПОТОК ВЫШЕ СТОИМОСТИ",
         options: {
             filter: true,
             sort: true,
@@ -2075,7 +2075,7 @@ export const columnsSharedStoragesConstraints = [
 
     {
         name: "flow",
-        label: "РАСХОД, ОБЪЁМ",
+        label: "ПОТОК, ОБЪЁМ",
         options: {
             filter: true,
             sort: true,

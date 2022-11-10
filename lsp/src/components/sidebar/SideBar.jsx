@@ -21,12 +21,17 @@ const SideBar = (props) => {
     const [nameRes, setNameRes] = useState("Выбирете эксперимент")
 
     const [openOptimization, setOpenOptimization] = useState(false)
+    const [showOptimization, setShowOptimization] = useState(false)
 
 
     const handleClickOptimization = () => {
         setOpenOptimization(!openOptimization);
         //setOpenSimulation(false);
     };
+
+    // const handleClickExperiment = () => {
+    //     setShowOptimization(!showOptimization);
+    // };
 
 
     const StyledDrawer = styled(({className, ...props}) => (
@@ -43,7 +48,6 @@ const SideBar = (props) => {
     const chooseMenu = (exp) =>{
         if(typeof exp==='string')
             props.setExperiment(exp)
-
     }
 
 
@@ -62,9 +66,10 @@ const SideBar = (props) => {
                 <hr/>
                 <div className="center">
                     <div className="autocomplete">
-                        <EMenu setExperiment = {chooseMenu} experiments={props.experiments}/>
+                        <EMenu setExperiment = {chooseMenu} experiments={props.experiments} /*showOptimization = {showOptimization} handleClickExperiment = {handleClickExperiment}*//>
                     </div>
-                    <OptimizationMenuList openOptimization = {openOptimization} handleClickOptimization={handleClickOptimization}/>
+
+                    <OptimizationMenuList  showOptimization={showOptimization} handleClickExp={props.handleClickExp} openOptimization = {openOptimization} handleClickOptimization={handleClickOptimization}/>
                     <Divider/>
                     {/*<SimulationMenuList openSimulation = {openSimulation} handleClickSimulation={handleClickSimulation}/>*/}
                 </div>

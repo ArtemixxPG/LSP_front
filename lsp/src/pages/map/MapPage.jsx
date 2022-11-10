@@ -99,7 +99,6 @@ const Map = (props) => {
         console.log(dataTable)
         setRoad(prevRoad => roadName)
         onMapTableChange(true)
-
     }
 
 
@@ -137,7 +136,7 @@ const Map = (props) => {
     }
 
     const openAlert = () => {
-        if(message!=="" && typeMsg !==""){
+        if(message!=="" && typeMsg !=="") {
           return <div className="alert"> <Alert severity={typeMsg} >Выбран: {message}</Alert> </div>
         }
     }
@@ -174,7 +173,6 @@ const Map = (props) => {
                    header= { <h2 style={{marginBottom:"10px"}}>{"ВКМ-таблица СОНК"}</h2>}/>
             <YMap road = {road} dataTable={dataTable} setDataTable={setDataTable}  didOnMapTableChange = {didOnMapTableChange}>
             </YMap>
-
         </div>
     );
 };
