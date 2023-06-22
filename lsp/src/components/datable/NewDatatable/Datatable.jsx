@@ -43,6 +43,8 @@ const Datatable = (props) => {
         const fetchData = async () => {
             try {
                 let result = null;
+                props.url.searchParams.append("experiment", props.experiment)
+                props.url.searchParams.append("limit", props.limit)
                 const response = await fetch(props.url);
 
                 if(response.ok) {
@@ -149,7 +151,7 @@ const Datatable = (props) => {
         fetchData().then();
         // функция очистки useEffect
         return () => cleanupFunction = true;
-    }, [])
+    }, [props.experiment])
 
 
     // const columns = [

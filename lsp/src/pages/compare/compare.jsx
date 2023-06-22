@@ -11,6 +11,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import "./compare.scss"
 import CompareDatatable from "../../components/datable/CompareDatatable";
 import ErrorModal from "../../components/Modal/ErrorModal";
+import NEChart from "../../components/chart/nechart/NEChart";
+import OMChart from "../../components/chart/omchart/OMChart";
+import OSChart from "../../components/chart/oschart/OSChart";
 
 const CompareDemandFulfillment = (props) => {
 
@@ -126,40 +129,78 @@ const CompareDemandFulfillment = (props) => {
     //const [typeExp, setTypeExp] = useState("");
     const [chooseTable1, setChoseTable1] = useState("");
     const [chooseTable2, setChoseTable2] = useState("");
+    const [firstExperiment, setFirstExperiments] = useState('')
+    const [secondExperiment, setSecondExperiments] = useState('')
+    const [dataDFTable, setDataDFTable] = useState({
+        dataDFFirstExperiment:[],
+        dataDFSecondExperiment:[]
+    })
+
+    const [dataOvSTable, setDataOvsTable] = useState({
+        dataOvSFirstExperiment:[],
+        dataOvSSecondExperiment:[]
+    })
+
+    const [dataVFTable, setDataVFTable] = useState({
+        dataVFFirstExperiment:[],
+        dataVFSecondExperiment:[]
+    })
+
     const [icon, setIcon] = useState(false);
 
-    const urlDF = 'http://localhost:8080/results/dfilm'
-         //'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/dfilm'
+    const [data, setData] = useState({
+        dFsForFirstExperiment:[],
+        dFsForSecondExperiment:[],
+        ovSsForFirstExperiment:[],
+        ovSsForSecondExperiment:[],
+        nEForFirstExperiment:[],
+        nEForSecondExperiment:[],
+        vehicleFlowsForFirstExperiment:[],
+        vehicleFlowsForSecondExperiment:[],
+        membersForFirstExperiment:[],
+        membersForSecondExperiment:[]
+    });
 
-    const urlOvS = 'http://localhost:8080/results/ovs'
-        //'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/ovs'
+     const urlDF =
+         'http://localhost:8080/results/dfilm'
 
-    const urlVF = 'http://localhost:8080/results/vf'
-        //'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/vf'
+     const urlOvS =
+        'http://localhost:8080/results/ovs'
+
+    const urlVF =
+        'http://localhost:8080/results/vf'
 
 
-    // useEffect(() => {
-    //     let cleanupFunction = false;
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await fetch('http://localhost:8080/dfilm');
-    //             const result = await response.json();
-    //
-    //             // непосредственное обновление состояния при условии, что компонент не размонтирован
-    //             if(!cleanupFunction) {
-    //                 setData(result);
-    //             }
-    //
-    //         } catch (e) {
-    //             console.error(e.message)
-    //         }
-    //     };
-    //
-    //
-    //     fetchData().then();
-    //     // функция очистки useEffect
-    //     return () => cleanupFunction = true;
-    // }, [])
+    useEffect(() => {
+        let cleanupFunction = false;
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/compare/data?firstExperimentName=' + firstExperiment + '&secondExperimentName=' + secondExperiment );
+                const result = await response.json();
+
+                // непосредственное обновление состояния при условии, что компонент не размонтирован
+                if(!cleanupFunction) {
+                    setData(result);
+                    setDataDFTable({
+                        dFsForFirstExperiment:result['dFsForFirstExperiment'],
+                        dFsForSecondExperiment:result['dFsForSecondExperiment'],
+                    })
+                }
+
+            } catch (e) {
+                console.error(e.message)
+            }
+        };
+
+
+        fetchData().then();
+        // функция очистки useEffect
+        return () => cleanupFunction = true;
+    }, [])
+
+
+    const  firstExperimentList = props.experiments.map
+
 
 
 
@@ -200,6 +241,9 @@ const CompareDemandFulfillment = (props) => {
                 experiments={props.experiments}
             />
                 <div className="content">
+                    <div className="exp-pole">
+
+                    </div>
                     <div className="datatableDF">УДОВЛЕТВОРЕНИЕ СПРОСА
                         <form onSubmit={handleSubmitTable1}>
                             <label className="search">
@@ -239,7 +283,7 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatatable url = {urlOvS} columns = {columnsOverallStatsWithColor} /*table={"pageOverallStats"} setError = {props.setError}*//>
+                        <CompareDatatable url = {urlOvS} columns = {columnsOverallStatsWithColor(null, null)} /*table={"pageOverallStats"} setError = {props.setError}*//>
                         {/*<ErrorModal error = {props.error} handleClose={props.handleClose} />*/}
                     </div>
 
@@ -253,7 +297,7 @@ const CompareDemandFulfillment = (props) => {
                                 </select>
                             </label>
                         </form>
-                        <CompareDatatable url = {urlOvS} columns = {columnsOverallStatsWithColor} /*table={"pageOverallStats"} setError = {props.setError}*//>
+                        <CompareDatatable url = {urlOvS} columns = {columnsOverallStatsWithColor(null, null)} /*table={"pageOverallStats"} setError = {props.setError}*//>
                         {/*<ErrorModal error = {props.error} handleClose={props.handleClose} />*/}
                     </div>
 
@@ -283,6 +327,21 @@ const CompareDemandFulfillment = (props) => {
                         </form>
                         <CompareDatatable url = {urlVF} columns = {columnsVehicleFlowsWithColor} /*table={"pageVehicleFlows"} setError = {props.setError}*//>
                         {/*<ErrorModal error = {props.error} handleClose={props.handleClose} />*/}
+                    </div>
+                    <div className="NEcharts">
+                        <NEChart data = {data.dataSetNE} title = "Гистограмма общей стоимости:"
+                                 dataName = "nameru" dataKeyFirst="mun" dataKeySecond="mun" strokeFirst="#00008B" strokeSecond="#218bff"
+                                 fillFirst="#00008B" fillSecond="#00BFFF"/>
+                    </div>
+
+                    <div className="OMcharts">
+                        <OMChart data = {data.dataSetOM} title = "Гистограмма закупочной стоимости:"
+                                 dataName = "nameru" dataKeyFirst="it1" strokeFirst="#9ACD32" fillFirst="#9ACD32"/>
+                    </div>
+
+                    <div className="OScharts">
+                        <OSChart data = {data.dataSetOvS} title = "Гистограмма общей статистики:"
+                                 dataName = "name" dataKey="value" dataFill="#FA8072" dataStroke = "#FA8072"/>
                     </div>
                 </div>
             </div>

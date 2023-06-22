@@ -13,11 +13,17 @@ const SharedFlowConstraints = (props) => {
     //const [rowId, setRowId] = useState();
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
+    const [urlPage, setUrlPage] = useState(new URL('http://62.213.30.22:8585/LSP_back-1.0-SNAPSHOT/results/sfc/exp_limit'))
 
-    const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/sfc'
+   // const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/datasets/sfc'
 
+    const limit = 25
 
-
+    // useEffect(()=>{
+    //     setUrlPage(new URL('http://10.1.1.170:8585/LSP_back-1.0-SNAPSHOT/results/sfc/exp_limit'))
+    //     urlPage.searchParams.append("experiment", props.experiment)
+    //     urlPage.searchParams.append("limit", 25)
+    // }, [props.experiment])
 
     return (
         <div className="sharedflowconstraints">
@@ -30,9 +36,10 @@ const SharedFlowConstraints = (props) => {
                 open = {icon}
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
+                setExperiment={props.setExperiment}
             />
                 <div className="datatable">ОГРАНИЧЕНИЯ НА ПОТОКИ
-                    <Datatable url = {url} columns = {columnsSharedFlowConstraints} table={"pageSharedFlowConstraints"} setError = {props.setError}/>
+                    <Datatable url = {urlPage} limit ={limit} experiment={props.experiment} columns = {columnsSharedFlowConstraints} table={"pageSharedFlowConstraints"} setError = {props.setError}/>
                 </div>
         </div>
     );

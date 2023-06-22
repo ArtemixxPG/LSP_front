@@ -14,11 +14,20 @@ const ProductFlow = (props) => {
 
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
+    const [urlPage, setUrlPage] = useState(new URL('http://62.213.30.22:8585/LSP_back-1.0-SNAPSHOT/results/prdflow/exp_limit'))
 
-    //const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/prdflow'
-    const url =  'http://localhost:8080/results/prdflow'
+    // const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/prdflow'
+    //const url =  'http://localhost:8080/results/prdflow'
 
 
+    const limit = 25
+
+    // useEffect(()=>{
+    //     setUrlPage(new URL('http://10.1.1.170:8585/LSP_back-1.0-SNAPSHOT/results/prdflow/exp_limit'))
+    //     urlPage.searchParams.append("experiment", props.experiment)
+    //     urlPage.searchParams.append("limit", 25)
+    //     console.log(urlPage)
+    // }, [props.experiment])
 
     return (
         <div className="productflow">
@@ -31,9 +40,10 @@ const ProductFlow = (props) => {
                 open = {icon}
                 close = {()=>setIcon(!icon)}
                 experiments={props.experiments}
+                setExperiment={props.setExperiment}
             />
                 <div className="datatable">ТОВАРНЫЕ ПОТОКИ
-                    <Datatable url = {url} columns = {columnsProductFlows} /*table={"pageProductsFlows"} setError = {props.setError}*//>
+                    <Datatable url = {urlPage} limit ={limit} experiment={props.experiment} columns = {columnsProductFlows} /*table={"pageProductsFlows"} setError = {props.setError}*//>
                 </div>
             {/*<ErrorModal error = {props.error} handleClose={props.handleClose}/>*/}
         </div>

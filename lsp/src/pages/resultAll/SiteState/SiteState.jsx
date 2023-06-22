@@ -14,7 +14,7 @@ const SiteState = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
 
-    const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/sitestate'
+    const url = 'http://62.213.30.22:8585/LSP_back-1.0-SNAPSHOT/results/sitestate'
 
 
 

@@ -12,10 +12,17 @@
     align-items: center;
     justify-content: center;
     background-color: #218bff;
+    flex-direction: column;
 
     .logo {
       font-size: 20px;
       font-weight: bold;
+      color: snow;
+      padding-bottom: 5px;
+    }
+    .experiment{
+      text-align: center;
+      font-size: 12px;
       color: snow;
     }
   }

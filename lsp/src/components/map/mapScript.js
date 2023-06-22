@@ -9,7 +9,7 @@ import demandFulfillment from "../../pages/resultAll/DemandFulfillment/DemandFul
 
 
 
-export const createAllMapObjects = (data, road) => {
+export const createAllMapObjects = (data, road, products, originalMap, enableRoads) => {
 
     let customers = data["customers"]
     let dcsAndFactories = data["dcsAndFactories"]
@@ -18,18 +18,20 @@ export const createAllMapObjects = (data, road) => {
     let demandFulfillments = data["demandFulfillments"]
     let groups = data["groupsSites"]
 
-    return createMap(customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments, groups, road)
+    return createMap(customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments, groups, road, products, originalMap, enableRoads)
 }
 
 
-const  createPlacemarks =  (customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments, groups, road, toRoad) => {
+const  createPlacemarks =  (customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments, groups, road, products,
+                            toRoad, originalMap) => {
 
 
 
     let result ={
         marks:[],
         lines:[],
-        sonks:[]
+        sonks:[],
+        center:[50, 50]
     }
 
     let collection = []
@@ -213,6 +215,8 @@ if(suppliers) {
     })
 }
 
+    let firstCoordinate = true
+
     productsFlows.forEach((item, index)=>{
         let from
         let to
@@ -253,53 +257,133 @@ if(suppliers) {
             let row = {
                 vkm:'',
                 client:'',
-                sonk:0
+                sonk:'',
+                value:0
             }
 
-            if(toRoad) {
+            if(toRoad && products.length !== 0) {
+                if(firstCoordinate){
+                    result.center[0] = from.locations.latitude
+                    result.center[1] = from.locations.longitude
+                    firstCoordinate = false
+                }
                 let sonk = 0;
-                if (item.product.includes('СОНК')) {
-                    if (result.sonks.length === 0) {
-                        row.vkm = item.from
-                        productsFlows.forEach((pf) => {
-                            if ((pf.from === row.vkm) && (pf.product.includes('СОНК'))) {
-                                sonk += Math.ceil(pf.flow)
-                            }
-                        })
-                        row.sonk = sonk;
-                        result.sonks.push(row)
-                         row = {
-                            vkm:'',
-                            client: item.to,
-                            sonk: Math.ceil(item.flow)
-                        }
-                        result.sonks.push(row)
-                    } else {
-                        if (!result.sonks.find(elem => elem.vkm === item.from)) {
+                if(products.length!==0) {
+                    if (products.find(product => item.product.includes(product))) {
+
+                        if (result.sonks.length === 0) {
                             row.vkm = item.from
                             productsFlows.forEach((pf) => {
-                                if ((pf.from === row.vkm) && (pf.product.includes('СОНК'))) {
-                                    let count = Math.ceil(pf.flow)
-                                    sonk += count
+                                if ((pf.from === row.vkm) && (products.find(product => pf.product.includes(product)))) {
+                                    sonk += Math.ceil(pf.flow)
                                 }
                             })
-                            row.sonk = sonk
+                            row.value = sonk;
+                            row.sonk = item.product
                             result.sonks.push(row)
                             row = {
-                                vkm:'',
+                                vkm: '',
                                 client: item.to,
-                                sonk: Math.ceil(item.flow)
+                                value: Math.ceil(item.flow),
+                                sonk: item.product,
+
                             }
                             result.sonks.push(row)
                         } else {
-                            row.client = item.to
-                            row.sonk = Math.ceil(item.flow)
-                            result.sonks.push(row)
-                        }
+                            if (!result.sonks.find(elem => elem.vkm === item.from)) {
+                                row.vkm = item.from
+                                productsFlows.forEach((pf) => {
+                                    if ((pf.from === row.vkm) && (products.find(product => pf.product.includes(product)))) {
+                                        let count = Math.ceil(pf.flow)
+                                        sonk += count
+                                    }
+                                })
+                                row.sonk = item.product
+                                row.value = sonk;
+                                result.sonks.push(row)
+                                row = {
+                                    vkm: '',
+                                    client: item.to,
+                                    value: Math.ceil(item.flow),
+                                    sonk: item.product,
+                                }
+                                result.sonks.push(row)
+                            } else {
+                                row.client = item.to
+                                row.sonk = item.product
+                                row.value = Math.ceil(item.flow);
+                                result.sonks.push(row)
+                            }
 
+                        }
                     }
                 }
-            }
+            } else {
+                // if(firstCoordinate){
+                //     result.center[0] = from.locations.latitude
+                //     result.center[1] = from.locations.longitude
+                //     firstCoordinate = false
+                // }
+
+                row = {
+                    vkm: item.from,
+                    client: item.to,
+                    value: Math.ceil(item.flow),
+                    sonk: item.product,
+                }
+
+                 result.sonks.push(row)
+                // let sonk = 0;
+                //
+                //         if (result.sonks.length === 0) {
+                //             row.vkm = item.from
+                //             productsFlows.forEach((pf) => {
+                //                 if ((pf.from === row.vkm) && (pf.product.includes(item.product))) {
+                //                     sonk += Math.ceil(pf.flow)
+                //                 }
+                //             })
+                //             row.sonk = sonk;
+                //             result.sonks.push(row)
+                //             row = {
+                //                 vkm: '',
+                //                 client: item.to,
+                //                 sonk: Math.ceil(item.flow)
+                //             }
+                //             result.sonks.push(row)
+                //         } else {
+                //             if (!result.sonks.find(elem => elem.vkm === item.from)) {
+                //                 row.vkm = item.from
+                //                 productsFlows.forEach((pf) => {
+                //                     if ((pf.from === row.vkm) && (pf.product.includes(item.product))) {
+                //                         let count = Math.ceil(pf.flow)
+                //                         sonk += count
+                //                     }
+                //                 })
+                //
+                //                 row.sonk = sonk
+                //                 result.sonks.push(row)
+                //                 let index = result.sonks.findIndex(tmc => tmc.to===item.to && tmc.product === item.product)
+                //                 // if(index){
+                //                 //     result.sonks[index].sonk += Math.ceil(item.flow)
+                //                 // } else {
+                //                     row = {
+                //                         vkm: '',
+                //                         client: item.to,
+                //                         sonk: Math.ceil(item.flow)
+                //                     }
+                //
+                //                     result.sonks.push(row)
+                //                 //}
+                //             } else {
+                //               //  if(index){
+                //               //      result.sonks[index].sonk += Math.ceil(item.flow)
+                //                // } else {
+                //
+                //                 }
+                //             }
+
+                        }
+
 
             if (!inLinesTo) {
 
@@ -322,32 +406,50 @@ if(suppliers) {
                 // }
 
                 const setBalloonContent = (demands) => {
-                    let content = ""
+                    let content = ''
                     demands.forEach((item, index) => {
-                        if (item.percentage === 100) {
-                            content += '<div class="balloonContentItem high">' +
-                                '<div><span>Номенклатура: ' + item.product + '</span></div>' +
-                                '<div><span>Поставлено: ' + item.satisfied + '</span></div>' +
-                                '<div><span>Процент от необходимой поставки: ' + item.percentage + '</span></div>' +
-                                '</div>'
-                        }
+                        if(toRoad) {
+                            if (products.find(product => item.product.includes(product))) {
+                                if (item.percentage === 100) {
+                                    content += '<div class="balloonContentItem high">' +
+                                        '<div><span>Номенклатура: ' + item.product + '</span></div>' +
+                                        '<div><span>Поставлено: ' + item.satisfied+ '/'+ item.demandMax + ' (' +  item.percentage + '%)' + '</span></div>'
+                                }
 
-                        if (item.percentage < 100 && item.percentage > 0) {
-                            content += '<div class="balloonContentItem medium">' +
-                                '<div><span>Номенклатура: ' + item.product + '</span></div>' +
-                                '<div><span>Поставлено: ' + item.satisfied + '</span></div>' +
-                                '<div><span>Процент от необходимой поставки: ' + item.percentage + '</span></div>' +
-                                '</div>'
-                        }
+                                if (item.percentage < 100 && item.percentage > 0) {
+                                    content += '<div class="balloonContentItem medium">' +
+                                        '<div><span>Номенклатура: ' + item.product + '</span></div>' +
+                                        '<div><span>Поставлено: ' + item.satisfied+ '/'+ item.demandMax + ' (' +  item.percentage + '%)' + '</span></div>'
+                                }
 
-                        if (item.percentage === 0) {
-                            content += '<div class="balloonContentItem low">' +
-                                '<div><span>Номенклатура: ' + item.product + '</span></div>' +
-                                '<div><span>Поставлено: ' + item.satisfied + '</span></div>' +
-                                '<div><span>Процент от необходимой поставки: ' + item.percentage + '</span></div>' +
-                                '</div>'
+                                if (item.percentage === 0) {
+                                    content += '<div class="balloonContentItem low">' +
+                                        '<div><span>Номенклатура: ' + item.product + '</span></div>' +
+                                        '<div><span>Поставлено: ' + item.satisfied+ '/'+ item.demandMax + ' (' +  item.percentage + '%)' + '</span></div>'
+                                }
+                            }
+
+
+                        } else {
+                            if (item.percentage === 100) {
+                                content += '<div class="balloonContentItem high">' +
+                                    '<div><span>Номенклатура: ' + item.product + '</span></div>' +
+                                    '<div><span>Поставлено: ' + item.satisfied+ '/'+ item.demandMax + ' (' +  item.percentage + '%)' + '</span></div>'
+                            }
+
+                            if (item.percentage < 100 && item.percentage > 0) {
+                                content += '<div class="balloonContentItem medium">' +
+                                    '<div><span>Номенклатура: ' + item.product + '</span></div>' +
+                                    '<div><span>Поставлено: ' + item.satisfied+ '/'+ item.demandMax + ' (' +  item.percentage + '%)' + '</span></div>'
+                            }
+
+                            if (item.percentage === 0) {
+                                content += '<div class="balloonContentItem low">' +
+                                    '<div><span>Номенклатура: ' + item.product + '</span></div>' +
+                                    '<div><span>Поставлено: ' + item.satisfied+ '/'+ item.demandMax + ' (' +  item.percentage + '%)' + '</span></div>'
+                            }
                         }
-                    })
+                })
 
                     if (content === "") {
                         content += '<div class="balloonContentItem nothing">' + '<div><span>' + 'Данных о перевозке ненайдено!' +
@@ -436,7 +538,7 @@ function createLine (currentId, item, from, to, color) {
     return line;
 }
 
-function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments, groups, road){
+function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments, groups, road, products, enableRoads){
 
     let newDcsAndFactories = []
     let newProductFlows = []
@@ -445,9 +547,105 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
     let newDcsAndFactoriesWithProduct = []
 
 
+    let currentDcsAndFactories = []
+    let currentCustomers = []
+    let currentSuppliers = []
 
-    if(road === "Общая"){
-        return createPlacemarks(customers, dcsAndFactories, suppliers, productsFlows, demandFulfillments, groups, road, false)
+
+    productsFlows.forEach((item_pf)=>{
+        customers.forEach((item_cust)=>{
+            if(item_cust.name === item_pf.from || item_cust.name === item_pf.to){
+                if(!currentCustomers.find(item => item.name === item_cust.name)) {
+                    currentCustomers.push(item_cust)
+                }
+            }
+        })
+    })
+
+    productsFlows.forEach((item_pf)=>{
+        dcsAndFactories.forEach((item_dc)=>{
+            if(item_dc.name === item_pf.from || item_dc.name === item_pf.to){
+                if(!currentDcsAndFactories.find(item => item.name === item_dc.name)) {
+                    currentDcsAndFactories.push(item_dc)
+                }
+            }
+        })
+    })
+
+    productsFlows.forEach((item_pf)=>{
+        suppliers.forEach((item_sup)=>{
+            if(item_sup.name === item_pf.from || item_sup.name === item_pf.to){
+                if(!currentSuppliers.find(item => item.name === item_sup.name)) {
+                    currentSuppliers.push(item_sup)
+                }
+            }
+        })
+    })
+
+    if(road === 'Общая'){
+
+        if (products.length === 0){
+            return createPlacemarks(currentCustomers, currentDcsAndFactories, currentSuppliers, productsFlows, demandFulfillments, groups, road, products, false)
+        } else {
+
+
+            productsFlows.forEach((productsFlow)=>{
+                if(products.find(product => productsFlow.product.includes(product))){
+                    newProductFlows.push(productsFlow)
+                }
+            }
+            )
+
+
+
+
+            newProductFlows.forEach((newProductFlow) => {
+                currentCustomers.forEach((customer) => {
+                    if (newProductFlow.from === customer.name ||
+                        newProductFlow.to === customer.name) {
+                        if (newCustomers.length === 0) {
+                            newCustomers.push(customer)
+                        }
+                        if (newCustomers.filter(i => JSON.stringify(Object.entries(i).sort()) !==
+                            JSON.stringify(Object.entries(customer).sort())).length > 0)
+                            newCustomers.push(customer)
+                    }
+                })
+            })
+
+
+            newProductFlows.forEach((newProductFlow) => {
+                currentDcsAndFactories.forEach((dcsAndFactory) => {
+
+                    if (newProductFlow.from === dcsAndFactory.name ||
+                        newProductFlow.to === dcsAndFactory.name) {
+                        if (newDcsAndFactories.length === 0) {
+                            newDcsAndFactories.push(dcsAndFactory)
+                        }
+                        if (newDcsAndFactories.filter(i => JSON.stringify(Object.entries(i).sort()) !==
+                            JSON.stringify(Object.entries(dcsAndFactory).sort())).length > 0)
+                            newDcsAndFactories.push(dcsAndFactory)
+                    }
+                })
+            })
+
+            newProductFlows.forEach((newProductFlow)=>{
+               currentSuppliers.forEach((supplier)=>{
+
+                    if(newProductFlow.from === supplier.name ||
+                        newProductFlow.to === supplier.name){
+
+                        if (newSuppliers.length === 0) {
+                            newSuppliers.push(supplier)
+                        }
+                        if(newSuppliers.filter(i=>JSON.stringify(  Object.entries(i).sort()) !==
+                            JSON.stringify(Object.entries(supplier).sort())  ).length > 0)
+                            newSuppliers.push(supplier)
+                    }
+                })
+            })
+            return createPlacemarks(newCustomers, newDcsAndFactories, newSuppliers, newProductFlows, demandFulfillments, groups, road, products, false)
+        }
     }
     else {
 
@@ -455,7 +653,7 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
 
 
 
-        dcsAndFactories.forEach((item)=>{
+        currentDcsAndFactories.forEach((item)=>{
             if(item.road !== null) {
                 if (item.road.name === road) {
                     newDcsAndFactories.push(item)
@@ -465,7 +663,7 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
 
         newDcsAndFactories.forEach((newDcsAndFactory)=>{
            productsFlows.forEach((productsFlow)=>{
-               if(productsFlow.product.includes('СОНК')) {
+               if(products.find(product => productsFlow.product.includes(product))) {
                    if (productsFlow.from === newDcsAndFactory.name ||
                        productsFlow.to === newDcsAndFactory.name) {
                        newProductFlows.push(productsFlow)
@@ -478,7 +676,7 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
 
 
         newProductFlows.forEach((newProductFlow)=>{
-            customers.forEach((customer)=>{
+           currentCustomers.forEach((customer)=>{
                 if(newProductFlow.from === customer.name ||
                 newProductFlow.to === customer.name){
                     if(newCustomers.length === 0){
@@ -494,7 +692,7 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
 
 
         newProductFlows.forEach((newProductFlow)=>{
-            dcsAndFactories.forEach((dcsAndFactory)=>{
+            currentDcsAndFactories.forEach((dcsAndFactory)=>{
 
                 if(newProductFlow.from === dcsAndFactory.name ||
                     newProductFlow.to === dcsAndFactory.name){
@@ -513,5 +711,5 @@ function createMap(customers, dcsAndFactories, suppliers, productsFlows, demandF
 
 
    return  createPlacemarks(newCustomers, newDcsAndFactoriesWithProduct, null,
-       newProductFlows, demandFulfillments, groups, road, true)
+       newProductFlows, demandFulfillments, groups, road,products, true)
 }

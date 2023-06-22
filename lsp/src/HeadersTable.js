@@ -1,7 +1,7 @@
 export const columnsMapSONK = [
     {
         name: "vkm",
-        label: "ВКМ",
+        label: "Поставщик",
         options: {
             filter: true,
             sort: true,
@@ -10,7 +10,7 @@ export const columnsMapSONK = [
 
     {
         name: "client",
-        label: "КЛИЕНТ",
+        label: "КлиентТ",
         options: {
             filter: true,
             sort: true,
@@ -19,7 +19,15 @@ export const columnsMapSONK = [
 
     {
         name: "sonk",
-        label: "СОНК",
+        label: "ТМЦ",
+        options: {
+            filter: true,
+            sort: true,
+        }
+    },
+    {
+        name: "value",
+        label: "Количество",
         options: {
             filter: true,
             sort: true,
@@ -621,6 +629,15 @@ export const columnsDemandFulfillmentWithColor = /*(data1, data2)=> {*/
             options: {
                 filter: true,
                 sort: true,
+                setCellProps: () => {
+                        return {
+                            style: {
+                                border: "2px solid blue",
+                                color: "#00ff00",
+                                backgroundColor: "#fff"
+                            }
+                        };
+                    }
             },
             // renderCell: (params) => {
             //     if (params.row.demandForProduct === chooseColor('demandForProduct', params.row.demandForProduct, data1, data2)) {
@@ -684,12 +701,36 @@ export const columnsDemandFulfillmentWithColor = /*(data1, data2)=> {*/
 
 
 
-const chooseColor = (key, currentValue, firstValue, secondValue) => {
+const chooseColor = (value, dataFirstExperiment, dataSecondExperiment) => {
 
-   let value = firstValue.find(value => value[key.toString()] === currentValue);
-   let index = firstValue.indexOf(value);
+   let green = '#00ff00'
+   let yellow = '#ffff00';
 
-   return secondValue[index][key.toString()];
+    let index = 0
+    let keyData
+
+    if(dataFirstExperiment || dataSecondExperiment) {
+
+        dataFirstExperiment.map((item) => {
+            for (let key in item) {
+                if (item[key] === value) {
+                    keyData = key
+                }
+            }
+        })
+
+        index = dataFirstExperiment.findIndex(item => item[keyData] === value)
+
+        if (dataFirstExperiment[index][keyData] < dataSecondExperiment[index][keyData]) {
+            return yellow
+        } else {
+            return green
+        }
+
+    }
+
+
+   return '#000000'
 }
 
 
@@ -2346,37 +2387,58 @@ export const columnsVehicleFlows = [
     //     )}},
 ];
 
-// export const columnsNamedExpressionsWithColor = (data1, data2)=> {
-//     return [
-//         {
-//             field: 'objective_member', headerName: 'ОБЩАЯ СТАТИСТИКА', flex: 1, renderCell: (params) => {
-//                 if (params.row.objective_member === chooseColor("objective_member", params.row.objective_member, data1, data2)) {
-//                     return (
-//                         <div className="cell over">{params.row.objective_member}</div>
-//                     )
-//                 } else {
-//                     return (
-//                         <div className="cell lower">{params.row.objective_member}</div>
-//                     )
-//                 }
-//             }
-//         },
-//
-//         {
-//             field: 'value', headerName: 'ЗНАЧЕНИЕ', flex: 1, renderCell: (params) => {
-//                 if (params.row.value === chooseColor("value", params.row.value, data1, data2)) {
-//                     return (
-//                         <div className="cell over">{params.row.value}</div>
-//                     )
-//                 } else {
-//                     return (
-//                         <div className="cell lower">{params.row.value}</div>
-//                     )
-//                 }
-//             }
-//         },
-//     ];
-// }
+
+export const columnsNamedExpressions = [
+    {
+        name: "expression_name",
+        label: "ОБЩАЯ СТАТИСТИКА",
+        options: {
+            filter: true,
+            sort: true,
+        }
+    },
+
+    {
+        name: "value",
+        label: "ЗНАЧЕНИЕ",
+        options: {
+            filter: true,
+            sort: true,
+        }
+    }
+]
+
+export const columnsNamedExpressionsWithColor = (data1, data2)=> {
+    return [
+        {
+            field: 'objective_member', headerName: 'ОБЩАЯ СТАТИСТИКА', flex: 1, renderCell: (params) => {
+                if (params.row.objective_member === chooseColor("objective_member", params.row.objective_member, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.objective_member}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.objective_member}</div>
+                    )
+                }
+            }
+        },
+
+        {
+            field: 'value', headerName: 'ЗНАЧЕНИЕ', flex: 1, renderCell: (params) => {
+                if (params.row.value === chooseColor("value", params.row.value, data1, data2)) {
+                    return (
+                        <div className="cell over">{params.row.value}</div>
+                    )
+                } else {
+                    return (
+                        <div className="cell lower">{params.row.value}</div>
+                    )
+                }
+            }
+        },
+    ];
+}
 
 export const columnsObjectiveMembers = [
     { field: 'iteration', headerName: 'ИТЕРАЦИЯ', flex:1, renderCell:(params)=>{return(
@@ -2450,17 +2512,26 @@ export const columnsOverallStats = [
         )}},
 ];
 
-export const columnsOverallStatsWithColor = /*(data1, data2)=> {*/
-    [
+export const columnsOverallStatsWithColor = (data1, data2)=> {
+    return [
         {
             name: 'inbound_processing_cost',
             label: 'РАЗГРУЗКА',
             options: {
                 filter: true,
                 sort: true,
+                setCellProps: (value) => {
+                    return {
+                        style: {
+                            border: "2px solid blue",
+                            color: chooseColor(value, data1, data2),
+                            backgroundColor: "#fff"
+                        }
+                    };
+                }
             },
             // renderCell: (params) => {
-            //     if (params.row.inbound_processing_cost === chooseColor('inbound_processing_cost', params.row.inbound_processing_cost, data1, data2)) {
+            // if (params.row.inbound_processing_cost === chooseColor('inbound_processing_cost', params.row.inbound_processing_cost, data1, data2)) {
             //         return (
             //             <div className="cell over">{params.row.vehicleParametersCapacity}</div>
             //         )
@@ -2478,6 +2549,15 @@ export const columnsOverallStatsWithColor = /*(data1, data2)=> {*/
             options: {
                 filter: true,
                 sort: true,
+                setCellProps: (value) => {
+                    return {
+                        style: {
+                            border: "2px solid blue",
+                            color: chooseColor(value, data1, data2),
+                            backgroundColor: "#fff"
+                        }
+                    };
+                }
             },
             // renderCell: (params) => {
             //     if (params.row.outbound_processing_cost === chooseColor('outbound_processing_cost', params.row.outbound_processing_cost, data1, data2)) {
@@ -2498,6 +2578,15 @@ export const columnsOverallStatsWithColor = /*(data1, data2)=> {*/
             options: {
                 filter: true,
                 sort: true,
+                setCellProps: (value) => {
+                    return {
+                        style: {
+                            border: "2px solid blue",
+                            color: chooseColor(value, data1, data2),
+                            backgroundColor: "#fff"
+                        }
+                    };
+                }
             },
             // renderCell: (params) => {
             //     if (params.row.production_cost === chooseColor('production_cost', params.row.production_cost, data1, data2)) {
@@ -2518,6 +2607,15 @@ export const columnsOverallStatsWithColor = /*(data1, data2)=> {*/
             options: {
                 filter: true,
                 sort: true,
+                setCellProps: (value) => {
+                    return {
+                        style: {
+                            border: "2px solid blue",
+                            color: chooseColor(value, data1, data2),
+                            backgroundColor: "#fff"
+                        }
+                    };
+                }
             },
             // renderCell: (params) => {
             //     if (params.row.transportation_cost === chooseColor('transportation_cost', params.row.transportation_cost, data1, data2)) {
@@ -2538,6 +2636,15 @@ export const columnsOverallStatsWithColor = /*(data1, data2)=> {*/
             options: {
                 filter: true,
                 sort: true,
+                setCellProps: (value) => {
+                    return {
+                        style: {
+                            border: "2px solid blue",
+                            color: chooseColor(value, data1, data2),
+                            backgroundColor: "#fff"
+                        }
+                    };
+                }
             },
             // renderCell: (params) => {
             //     if (params.row.supply_cost === chooseColor('supply_cost', params.row.supply_cost, data1, data2)) {
@@ -2558,6 +2665,15 @@ export const columnsOverallStatsWithColor = /*(data1, data2)=> {*/
             options: {
                 filter: true,
                 sort: true,
+                setCellProps: (value) => {
+                    return {
+                        style: {
+                            border: "2px solid blue",
+                            color: chooseColor(value, data1, data2),
+                            backgroundColor: "#fff"
+                        }
+                    };
+                }
             },
             // renderCell: (params) => {
             //     if (params.row.total_cost === chooseColor('total_cost', params.row.total_cost, data1, data2)) {
@@ -2578,6 +2694,15 @@ export const columnsOverallStatsWithColor = /*(data1, data2)=> {*/
             options: {
                 filter: true,
                 sort: true,
+                setCellProps: (value) => {
+                    return {
+                        style: {
+                            border: "2px solid blue",
+                            color: chooseColor(value, data1, data2),
+                            backgroundColor: "#fff"
+                        }
+                    };
+                }
             },
             // renderCell: (params) => {
             //     if (params.row.revenue === chooseColor('revenue', params.row.revenue, data1, data2)) {
@@ -2598,6 +2723,15 @@ export const columnsOverallStatsWithColor = /*(data1, data2)=> {*/
             options: {
                 filter: true,
                 sort: true,
+                setCellProps: (value) => {
+                    return {
+                        style: {
+                            border: "2px solid blue",
+                            color: chooseColor(value, data1, data2),
+                            backgroundColor: "#fff"
+                        }
+                    };
+                }
             },
             // renderCell: (params) => {
             //     if (params.row.profit === chooseColor('profit', params.row.profit, data1, data2)) {
@@ -2723,6 +2857,7 @@ export const columnsOverallStatsWithColor = /*(data1, data2)=> {*/
         //     }
         // },
     ];
+}
 
 // export const dataCSV = (data) => {
 //     const dataStringLines = data.split(/\r\n|\n/);

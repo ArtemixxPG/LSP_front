@@ -62,6 +62,7 @@ const SideBar = (props) => {
                     <Link to="/" style={{textDecoration: "none"}}>
                         <span className="logo">ЛСП ТРАНСРЕСУРС</span>
                     </Link>
+                    <span className="experiment">Текущий эксперимент: {props.experiment}</span>
                 </div>
                 <hr/>
                 <div className="center">

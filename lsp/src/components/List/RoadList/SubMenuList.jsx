@@ -30,7 +30,7 @@ const SubMenuList = (props) => {
                   <ListSubheader component="div" id="road-list" style={{height:"30px",fontSize:12,color:'#1E90FF'}}>
                       {props.subheader}
                   </ListSubheader>}>
-            <ListItemButton onClick={props.changeStateList}>
+            <ListItemButton disabled={props.disabled} onClick={props.changeStateList}>
                 <ListItemIcon>
                     {props.icon}
                 </ListItemIcon>

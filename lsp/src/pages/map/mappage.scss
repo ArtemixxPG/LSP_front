@@ -17,17 +17,40 @@
       cursor: pointer;
     }
 
-    .list{
-      max-height: 74px;
-      margin-bottom: 5px;
-      margin-left: 20px;
-      margin-top: 0px;
+    .content-right-bar {
+      .list {
+        max-height: 74px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+        margin-top: 0px;
+      }
+
+      .sub-check-content {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .list-checkbox {
+        max-height: 74px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+        margin-top: 0px;
+        padding-left: 5px;
+        color: #1010ee;
+      }
     }
 
 
 
     .stat{
       margin-left: 5px;
+      .icon{
+        width: 30px;
+        height: 30px;
+        margin: 5px 5px 5px;
+        cursor: pointer;
+        color:#1010ee;
+      }
     }
 
     .alert{

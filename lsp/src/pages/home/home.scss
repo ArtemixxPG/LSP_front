@@ -25,5 +25,15 @@
     background-image: url('./img/home.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+
+    .modal-content{
+      .list-exp{
+        position: absolute;
+        max-height: 74px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+        margin-top: 0px;
+      }
+    }
   }
 }

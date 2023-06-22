@@ -21,7 +21,6 @@ import SendTimeExtensionIcon from '@mui/icons-material/SendTimeExtension';
 import "./EMenu.scss"
 
 
-const menuNames = ["Оптимизация", "Симуляция"]
 
 export default function EMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -173,7 +172,7 @@ export default function EMenu(props) {
                     variant="outlined"
                     disabled
                 >
-                <DarkModeOutlinedIcon className="icon"/>
+                <DarkModeOutlinedIcon className="icon-disable"/>
                 </IconButton>
                 {/*</CustomTooltip>*/}
                 <CustomTooltip title="Карта" arrow disableInteractive>
@@ -233,7 +232,7 @@ export default function EMenu(props) {
                         variant="outlined"
                         disabled
                     >
-                        <NotificationsNoneIcon className="icon"/>
+                        <NotificationsNoneIcon className="icon-disable"/>
                     </IconButton>
                 {/*</CustomTooltip>*/}
             </Stack>

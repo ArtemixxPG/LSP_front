@@ -1,41 +1,4 @@
-const createCompareDataset = (data) =>{
-
-    const vehicleFlows = data["vehicleFlows"]
-    const demandFulfillment = data["demandFulfillment"]
-    const namedExpressions = data["namedExpressions"]
-
-    let namedExpressionsNew =
-        [
-        {
-            InboundProcessingCost:0,
-            OutboundProcessingCost:0,
-            ProductionCost:0,
-            TransportationCost:0,
-            SupplyCost:0,
-            TotalCost:0,
-            Revenue:0,
-            Profit:0,
-        }
-        ]
-
-    let demandFulfillmentNew = [
-        {
-            demandForOrder:0,
-            demandForProduct:0
-        }
-    ]
-
-
-    let demandForProduct = {
-        min:0,
-        satisfied: 0,
-        result:0,
-    }
-
-    let  demandForOrder = {
-        percentage:0,
-        result:0,
-    }
+export const createFinalStatVFDataset = (vehicleFlows) =>{
 
     let vehicleParametersCapacity = {
         auto20T: 0,
@@ -57,17 +20,17 @@ const createCompareDataset = (data) =>{
     vehicleFlows.forEach((item, index)=>{
         if(item.vehicleType==="Авто 20 т КП"){
             vehicleParametersCapacity.auto20T+=item.vehicleTrips;
-            vehicleParameters.auto20T = item.actualLoad;
+            vehicleParameters.auto20T += item.actualLoad;
         }
 
         if(item.vehicleType==="Авто 10 т КП"){
             vehicleParametersCapacity.auto10T+=item.vehicleTrips;
-            vehicleParameters.auto10T = item.actualLoad;
+            vehicleParameters.auto10T += item.actualLoad;
         }
 
         if(item.vehicleType==="Авто 5 т КП"){
             vehicleParametersCapacity.auto5T+=item.vehicleTrips;
-            vehicleParameters.auto5T = item.actualLoad;
+            vehicleParameters.auto5T+= item.actualLoad;
         }
 
         if(item.vehicleType==="Полувагон КП"){
@@ -77,24 +40,42 @@ const createCompareDataset = (data) =>{
 
         if(item.vehicleType==="Ж/д платформа КП"){
             vehicleParametersCapacity.platforma+=item.vehicleTrips;
-            vehicleParameters.platforma = item.actualLoad;
+            vehicleParameters.platforma += item.actualLoad;
         }
 
     })
 
-    demandFulfilment.forEach((item, index)=>{
-        demandForProduct.min += item.min
-        demandForProduct.satisfied += item.satisfied
-        if(item.percentage>=0.9){
-            demandForOrder.percentage+=1
-        }
-    })
+    console.log(vehicleParameters)
+    console.log(vehicleParametersCapacity)
+
+    const vehicleFlowsNew = {
+        vehicleParametersCapacity:vehicleParametersCapacity,
+        vehicleParameters:vehicleParameters
+    }
+
+    return vehicleFlowsNew
+
+}
+
+export const createFinalStatNEDataSet = (data)=> {
+
+    const namedExpressions = data["namedExpressions"]
+
+    let namedExpressionsNew =
+        [
+            {
+                InboundProcessingCost:0,
+                OutboundProcessingCost:0,
+                ProductionCost:0,
+                TransportationCost:0,
+                SupplyCost:0,
+                TotalCost:0,
+                Revenue:0,
+                Profit:0,
+            }
+        ]
 
 
-
-    demandForProduct.result = demandForProduct.satisfied*100/demandForProduct.min
-
-    demandForOrder.result = demandForOrder.percentage*100/demandFulfilment.length
 
     namedExpressions.forEach((item, key) =>{
 
@@ -112,14 +93,45 @@ const createCompareDataset = (data) =>{
     })
 
     return {
-        namedExpressionsNew: namedExpressionsNew,
-        demandFulfilmentNew: [{
-            demandForProduct: demandForProduct,
-            demandForOrder: demandForOrder}],
-        vehicleFlowsNew: [{
-            vehicleParametersCapacity:vehicleParametersCapacity,
-            vehicleParameters:vehicleParameters
-        }]
+        namedExpressionsNew: namedExpressionsNew
     }
 
+
+}
+
+export const createFinalStatDFDataSet = (demandFulfillment) => {
+
+
+
+
+    let demandForProduct = {
+        min: 0,
+        satisfied: 0,
+        result: 0,
+    }
+
+    let demandForOrder = {
+        percentage: 0,
+        result: 0,
+    }
+
+
+    demandFulfillment.forEach((item, index) => {
+        demandForProduct.min += item.demandMin
+        demandForProduct.satisfied += item.satisfied
+        if (item.percentage >= 0.9) {
+            demandForOrder.percentage += 1
+        }
+    })
+
+
+    demandForProduct.result = demandForProduct.satisfied * 100 / demandForProduct.min
+
+    demandForOrder.result = demandForOrder.percentage * 100 / demandFulfillment.length
+
+
+    return {
+            demandForProduct: demandForProduct,
+            demandForOrder: demandForOrder
+    }
 }

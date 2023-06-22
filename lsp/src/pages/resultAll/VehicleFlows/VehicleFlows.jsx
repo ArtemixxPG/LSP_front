@@ -16,7 +16,9 @@ const VehicleFlows = (props) => {
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
     const [openErrorModal, setErrorModal] = useState(false)
+    const [url, setUrl] = useState(new URL('http://62.213.30.22:8585/LSP_back-1.0-SNAPSHOT/results/vf/exp_limit'))
 
+    const limit = 25
 
     const styleErrorModal = {
         position: 'absolute',
@@ -32,11 +34,9 @@ const VehicleFlows = (props) => {
     };
 
 
-    // const url = 'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/vf/limit?limit=100'
-
-    const url = 'http://localhost:8080/results/vf/limit?limit=50'
-
     const handleClose = () => props.setError(false)
+
+
 
     const errorModalContent = () => {
         return (
@@ -68,7 +68,7 @@ const VehicleFlows = (props) => {
                 setExperiment={props.setExperiment}
             />
                 <div className="datatable">
-                    <Datatable url = {url} columns = {columnsVehicleFlows} table={"pageVehicleFlows"}
+                    <Datatable url = {url} limit ={limit} experiment={props.experiment} columns = {columnsVehicleFlows} table={"pageVehicleFlows"}
                                setError = {props.setError} />
                 </div>
 

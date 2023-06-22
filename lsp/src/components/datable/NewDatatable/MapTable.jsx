@@ -35,7 +35,9 @@ const Maptable = (props) => {
 
     const [data, setData] = useState([])
 
-
+    useEffect(()=>{
+        setData(props.data)
+    }, [props.data])
 
 
     const options = {
@@ -84,7 +86,7 @@ const Maptable = (props) => {
             <Paper className="table">
                 <ThemeProvider theme={theme}>
                     <MUIDataTable
-                        data={props.data}
+                        data={data}
                         columns={props.columns}
                         options={options}
 

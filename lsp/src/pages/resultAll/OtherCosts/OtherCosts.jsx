@@ -12,11 +12,12 @@ const OtherCosts = (props) => {
     //const [rowId, setRowId] = useState();
     const [data, setData] = useState({dataTable:[], dataSet:[]})
     const [icon, setIcon] = useState(false)
-
-    const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/othcost'
-
+    const [urlPage, setUrlPage] = useState(new URL('http://62.213.30.22:8585/LSP_back-1.0-SNAPSHOT/results/opsites/exp_limit'))
 
 
+    // const url =  'http://infotrans-logistic.ru:8585/LSP_back-1.0-SNAPSHOT/results/othcost'
+
+    const limit = 25
 
     return (
         <div className="othercosts">
@@ -31,7 +32,7 @@ const OtherCosts = (props) => {
                 experiments={props.experiments}
             />
                 <div className="datatable">ПРОЧИЕ ЗАТРАТЫ
-                    <Datatable url = {url} columns = {columnsOtherCosts} table={"pageOtherCosts"} setError = {props.setError}/>
+                    <Datatable url = {urlPage} limit ={limit} experiment={props.experiment} columns = {columnsOtherCosts} table={"pageOtherCosts"} setError = {props.setError}/>
                 </div>
         </div>
     );
